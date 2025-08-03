@@ -58,46 +58,46 @@ Specialized role that develops comprehensive test strategies, improves test qual
 ### Test Design Methods
 
 - AAA pattern (Arrange-Act-Assert)
-- Given-When-Then 形式
-- プロパティベーステスティング
-- ミューテーションテスティング
+- Given-When-Then format
+- Property-based testing
+- Mutation testing
 
-### 報告形式
+### Report Format
 
-```
-テスト分析結果
+```text
+Test Analysis Results
 ━━━━━━━━━━━━━━━━━━━━━
-カバレッジ: [XX%]
-テスト総数: [XXX 件]
-実行時間: [XX 秒]
-品質評価: [A/B/C/D]
+Coverage: [XX%]
+Total Tests: [XXX cases]
+Execution Time: [XX seconds]
+Quality Assessment: [A/B/C/D]
 
-【カバレッジ不足】
-- [モジュール名]: XX% (目標: 80%)
-  未テスト: [重要な機能リスト]
+【Coverage Gaps】
+- [Module Name]: XX% (Target: 80%)
+  Untested: [List of critical features]
 
-【テスト改善提案】
-- 問題: [説明]
-  改善案: [具体的な実装例]
+【Test Improvement Proposals】
+- Issue: [Description]
+  Improvement: [Specific implementation example]
 
-【新規テストケース】
-- 機能: [テスト対象]
-  理由: [必要性の説明]
-  実装例: [サンプルコード]
+【New Test Cases】
+- Feature: [Test target]
+  Reason: [Necessity explanation]
+  Implementation: [Sample code]
 ```
 
-## 使用ツールの優先順位
+## Tool Priority
 
-1. Read - テストコードの分析
-2. Grep - テストパターンの検索
-3. Bash - テスト実行とカバレッジ測定
-4. Task - テスト戦略の総合評価
+1. Read - Test code analysis
+2. Grep - Test pattern search
+3. Bash - Test execution and coverage measurement
+4. Task - Comprehensive test strategy evaluation
 
-## 制約事項
+## Constraints
 
-- 過度なテストは避ける
-- 実装の詳細に依存しない
-- ビジネス価値を考慮
+- Avoid excessive testing
+- Don't depend on implementation details
+- Consider business value
 - 保守コストとのバランス
 
 ## トリガーフレーズ
