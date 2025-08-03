@@ -1,253 +1,253 @@
 ## Role Debate
 
-異なる専門性を持つロールが議論し、トレードオフを検討して最適解を導出するコマンド。
+A command where roles with different expertise engage in discussions, consider trade-offs, and derive optimal solutions.
 
-### 使い方
+### Usage
 
 ```bash
-/role-debate <ロール 1>,<ロール 2> [議題]
-/role-debate <ロール 1>,<ロール 2>,<ロール 3> [議題]
+/role-debate <role1>,<role2> [topic]
+/role-debate <role1>,<role2>,<role3> [topic]
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# セキュリティ vs パフォーマンスのトレードオフ
+# Security vs Performance trade-offs
 /role-debate security,performance
-「JWT トークンの有効期限設定について」
+"JWT token expiration time settings"
 
-# ユーザビリティ vs セキュリティのバランス
+# Usability vs Security balance
 /role-debate frontend,security
-「2 段階認証の UX 最適化について」
+"UX optimization for two-factor authentication"
 
-# 技術選定の議論
+# Technology selection discussion
 /role-debate architect,mobile
-「React Native vs Flutter の選択について」
+"Choosing between React Native vs Flutter"
 
-# 3 者議論
+# Three-way discussion
 /role-debate architect,security,performance
-「マイクロサービス化の是非について」
+"Pros and cons of microservices architecture"
 ```
 
-### 議論の基本原則
+### Basic Principles of Discussion
 
-#### 建設的議論の心得
+#### Constructive Discussion Guidelines
 
-- **相互尊重**: 他ロールの専門性と視点を尊重する
-- **事実ベース**: 感情的反論ではなく、データ・根拠に基づく議論
-- **解決志向**: 批判のための批判ではなく、より良い解決策を目指す
-- **実装重視**: 理想論ではなく実現可能性を考慮した提案
+- **Mutual Respect**: Respect the expertise and perspectives of other roles
+- **Fact-Based**: Arguments based on data and evidence, not emotional responses
+- **Solution-Oriented**: Aim for better solutions, not criticism for criticism's sake
+- **Implementation-Focused**: Consider feasibility rather than just idealistic proposals
 
-#### 論拠の質的要件
+#### Quality Requirements for Arguments
 
-- **公式文書**: 標準・ガイドライン・公式ドキュメントへの言及
-- **実証事例**: 成功事例・失敗事例の具体的引用
-- **定量評価**: 可能な限り数値・指標での比較
-- **時系列考慮**: 短期・中期・長期での影響評価
+- **Official Documentation**: Reference to standards, guidelines, and official documents
+- **Empirical Evidence**: Specific citations of success/failure cases
+- **Quantitative Evaluation**: Numerical comparison using metrics where possible
+- **Time-Series Consideration**: Impact evaluation in short, medium, and long terms
 
-#### 議論倫理
+#### Discussion Ethics
 
-- **誠実性**: 自身の専門分野の限界も認める
-- **開放性**: 新しい情報・視点に対する柔軟性
-- **透明性**: 判断根拠・前提条件の明示
-- **責任性**: 提案の実装リスクも含めて言及
+- **Integrity**: Acknowledge limitations in one's own field of expertise
+- **Openness**: Flexibility toward new information and perspectives
+- **Transparency**: Clear statement of judgment criteria and assumptions
+- **Responsibility**: Include implementation risks in proposals
 
-### 議論プロセス
+### Discussion Process
 
-### Phase 1: 初期立場表明
+### Phase 1: Initial Position Statement
 
-各ロールが専門視点から独立して意見表明
+Each role expresses opinions independently from their professional perspective
 
-- 推奨案の提示
-- 根拠となる標準・文書の明示
-- 想定されるリスク・課題の説明
-- 成功指標の定義
+- Present recommended proposals
+- Clearly state supporting standards and documents
+- Explain anticipated risks and challenges
+- Define success metrics
 
-### Phase 2: 相互議論・反駁
+### Phase 2: Cross-Discussion and Refutation
 
-ロール間でのクロス議論
+Cross-discussion between roles
 
-- 他ロール提案への建設的反論
-- 見落とされた視点の指摘
-- トレードオフの明確化
-- 代替案の提示
+- Constructive counter-arguments to other roles' proposals
+- Point out overlooked perspectives
+- Clarify trade-offs
+- Present alternative proposals
 
-### Phase 3: 妥協点探索
+### Phase 3: Compromise Exploration
 
-実装可能な解決策の模索
+Search for implementable solutions
 
-- 各視点の重要度評価
-- Win-Win 解決策の検討
-- 段階的実装アプローチ
-- リスク軽減策の検討
+- Evaluate importance of each perspective
+- Consider Win-Win solutions
+- Phased implementation approaches
+- Risk mitigation strategy consideration
 
-### Phase 4: 統合結論
+### Phase 4: Integrated Conclusion
 
-最終的な推奨事項の決定
+Final recommendation decision
 
-- 合意された解決策
-- 実装ロードマップ
-- 成功指標・測定方法
-- 将来の見直しポイント
+- Agreed-upon solutions
+- Implementation roadmap
+- Success metrics and measurement methods
+- Future review points
 
-### 出力フォーマット例
+### Output Format Examples
 
-### 2 ロール議論の場合
+### Two-Role Discussion Case
 
 ```
-ロール議論: Security vs Performance
+Role Debate: Security vs Performance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-議題: JWT トークンの有効期限設定
+Topic: JWT Token Expiration Time Settings
 
-Security ロールの主張:
-「15 分の短期有効期限を推奨します」
+Security Role's Argument:
+"Recommend 15-minute short-term expiration"
 
-根拠:
-- OWASP JWT Security Cheat Sheet 準拠
-- トークン漏洩時の被害時間窓を最小化
-- 攻撃者の利用可能時間を制限
+Evidence:
+- Compliant with OWASP JWT Security Cheat Sheet
+- Minimize damage window during token leakage
+- Limit available time for attackers
 
-懸念事項:
-- 長期有効期限は攻撃リスクが指数関数的に増大
-- コンプライアンス要件（金融系）では短期が必須
+Concerns:
+- Long-term expiration exponentially increases attack risk
+- Compliance requirements (financial sector) mandate short-term
 
-成功指標:
-- セキュリティインシデント発生率 < 0.1%
-- 平均攻撃検出時間 < 5 分
+Success Metrics:
+- Security incident rate < 0.1%
+- Average attack detection time < 5 minutes
 
-Performance ロールの反論:
-「2 時間の有効期限を推奨します」
+Performance Role's Counter-argument:
+"Recommend 2-hour expiration time"
 
-根拠:
-- Google OAuth 2.0 Best Practices 参考
-- 頻繁な再認証によるサーバー負荷増大を回避
-- ユーザー体験（作業中断）の最小化
+Evidence:
+- Reference Google OAuth 2.0 Best Practices
+- Avoid server load increase from frequent re-authentication
+- Minimize user experience interruption (work disruption)
 
-懸念事項:
-- 15 分間隔の再認証は API 負荷 8 倍増
-- モバイル環境での接続断が頻発
+Concerns:
+- 15-minute interval re-authentication increases API load 8x
+- Frequent connection drops in mobile environments
 
-成功指標:
-- API レスポンス時間 < 200ms 維持
-- サーバー CPU 使用率 < 60%
+Success Metrics:
+- Maintain API response time < 200ms
+- Server CPU usage < 60%
 
-相互議論:
+Cross-Discussion:
 Security → Performance:
-「サーバー負荷よりもセキュリティ侵害のビジネス損失の方が甚大。
-例: Equifax 事件では 7 億ドルの損失」
+"Business losses from security breaches are more severe than server load.
+Example: Equifax incident resulted in $700M loss"
 
 Performance → Security:
-「リフレッシュトークン機構で両立可能。
-バックグラウンド更新により UX を損なわずセキュリティ確保」
+"Both goals achievable with refresh token mechanism.
+Background updates ensure security without compromising UX"
 
 Security → Performance:
-「リフレッシュトークンも攻撃対象。適切な実装が前提」
+"Refresh tokens are also attack targets. Proper implementation is prerequisite"
 
 Performance → Security:
-「段階的アプローチを提案。通常操作 30 分、機密操作 15 分」
+"Propose staged approach: 30 minutes for normal operations, 15 minutes for sensitive operations"
 
-妥協点探索:
-共通理解:
-- ユーザー体験とセキュリティの両立が必要
-- リスクレベルに応じた柔軟な対応
-- 実装・運用コストの現実的考慮
+Compromise Exploration:
+Common Understanding:
+- Need to balance user experience and security
+- Flexible response based on risk levels
+- Realistic consideration of implementation and operational costs
 
-Win-Win 要素:
-- リフレッシュトークン機構の活用
-- リスクベース認証の段階的導入
-- 自動ログアウト機能による補完
+Win-Win Elements:
+- Utilize refresh token mechanisms
+- Gradual introduction of risk-based authentication
+- Complement with automatic logout functionality
 
-統合結論:
-「30 分有効期限 + リフレッシュトークン + リスクベース認証」
+Integrated Conclusion:
+"30-minute expiration + Refresh tokens + Risk-based authentication"
 
-実装詳細:
-1. アクセストークン: 30 分有効期限
-2. リフレッシュトークン: 7 日有効期限
-3. 高リスク操作: 15 分で強制再認証
-4. 無操作 30 分で自動ログアウト
+Implementation Details:
+1. Access token: 30-minute expiration
+2. Refresh token: 7-day expiration
+3. High-risk operations: Force re-authentication at 15 minutes
+4. Automatic logout after 30 minutes of inactivity
 
-段階的実装:
-週 1-2: 基本的な 30 分トークン実装
-週 3-4: リフレッシュトークン機構追加
-月 2: リスクベース認証の導入
+Phased Implementation:
+Week 1-2: Basic 30-minute token implementation
+Week 3-4: Add refresh token mechanism
+Month 2: Introduce risk-based authentication
 
-成功指標:
-- セキュリティ: インシデント発生率 < 0.1%
-- パフォーマンス: API 負荷増加率 < 20%
-- UX: ユーザー満足度 > 85%
+Success Metrics:
+- Security: Incident rate < 0.1%
+- Performance: API load increase < 20%
+- UX: User satisfaction > 85%
 
-将来の見直し:
-- 3 ヶ月後: 実際の攻撃パターン・負荷状況を評価
-- 6 ヶ月後: より洗練されたリスクベース認証への移行検討
+Future Reviews:
+- After 3 months: Evaluate actual attack patterns and load conditions
+- After 6 months: Consider migration to more sophisticated risk-based authentication
 ```
 
-### 3 ロール議論の場合
+### Three-Role Discussion Case
 
 ```
-ロール議論: Architect vs Security vs Performance
+Role Debate: Architect vs Security vs Performance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-議題: マイクロサービス化の是非
+Topic: Pros and Cons of Microservices Architecture
 
-Architect ロールの主張:
-「段階的マイクロサービス化を推奨」
-根拠: ドメイン境界の明確化、独立したデプロイ、技術選択の自由度
+Architect Role's Argument:
+"Recommend gradual microservices adoption"
+Evidence: Domain boundary clarification, independent deployment, technology choice freedom
 
-Security ロールの懸念:
-「サービス間通信のセキュリティ複雑化」
-根拠: API Gateway、mTLS、分散認証の管理コスト
+Security Role's Concerns:
+"Complexity of inter-service communication security"
+Evidence: Management costs of API Gateway, mTLS, distributed authentication
 
-Performance ロールの懸念:
-「ネットワーク通信によるレイテンシ増加」
-根拠: 内部 API 呼び出しによる N+1 問題、分散トランザクション
+Performance Role's Concerns:
+"Increased latency from network communication"
+Evidence: N+1 problems from internal API calls, distributed transactions
 
-3 者議論:
-Architect → Security: 「API Gateway で集中管理により統制可能」
-Security → Architect: 「単一障害点となるリスク」
-Performance → Architect: 「サービス分割の粒度が重要」
-...（議論継続）
+Three-way Discussion:
+Architect → Security: "Centralized control possible through API Gateway"
+Security → Architect: "Risk of single point of failure"
+Performance → Architect: "Service separation granularity is critical"
+...(discussion continues)
 
-統合結論:
-「ドメイン駆動設計による段階的分割 + セキュリティファースト設計」
+Integrated Conclusion:
+"Domain-driven design with gradual separation + Security-first design"
 ```
 
-### 効果的な議論パターン
+### Effective Discussion Patterns
 
-### 技術選定
+### Technology Selection
 
 ```bash
 /role-debate architect,performance
-「データベース選択: PostgreSQL vs MongoDB」
+"Database choice: PostgreSQL vs MongoDB"
 
 /role-debate frontend,mobile
-「UI フレームワーク: React vs Vue」
+"UI framework: React vs Vue"
 
 /role-debate security,architect
-「認証方式: JWT vs Session Cookie」
+"Authentication method: JWT vs Session Cookie"
 ```
 
-### 設計判断
+### Design Decisions
 
 ```bash
 /role-debate security,frontend
-「ユーザー認証の UX 設計」
+"User authentication UX design"
 
 /role-debate performance,mobile
-「データ同期戦略の最適化」
+"Data synchronization strategy optimization"
 
 /role-debate architect,qa
-「テスト戦略とアーキテクチャ設計」
+"Testing strategy and architecture design"
 ```
 
-### トレードオフ問題
+### Trade-off Issues
 
 ```bash
 /role-debate security,performance
-「暗号化レベル vs 処理速度」
+"Encryption level vs processing speed"
 
 /role-debate frontend,performance
-「リッチ UI vs ページ読み込み速度」
+"Rich UI vs page load speed"
 
 /role-debate mobile,security
 「利便性 vs データ保護レベル」

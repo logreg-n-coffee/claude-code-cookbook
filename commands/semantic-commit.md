@@ -80,209 +80,209 @@ git diff HEAD --name-status | grep '^D' # Deleted files
 ##### 3. Dependency Analysis
 
 ```bash
-# インポート関係の変更を検出
+# Detect import relationship changes
 git diff HEAD | grep -E '^[+-].*import|^[+-].*require' | \
 cut -d' ' -f2- | sort | uniq
 ```
 
-#### ファイル単位の詳細分析
+#### Detailed Analysis by File Unit
 
 ```bash
-# 変更されたファイル一覧を取得
+# Get list of changed files
 git diff HEAD --name-only
 
-# 各ファイルの変更内容を個別に分析
+# Analyze changes in each file individually
 git diff HEAD -- <file>
 
-# ファイルの変更タイプを判定
+# Determine file change type
 git diff HEAD --name-status | while read status file; do
   case $status in
-    A) echo "$file: 新規作成" ;;
-    M) echo "$file: 修正" ;;
-    D) echo "$file: 削除" ;;
-    R*) echo "$file: リネーム" ;;
+    A) echo "$file: New file created" ;;
+    M) echo "$file: Modified" ;;
+    D) echo "$file: Deleted" ;;
+    R*) echo "$file: Renamed" ;;
   esac
 done
 ```
 
-#### 論理的グループ化の基準
+#### Logical Grouping Criteria
 
-1. **機能単位**: 同一機能に関連するファイル
-   - `src/auth/` 配下のファイル → 認証機能
-   - `components/` 配下のファイル → UI コンポーネント
+1. **Functional Units**: Files related to the same function
+   - Files under `src/auth/` → Authentication function
+   - Files under `components/` → UI components
 
-2. **変更種別**: 同じ種類の変更
-   - テストファイルのみ → `test:`
-   - ドキュメントのみ → `docs:`
-   - 設定ファイルのみ → `chore:`
+2. **Change Type**: Same type of changes
+   - Test files only → `test:`
+   - Documentation only → `docs:`
+   - Configuration files only → `chore:`
 
-3. **依存関係**: 相互に関連するファイル
-   - モデル + マイグレーション
-   - コンポーネント + スタイル
+3. **Dependencies**: Mutually related files
+   - Model + Migration
+   - Component + Style
 
-4. **変更規模**: 適切なコミットサイズの維持
-   - 1 コミットあたり 10 ファイル以下
-   - 関連性の高いファイルをグループ化
+4. **Change Scale**: Maintaining appropriate commit size
+   - 10 files or less per commit
+   - Group files with high relevance
 
-### 出力例
+### Output Example
 
 ```bash
 $ /semantic-commit
 
-変更分析中...
+Analyzing changes...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-検出された変更:
-• src/auth/login.ts (修正)
-• src/auth/register.ts (新規)
-• src/auth/types.ts (修正)
-• tests/auth.test.ts (新規)
-• docs/authentication.md (新規)
+Detected changes:
+• src/auth/login.ts (Modified)
+• src/auth/register.ts (New)
+• src/auth/types.ts (Modified)
+• tests/auth.test.ts (New)
+• docs/authentication.md (New)
 
-提案されるコミット分割:
+Proposed commit division:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-コミット 1/3
+Commit 1/3
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-メッセージ: feat: implement user registration and login system
-含まれるファイル:
+Message: feat: implement user registration and login system
+Included files:
   • src/auth/login.ts
   • src/auth/register.ts  
   • src/auth/types.ts
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-コミット 2/3
+Commit 2/3
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-メッセージ: test: add comprehensive tests for authentication system
-含まれるファイル:
+Message: test: add comprehensive tests for authentication system
+Included files:
   • tests/auth.test.ts
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-コミット 3/3
+Commit 3/3
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-メッセージ: docs: add authentication system documentation
-含まれるファイル:
+Message: docs: add authentication system documentation
+Included files:
   • docs/authentication.md
 
-この分割案でコミットを実行しますか？ (y/n/edit): 
+Execute commits with this division plan? (y/n/edit): 
 ```
 
-### 実行時の選択肢
+### Runtime Options
 
-- `y` : 提案されたコミット分割で実行
-- `n` : キャンセル
-- `edit` : コミットメッセージを個別に編集
-- `merge <番号 1> <番号 2>` : 指定したコミットをマージ
-- `split <番号>` : 指定したコミットをさらに分割
+- `y` : Execute with proposed commit division
+- `n` : Cancel
+- `edit` : Edit commit messages individually
+- `merge <number 1> <number 2>` : Merge specified commits
+- `split <number>` : Further divide specified commit
 
-### Dry Run モード
+### Dry Run Mode
 
 ```bash
 $ /semantic-commit --dry-run
 
-変更分析中... (DRY RUN)
+Analyzing changes... (DRY RUN)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[コミット分割提案の表示]
+[Commit division proposal display]
 
-ℹ️  DRY RUN モード: 実際のコミットは実行されません
-💡 実行する場合は --dry-run オプションを除いて再実行してください
+ℹ️  DRY RUN mode: Actual commits will not be executed
+💡 To execute, run again without the --dry-run option
 ```
 
-### スマート分析機能
+### Smart Analysis Features
 
-#### 1. プロジェクト構造の理解
+#### 1. Understanding Project Structure
 
-- `package.json`, `Cargo.toml`, `pom.xml` などからプロジェクト種別を判定
-- フォルダ構造から機能単位を推測
+- Determine project type from `package.json`, `Cargo.toml`, `pom.xml`, etc.
+- Infer functional units from folder structure
 
-#### 2. 変更パターンの認識
+#### 2. Change Pattern Recognition
 
 ```bash
-# バグ修正パターンの検出
-- "fix", "bug", "error" などのキーワード
-- 例外処理の追加
-- 条件分岐の修正
+# Bug fix pattern detection
+- Keywords like "fix", "bug", "error"
+- Addition of exception handling
+- Conditional branch fixes
 
-# 新機能パターンの検出  
-- 新ファイル作成
-- 新メソッド追加
-- API エンドポイント追加
+# New feature pattern detection  
+- New file creation
+- New method addition
+- API endpoint addition
 ```
 
-#### 3. 依存関係の分析
+#### 3. Dependency Analysis
 
-- インポート文の変更
-- 型定義の追加/修正
-- 設定ファイルとの関連性
+- Import statement changes
+- Type definition additions/modifications
+- Relationship with configuration files
 
-### 技術的実装
+### Technical Implementation
 
-#### Git 標準コマンドによる順次コミット実装
+#### Sequential Commit Implementation Using Standard Git Commands
 
-##### 1. 前処理: 現在の状態を保存
+##### 1. Preprocessing: Save Current State
 
 ```bash
-# 未ステージの変更がある場合は一旦リセット
+# Reset unstaged changes temporarily
 git reset HEAD
 git status --porcelain > /tmp/original_state.txt
 
-# 作業ブランチの確認
+# Check working branch
 CURRENT_BRANCH=$(git branch --show-current)
-echo "作業中のブランチ: $CURRENT_BRANCH"
+echo "Working branch: $CURRENT_BRANCH"
 ```
 
-##### 2. グループ別の順次コミット実行
+##### 2. Execute Sequential Commits by Group
 
 ```bash
-# 分割計画の読み込み
+# Load division plan
 while IFS= read -r commit_plan; do
   group_num=$(echo "$commit_plan" | cut -d':' -f1)
   files=$(echo "$commit_plan" | cut -d':' -f2- | tr ' ' '\n')
   
-  echo "=== コミット $group_num の実行 ==="
+  echo "=== Executing commit $group_num ==="
   
-  # 該当ファイルのみをステージング
+  # Stage only relevant files
   echo "$files" | while read file; do
     if [ -f "$file" ]; then
       git add "$file"
-      echo "ステージング: $file"
+      echo "Staging: $file"
     fi
   done
   
-  # ステージング状態の確認
+  # Check staging status
   staged_files=$(git diff --staged --name-only)
   if [ -z "$staged_files" ]; then
-    echo "警告: ステージングされたファイルがありません"
+    echo "Warning: No files staged"
     continue
   fi
   
-  # コミットメッセージの生成（LLM による分析）
+  # Generate commit message (LLM analysis)
   commit_msg=$(generate_commit_message_for_staged_files)
   
-  # ユーザー確認
-  echo "提案コミットメッセージ: $commit_msg"
-  echo "ステージングされたファイル:"
+  # User confirmation
+  echo "Proposed commit message: $commit_msg"
+  echo "Staged files:"
   echo "$staged_files"
-  read -p "このコミットを実行しますか? (y/n): " confirm
+  read -p "Execute this commit? (y/n): " confirm
   
   if [ "$confirm" = "y" ]; then
-    # コミット実行
+    # Execute commit
     git commit -m "$commit_msg"
-    echo "✅ コミット $group_num 完了"
+    echo "✅ Commit $group_num completed"
   else
-    # ステージングを取り消し
+    # Cancel staging
     git reset HEAD
-    echo "❌ コミット $group_num をスキップ"
+    echo "❌ Commit $group_num skipped"
   fi
   
 done < /tmp/commit_plan.txt
 ```
 
-##### 3. エラーハンドリングとロールバック
+##### 3. Error Handling and Rollback
 
 ```bash
-# プリコミットフック失敗時の処理
+# Handle pre-commit hook failures
 commit_with_retry() {
   local commit_msg="$1"
   local max_retries=2
@@ -290,14 +290,14 @@ commit_with_retry() {
   
   while [ $retry_count -lt $max_retries ]; do
     if git commit -m "$commit_msg"; then
-      echo "✅ コミット成功"
+      echo "✅ Commit successful"
       return 0
     else
-      echo "❌ コミット失敗 (試行 $((retry_count + 1))/$max_retries)"
+      echo "❌ Commit failed (attempt $((retry_count + 1))/$max_retries)"
       
-      # プリコミットフックによる自動修正を取り込み
+      # Incorporate automatic fixes by pre-commit hooks
       if git diff --staged --quiet; then
-        echo "プリコミットフックにより変更が自動修正されました"
+        echo "Changes were automatically fixed by pre-commit hooks"
         git add -u
       fi
       

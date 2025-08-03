@@ -1,65 +1,65 @@
 ## Ultrathink
 
-複雑な課題や重要な決定に対して、段階的で構造化された思考プロセスを実行します。
+Execute a gradual and structured thinking process for complex issues and important decisions.
 
-### 使い方
+### Usage
 
 ```bash
-# Claude に深い思考を依頼
-「[課題] について ultrathink で検討して」
+# Request deep thinking from Claude
+"Consider [issue] using ultrathink"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# アーキテクチャ設計の検討
-「マイクロサービスとモノリスのどちらを選ぶべきか ultrathink で検討して」
+# Architecture design consideration
+"Consider whether to choose microservices or monolith using ultrathink"
 
-# 技術選定の分析
-「このプロジェクトに Rust と TypeScript どちらが適しているか ultrathink で分析して」
+# Technology selection analysis
+"Analyze whether Rust or TypeScript is more suitable for this project using ultrathink"
 
-# 問題解決の深掘り
-「アプリケーションのパフォーマンスが悪い原因と改善方法を ultrathink で検討して」
+# Deep dive into problem solving
+"Consider the causes of poor application performance and improvement methods using ultrathink"
 ```
 
-### Claude との連携
+### Integration with Claude
 
 ```bash
-# ビジネス判断
-「新機能の優先順位付けを ultrathink で検討して。ユーザー価値、開発コスト、技術的リスクの観点から」
+# Business decisions
+"Consider feature prioritization using ultrathink. From the perspectives of user value, development cost, and technical risk"
 
-# システム設計
-「認証システムの設計を ultrathink で検討して。セキュリティ、スケーラビリティ、保守性を考慮して」
+# System design
+"Consider authentication system design using ultrathink. Taking into account security, scalability, and maintainability"
 
-# トレードオフ分析
-「GraphQL vs REST API の選択を ultrathink で分析して。プロジェクトの要件に基づいて」
+# Trade-off analysis
+"Analyze the choice between GraphQL vs REST API using ultrathink. Based on project requirements"
 
-# リファクタリング戦略
+# Refactoring strategy
 cat src/legacy_code.js
-「このレガシーコードのリファクタリング戦略を ultrathink で立案して」
+"Develop a refactoring strategy for this legacy code using ultrathink"
 ```
 
-### 思考プロセス
+### Thinking Process
 
-1. **問題の分解** - 課題を構成要素に分解
-2. **MECE 分析** - 漏れなく重複なく整理
-3. **複数視点検討** - 技術・ビジネス・ユーザー視点から分析
-4. **対話的確認** - 重要な判断ポイントでユーザーに確認
-5. **根拠付き提案** - データと論理に基づく結論
+1. **Problem Decomposition** - Break down issues into components
+2. **MECE Analysis** - Organize comprehensively without overlap
+3. **Multi-perspective Consideration** - Analyze from technical, business, and user perspectives
+4. **Interactive Confirmation** - Confirm with user at critical decision points
+5. **Evidence-based Proposals** - Conclusions based on data and logic
 
-### 詳細例
+### Detailed Examples
 
 ```bash
-# 複雑な技術的負債の解消
-「10 年間のレガシーシステムをモダナイズする戦略を ultrathink で検討して。段階的移行、リスク、ROI を含めて」
+# Complex technical debt resolution
+"Consider a strategy to modernize a 10-year legacy system using ultrathink. Include gradual migration, risks, and ROI"
 
-# 組織的な課題
-「開発チームのスケーリング戦略を ultrathink で検討して。現在 5 人から 20 人への拡大を想定」
+# Organizational challenges
+"Consider development team scaling strategy using ultrathink. Assuming expansion from current 5 people to 20 people"
 
-# データベース移行
-「PostgreSQL から DynamoDB への移行を ultrathink で分析して。コスト、パフォーマンス、運用面を考慮」
+# Database migration
+"Analyze migration from PostgreSQL to DynamoDB using ultrathink. Consider cost, performance, and operational aspects"
 ```
 
-### 注意事項
+### Notes
 
-ultrathink は時間をかけて深く考える必要がある課題に最適です。単純な質問や即座の回答が必要な場合は、通常の質問形式を使用してください。
+Ultrathink is optimal for issues that require time and deep consideration. For simple questions or cases requiring immediate answers, use the regular question format.

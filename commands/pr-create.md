@@ -1,163 +1,163 @@
 ## PR Create
 
-Git 変更分析に基づく自動 PR 作成で効率的な Pull Request ワークフローを実現します。
+Achieves efficient Pull Request workflow with automatic PR creation based on Git change analysis.
 
-### 使い方
+### Usage
 
 ```bash
-# 変更分析による自動 PR 作成
-git add . && git commit -m "feat: ユーザー認証機能の実装"
-「変更内容を分析して適切な説明文とラベルで Draft PR を作成してください」
+# Automatic PR creation through change analysis
+git add . && git commit -m "feat: implement user authentication feature"
+"Please analyze the changes and create a Draft PR with appropriate description and labels"
 
-# 既存テンプレート保持での更新
+# Update while preserving existing template
 cp .github/PULL_REQUEST_TEMPLATE.md pr_body.md
-「テンプレート構造を完全に保持して変更内容を補完してください」
+"Please completely preserve the template structure and supplement the change content"
 
-# 段階的品質向上
+# Gradual quality improvement
 gh pr ready
-「品質確認完了後、Ready for Review に変更してください」
+"After quality check completion, please change to Ready for Review"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# 1. ブランチ作成とコミット
+# 1. Branch creation and commit
 git checkout main && git pull
 git checkout -b feat-user-profile
-git add . && git commit -m "feat: ユーザー プロフィール機能の実装"
+git add . && git commit -m "feat: implement user profile feature"
 git push -u origin feat-user-profile
 
-# 2. PR 作成
-「以下の手順で PR を作成してください：
-1. git diff --cached で変更内容を確認
-2. .github/PULL_REQUEST_TEMPLATE.md を使用して説明文を作成
-3. 変更内容から適切なラベルを最大 3 個選択
-4. Draft PR として作成（HTML コメント保持）」
+# 2. PR creation
+"Please create a PR with the following steps:
+1. Check changes with git diff --cached
+2. Create description using .github/PULL_REQUEST_TEMPLATE.md
+3. Select up to 3 appropriate labels based on changes
+4. Create as Draft PR (preserve HTML comments)"
 
-# 3. CI 確認後に Ready 化
-「CI が通ったら PR を Ready for Review に変更してください」
+# 3. Ready after CI confirmation
+"Please change PR to Ready for Review after CI passes"
 ```
 
-### 実行手順
+### Execution Steps
 
-#### 1. ブランチ作成
+#### 1. Branch Creation
 
 ```bash
-# ガイドラインに従った命名規則: {type}-{subject}
+# Naming convention following guidelines: {type}-{subject}
 git checkout main
 git pull
 git checkout -b feat-user-authentication
 
-# ブランチ確認（現在のブランチ名を表示）
+# Branch confirmation (display current branch name)
 git branch --show-current
 ```
 
-#### 2. コミット
+#### 2. Commit
 
 ```bash
-# 変更をステージング
+# Stage changes
 git add .
 
-# ガイドラインに従ったコミットメッセージ
-git commit -m "feat: ユーザー認証 API の実装"
+# Commit message following guidelines
+git commit -m "feat: implement user authentication API"
 ```
 
-#### 3. リモートに Push
+#### 3. Push to Remote
 
 ```bash
-# 初回 Push（upstream 設定）
+# Initial push (set upstream)
 git push -u origin feat-user-authentication
 
-# 2 回目以降
+# Subsequent pushes
 git push
 ```
 
-#### 4. 自動分析による Draft PR 作成
+#### 4. Draft PR Creation through Automatic Analysis
 
-**Step 1: 変更内容の分析**
+##### Step 1: Change Content Analysis
 
 ```bash
-# ファイル変更の取得（ステージ済み変更を確認）
+# Get file changes (check staged changes)
 git diff --cached --name-only
 
-# 内容分析（最大 1000 行）
+# Content analysis (up to 1000 lines)
 git diff --cached | head -1000
 ```
 
-**Step 2: 説明文の自動生成**
+##### Step 2: Automatic Description Generation
 
 ```bash
-# テンプレート処理の優先順位
-# 1. 既存 PR 説明（完全保持）
+# Template processing priority
+# 1. Existing PR description (complete preservation)
 # 2. .github/PULL_REQUEST_TEMPLATE.md
-# 3. デフォルトテンプレート
+# 3. Default template
 
 cp .github/PULL_REQUEST_TEMPLATE.md pr_body.md
-# HTML コメント・区切り線を保持したまま空セクションのみ補完
+# Supplement only empty sections while preserving HTML comments and separators
 ```
 
-**Step 3: ラベルの自動選択**
+##### Step 3: Automatic Label Selection
 
 ```bash
-# 利用可能ラベルの取得（非インタラクティブ）
-「.github/labels.yml または GitHub リポジトリから利用可能なラベルを取得して、変更内容に基づいて適切なラベルを自動選択してください」
+# Get available labels (non-interactive)
+"Please get available labels from .github/labels.yml or GitHub repository and automatically select appropriate labels based on change content"
 
-# パターンマッチングによる自動選択（最大 3 個）
-# - ドキュメント: *.md, docs/ → documentation|docs
-# - テスト: test, spec → test|testing
-# - バグ修正: fix|bug → bug|fix
-# - 新機能: feat|feature → feature|enhancement
+# Automatic selection through pattern matching (up to 3)
+# - Documentation: *.md, docs/ → documentation|docs
+# - Test: test, spec → test|testing
+# - Bug fix: fix|bug → bug|fix
+# - New feature: feat|feature → feature|enhancement
 ```
 
-**Step 4: GitHub API での PR 作成（HTML コメント保持）**
+##### Step 4: PR Creation via GitHub API (Preserve HTML Comments)
 
 ```bash
-# PR 作成
-「以下の情報で Draft PR を作成してください：
-- タイトル: コミットメッセージから自動生成
-- 説明文: .github/PULL_REQUEST_TEMPLATE.md を使用して適切に記入
-- ラベル: 変更内容から自動選択（最大 3 個）
-- ベースブランチ: main
-- HTML コメントは完全に保持」
+# PR creation
+"Please create a Draft PR with the following information:
+- Title: Auto-generated from commit message
+- Description: Properly filled using .github/PULL_REQUEST_TEMPLATE.md
+- Labels: Auto-selected from change content (up to 3)
+- Base branch: main
+- HTML comments completely preserved"
 ```
 
-**方法 B: GitHub MCP（フォールバック）**
+##### Method B: GitHub MCP (Fallback)
 
 ```javascript
-// HTML コメント保持での PR 作成
+// PR creation with HTML comment preservation
 mcp_github_create_pull_request({
   owner: 'organization',
   repo: 'repository',
   base: 'main',
   head: 'feat-user-authentication',
-  title: 'feat: ユーザー認証の実装',
-  body: prBodyContent, // HTML コメントを含む完全な内容
+  title: 'feat: implement user authentication',
+  body: prBodyContent, // Complete content including HTML comments
   draft: true,
   maintainer_can_modify: true,
 });
 ```
 
-### 自動ラベル選択システム
+### Automatic Label Selection System
 
-#### ファイルパターンベース判定
+#### File Pattern-Based Detection
 
-- **ドキュメント**: `*.md`, `README`, `docs/` → `documentation|docs|doc`
-- **テスト**: `test`, `spec` → `test|testing`
+- **Documentation**: `*.md`, `README`, `docs/` → `documentation|docs|doc`
+- **Testing**: `test`, `spec` → `test|testing`
 - **CI/CD**: `.github/`, `*.yml`, `Dockerfile` → `ci|build|infra|ops`
-- **依存関係**: `package.json`, `pubspec.yaml` → `dependencies|deps`
+- **Dependencies**: `package.json`, `pubspec.yaml` → `dependencies|deps`
 
-#### 変更内容ベース判定
+#### Change Content-Based Detection
 
-- **バグ修正**: `fix|bug|error|crash|修正` → `bug|fix`
-- **新機能**: `feat|feature|add|implement|新機能|実装` → `feature|enhancement|feat`
-- **リファクタリング**: `refactor|clean|リファクタ` → `refactor|cleanup|clean`
-- **パフォーマンス**: `performance|perf|optimize` → `performance|perf`
-- **セキュリティ**: `security|secure` → `security`
+- **Bug fixes**: `fix|bug|error|crash` → `bug|fix`
+- **New features**: `feat|feature|add|implement` → `feature|enhancement|feat`
+- **Refactoring**: `refactor|clean` → `refactor|cleanup|clean`
+- **Performance**: `performance|perf|optimize` → `performance|perf`
+- **Security**: `security|secure` → `security`
 
-#### 制約事項
+#### Constraints
 
-- **最大 3 個まで**: 自動選択の上限
-- **既存ラベルのみ**: 新規作成禁止
+- **Up to 3 maximum**: Upper limit for automatic selection
+- **Existing labels only**: No new label creation
 - **部分マッチ**: キーワード含有による判定
 
 ### プロジェクトガイドライン

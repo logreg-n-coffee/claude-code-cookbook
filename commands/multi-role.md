@@ -1,162 +1,162 @@
 ## Multi Role
 
-複数のロールで同じ対象を並行分析し、統合レポートを生成するコマンド。
+A command that performs parallel analysis of the same target with multiple roles and generates integrated reports.
 
-### 使い方
+### Usage
 
 ```bash
-/multi-role <ロール 1>,<ロール 2> [--agent|-a] [分析対象]
-/multi-role <ロール 1>,<ロール 2>,<ロール 3> [--agent|-a] [分析対象]
+/multi-role <role1>,<role2> [--agent|-a] [analysis target]
+/multi-role <role1>,<role2>,<role3> [--agent|-a] [analysis target]
 ```
 
-**重要**:
+**Important**:
 
-- `--agent` オプションはロール指定の直後に配置してください
-- メッセージは `--agent` の後に記述してください
-- 正しい例: `/multi-role qa,architect --agent 計画を評価して`
-- 間違った例: `/multi-role qa,architect 計画を評価して --agent`
+- Place `--agent` option immediately after role specification
+- Write messages after `--agent`
+- Correct example: `/multi-role qa,architect --agent evaluate the plan`
+- Incorrect example: `/multi-role qa,architect evaluate the plan --agent`
 
-### オプション
+### Options
 
-- `--agent` または `-a` : 各ロールをサブエージェントとして並列実行（大規模分析時推奨）
-  - このオプションを使用すると、各ロールの description に自動委任促進フレーズ（"use PROACTIVELY" など）が含まれている場合、より積極的な自動委任が有効になります
+- `--agent` or `-a` : Execute each role as sub-agents in parallel (recommended for large-scale analysis)
+  - When this option is used, if each role's description contains automatic delegation promotion phrases (like "use PROACTIVELY"), more aggressive automatic delegation becomes enabled
 
-### 基本例
+### Basic Examples
 
 ```bash
-# セキュリティとパフォーマンスの両面分析（通常）
+# Security and performance dual analysis (normal)
 /multi-role security,performance
-「この API エンドポイントを評価して」
+"Evaluate this API endpoint"
 
-# 大規模システムの並列分析（サブエージェント）
+# Large-scale system parallel analysis (sub-agents)
 /multi-role security,performance --agent
-「システム全体のセキュリティとパフォーマンスを包括的に分析」
+"Comprehensively analyze system-wide security and performance"
 
-# フロントエンド・モバイル・パフォーマンスの統合分析
+# Integrated analysis of frontend, mobile, and performance
 /multi-role frontend,mobile,performance
-「この画面の最適化案を検討して」
+"Consider optimization plans for this screen"
 
-# アーキテクチャ設計の多角的評価（サブエージェント）
+# Multi-perspective evaluation of architecture design (sub-agents)
 /multi-role architect,security,performance --agent
-「マイクロサービス化の設計を評価して」
+"Evaluate the microservices architecture design"
 ```
 
-### 分析プロセス
+### Analysis Process
 
-### Phase 1: 並行分析
+### Phase 1: Parallel Analysis
 
-各ロールが独立して同じ対象を分析
+Each role independently analyzes the same target
 
-- 専門視点からの評価実行
-- ロール固有の基準で判定
-- 独立した推奨事項の生成
+- Execute evaluation from specialized perspectives
+- Make judgments based on role-specific criteria
+- Generate independent recommendations
 
-### Phase 2: 統合分析
+### Phase 2: Integrated Analysis
 
-結果を構造化して統合
+Structure and integrate results
 
-- 各ロールの評価結果整理
-- 重複・矛盾点の特定
-- 補完関係の明確化
+- Organize evaluation results from each role
+- Identify overlaps and contradictions
+- Clarify complementary relationships
 
-### Phase 3: 統合レポート
+### Phase 3: Integrated Report
 
-最終的な推奨事項の生成
+Generate final recommendations
 
-- 優先度付きアクションプラン
-- トレードオフの明示
-- 実装ロードマップ提示
+- Prioritized action plan
+- Clear trade-offs
+- Implementation roadmap presentation
 
-### 出力フォーマット例
+### Output Format Examples
 
-### 2 ロール分析の場合
+### Two-Role Analysis Case
 
 ```
-マルチロール分析: Security + Performance
+Multi-Role Analysis: Security + Performance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-分析対象: API エンドポイント /api/users
+Analysis Target: API endpoint /api/users
 
-Security 分析結果:
-認証: JWT 検証が適切に実装
-認可: ロールベースアクセス制御が不完全
-暗号化: API キーが平文でログ出力
+Security Analysis Results:
+Authentication: JWT validation properly implemented
+Authorization: Role-based access control incomplete
+Encryption: API keys output in plain text logs
 
-評価スコア: 65/100
-重要度: High（機密データアクセスのため）
+Evaluation Score: 65/100
+Importance: High (due to sensitive data access)
 
-Performance 分析結果:
-レスポンス時間: 平均 180ms（目標 200ms 以内）
-データベースクエリ: N+1 問題を検出
-キャッシュ: Redis キャッシュ未実装
+Performance Analysis Results:
+Response Time: Average 180ms (target under 200ms)
+Database Queries: N+1 problem detected
+Cache: Redis cache not implemented
 
-評価スコア: 70/100
-重要度: Medium（現状は許容範囲内）
+Evaluation Score: 70/100
+Importance: Medium (currently within acceptable range)
 
-相互関連分析:
-相乗効果の機会:
-- Redis キャッシュ実装時に暗号化も同時考慮
-- ログ出力の改善でセキュリティ＋パフォーマンス向上
+Cross-Correlation Analysis:
+Synergy Opportunities:
+- Consider encryption simultaneously when implementing Redis cache
+- Log output improvements enhance both security and performance
 
-トレードオフポイント:
-- 認可チェック強化 ↔ レスポンス時間への影響
-- ログ暗号化 ↔ デバッグ効率の低下
+Trade-off Points:
+- Authorization check strengthening ↔ Impact on response time
+- Log encryption ↔ Reduced debugging efficiency
 
-統合優先度:
-Critical: API キー平文出力の修正
-High: N+1 クエリの解決
-Medium: Redis キャッシュ + 暗号化の実装
-Low: 認可制御の詳細化
+Integrated Priority:
+Critical: Fix API key plain text output
+High: Resolve N+1 queries
+Medium: Implement Redis cache + encryption
+Low: Refine authorization control
 
-実装ロードマップ:
-週 1: API キーのマスキング実装
-週 2: データベースクエリ最適化
-週 3-4: キャッシュレイヤーの設計・実装
-月 2: 認可制御の段階的強化
+Implementation Roadmap:
+Week 1: Implement API key masking
+Week 2: Database query optimization
+Week 3-4: Cache layer design and implementation
+Month 2: Gradual authorization control enhancement
 ```
 
-### 3 ロール分析の場合
+### Three-Role Analysis Case
 
 ```
-マルチロール分析: Frontend + Mobile + Performance
+Multi-Role Analysis: Frontend + Mobile + Performance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-分析対象: ユーザープロフィール画面
+Analysis Target: User profile screen
 
-Frontend 分析結果:
-ユーザビリティ: 直感的なレイアウト
-アクセシビリティ: WCAG 2.1 準拠率 85%
-レスポンシブ: タブレット表示に課題
+Frontend Analysis Results:
+Usability: Intuitive layout
+Accessibility: WCAG 2.1 compliance rate 85%
+Responsive: Issues with tablet display
 
-Mobile 分析結果:
-タッチターゲット: 44pt 以上確保
-片手操作: 重要ボタンが上部に配置
-オフライン対応: 未実装
+Mobile Analysis Results:
+Touch Targets: 44pt+ secured
+One-handed Operation: Important buttons placed at top
+Offline Support: Not implemented
 
-Performance 分析結果:
-初期表示: LCP 2.1 秒（良好）
-画像最適化: WebP 未対応
-遅延読み込み: 未実装
+Performance Analysis Results:
+Initial Display: LCP 2.1 seconds (good)
+Image Optimization: WebP not supported
+Lazy Loading: Not implemented
 
-統合推奨事項:
-1. モバイル最適化（片手操作 + オフライン対応）
-2. 画像最適化（WebP + 遅延読み込み）
-3. タブレット UI の改善
+Integrated Recommendations:
+1. Mobile optimization (one-handed operation + offline support)
+2. Image optimization (WebP + lazy loading)
+3. Tablet UI improvements
 
-優先度: Mobile > Performance > Frontend
-実装期間: 3-4 週間
+Priority: Mobile > Performance > Frontend
+Implementation Period: 3-4 weeks
 ```
 
-### 効果的な組み合わせパターン
+### Effective Combination Patterns
 
-### セキュリティ重視
+### Security-Focused
 
 ```bash
 /multi-role security,architect
-「認証システムの設計」
+"Authentication system design"
 
 /multi-role security,frontend  
-「ログイン画面のセキュリティ」
+"Login screen security"
 
 /multi-role security,mobile
 「モバイルアプリのデータ保護」
