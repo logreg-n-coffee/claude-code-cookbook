@@ -1,63 +1,63 @@
 ## PR Review
 
-Pull Request の体系的レビューでコード品質とアーキテクチャの健全性を確保します。
+Ensure code quality and architectural soundness through systematic Pull Request reviews.
 
-### 使い方
+### Usage
 
 ```bash
-# PR の包括的レビュー
+# Comprehensive PR review
 gh pr view 123 --comments
-「この PR を体系的にレビューしてコード品質、セキュリティ、アーキテクチャの観点からフィードバックしてください」
+"Please systematically review this PR and provide feedback from code quality, security, and architecture perspectives"
 
-# セキュリティ特化レビュー
+# Security-focused review
 gh pr diff 123
-「セキュリティリスクと脆弱性に焦点を当ててレビューしてください」
+"Please review with focus on security risks and vulnerabilities"
 
-# アーキテクチャ観点のレビュー
+# Architecture perspective review
 gh pr checkout 123 && find . -name "*.js" | head -10
-「レイヤー分離、依存関係、SOLID 原則の観点からアーキテクチャを評価してください」
+"Please evaluate architecture from layer separation, dependencies, and SOLID principles perspectives"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# コード品質の数値的評価
+# Numerical evaluation of code quality
 find . -name "*.js" -exec wc -l {} + | sort -rn | head -5
-"コードの複雑度、関数サイズ、重複度を評価して改善点を指摘してください"
+"Please evaluate code complexity, function size, and duplication level and point out areas for improvement"
 
-# セキュリティ脆弱性チェック
+# Security vulnerability check
 grep -r "password\|secret\|token" . --include="*.js" | head -10
-"機密情報の漏洩、ハードコーディング、認証バイパスのリスクをチェックしてください"
+"Please check risks of sensitive information leakage, hardcoding, and authentication bypass"
 
-# アーキテクチャ違反の検出
+# Architecture violation detection
 grep -r "import.*from.*\.\./\.\." . --include="*.js"
-"レイヤー違反、循環依存、結合度の問題を評価してください"
+"Please evaluate layer violations, circular dependencies, and coupling issues"
 ```
 
-### コメント分類体系
+### Comment Classification System
 
-```
-🔴 critical.must: 致命的問題
-├─ セキュリティ脆弱性
-├─ データ整合性問題
-└─ システム障害リスク
+```text
+🔴 critical.must: Critical issues
+├─ Security vulnerabilities
+├─ Data integrity problems
+└─ System failure risks
 
-🟡 high.imo: 高優先度改善
-├─ 機能不全のリスク
-├─ パフォーマンス問題
-└─ 保守性の大幅低下
+🟡 high.imo: High priority improvements
+├─ Functional failure risks
+├─ Performance issues
+└─ Significant maintainability degradation
 
-🟢 medium.imo: 中優先度改善
-├─ 可読性の向上
-├─ コード構造改善
-└─ テスト品質向上
+🟢 medium.imo: Medium priority improvements
+├─ Readability improvements
+├─ Code structure improvements
+└─ Test quality improvements
 
-🟢 low.nits: 軽微な指摘
-├─ スタイル統一
-├─ タイポ修正
-└─ コメント追加
+🟢 low.nits: Minor points
+├─ Style unification
+├─ Typo corrections
+└─ Comment additions
 
-🔵 info.q: 質問・情報提供
+🔵 info.q: Questions and information
 ├─ 実装意図の確認
 ├─ 設計判断の背景
 └─ ベストプラクティスの共有

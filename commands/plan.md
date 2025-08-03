@@ -1,134 +1,134 @@
 ## Plan
 
-実装前の計画立案モードを起動して、詳細な実装戦略を策定します。コード実装前に構造化された計画を立てることで、効率的な開発を支援します。
+Activate pre-implementation planning mode to develop detailed implementation strategies. Support efficient development by creating structured plans before code implementation.
 
-### 使い方
+### Usage
 
 ```bash
-# Claude に Plan Mode を依頼
-「[実装内容] の実装計画を立てて」
+# Request Plan Mode from Claude
+"Create implementation plan for [implementation content]"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# 新機能の実装計画
-「ユーザー認証機能の実装計画を立てて」
+# New feature implementation plan
+"Create implementation plan for user authentication feature"
 
-# システム設計の計画
-「マイクロサービス分割の実装計画を立てて」
+# System design plan
+"Create implementation plan for microservice separation"
 
-# リファクタリング計画
-「レガシーコードのリファクタリング計画を立てて」
+# Refactoring plan
+"Create implementation plan for legacy code refactoring"
 ```
 
-### Claude との連携
+### Claude Integration
 
 ```bash
-# 複雑な機能実装
-「チャット機能の実装計画を立てて。WebSocket、リアルタイム通知、履歴管理を含めて」
+# Complex feature implementation
+"Create implementation plan for chat functionality. Include WebSocket, real-time notifications, and history management"
 
-# データベース設計
-「EC サイトのデータベース設計計画を立てて。商品、注文、ユーザー管理を含めて」
+# Database design
+"Create database design plan for EC site. Include product, order, and user management"
 
-# API 設計
-「GraphQL API の実装計画を立てて。認証、キャッシュ、レート制限を含めて」
+# API design
+"Create implementation plan for GraphQL API. Include authentication, caching, and rate limiting"
 
-# インフラ設計
-「Docker 化の実装計画を立てて。開発環境、本番環境、CI/CD を含めて」
+# Infrastructure design
+"Create implementation plan for Dockerization. Include development environment, production environment, and CI/CD"
 ```
 
-### Plan Mode の特徴
+### Plan Mode Features
 
-**自動起動**
+**Auto Activation**
 
-- 実装タスクを検出すると自動的に Plan Mode が起動
-- 「実装計画を立てて」などのキーワードで明示的に起動可能
+- Plan Mode automatically activates when implementation tasks are detected
+- Can be explicitly activated with keywords like "create implementation plan"
 
-**構造化された仕様書**
+**Structured Specifications**
 
-- 要件定義（ユーザーストーリー・受け入れ基準）
-- 設計書（アーキテクチャ・データ設計・ UI 設計）
-- 実装計画（タスク分解・進捗追跡・品質保証）
-- リスク分析と対策
+- Requirements definition (user stories, acceptance criteria)
+- Design documents (architecture, data design, UI design)
+- Implementation plan (task breakdown, progress tracking, quality assurance)
+- Risk analysis and countermeasures
 
-**承認プロセス**
+**Approval Process**
 
-- `exit_plan_mode` ツールで計画を提示
-- **重要**: ツールの戻り値に関わらず、必ずユーザーの明示的承認を待つ
-- 承認なしでの実装開始は禁止
-- 計画の修正・調整が可能
-- 承認後にのみ TodoWrite でタスク管理を開始
+- Present plan with `exit_plan_mode` tool
+- **Important**: Always wait for explicit user approval regardless of tool return value
+- Starting implementation without approval is prohibited
+- Plan modification and adjustment possible
+- Start task management with TodoWrite only after approval
 
-### 詳細例
+### Detailed Examples
 
 ```bash
-# 複雑なシステム実装
-「オンライン決済システムの実装計画を立てて。Stripe 連携、セキュリティ、エラーハンドリングを含めて」
+# Complex system implementation
+"Create implementation plan for online payment system. Include Stripe integration, security, and error handling"
 
-# フロントエンド実装
-「React ダッシュボードの実装計画を立てて。状態管理、コンポーネント設計、テストを含めて」
+# Frontend implementation
+"Create implementation plan for React dashboard. Include state management, component design, and testing"
 
-# バックエンド実装
-「RESTful API の実装計画を立てて。認証、バリデーション、ログ記録を含めて」
+# Backend implementation
+"Create implementation plan for RESTful API. Include authentication, validation, and logging"
 
-# DevOps 実装
-「CI/CD パイプラインの実装計画を立てて。テスト自動化、デプロイメント、監視を含めて」
+# DevOps implementation
+"Create implementation plan for CI/CD pipeline. Include test automation, deployment, and monitoring"
 ```
 
-### 3 段階ワークフロー
+### 3-Phase Workflow
 
-#### Phase 1: Requirements（要件定義）
+#### Phase 1: Requirements
 
-- **ユーザーストーリー**: 機能の目的と価値を明確化
-- **受け入れ基準**: 完了条件と品質基準を定義
-- **制約・前提条件**: 技術的・時間的制約を整理
-- **優先順位付け**: Must-have/Nice-to-have の分類
+- **User Stories**: Clarify purpose and value of features
+- **Acceptance Criteria**: Define completion conditions and quality standards
+- **Constraints & Assumptions**: Organize technical and temporal constraints
+- **Prioritization**: Classify Must-have/Nice-to-have
 
-#### Phase 2: Design（設計）
+#### Phase 2: Design
 
-- **アーキテクチャ設計**: システム構成と技術選定
-- **データ設計**: スキーマ、API 仕様、データフロー
-- **UI/UX 設計**: 画面構成と操作フロー
-- **リスク分析**: 潜在的問題と対策
+- **Architecture Design**: System configuration and technology selection
+- **Data Design**: Schema, API specifications, data flow
+- **UI/UX Design**: Screen configuration and operation flow
+- **Risk Analysis**: Potential problems and countermeasures
 
-#### Phase 3: Implementation（実装）
+#### Phase 3: Implementation
 
-- **タスク分解**: 実装可能な単位への細分化
-- **進捗追跡**: TodoWrite による状態管理
-- **品質保証**: テスト戦略と検証方法
-- **承認プロセス**: exit_plan_mode での計画提示と明示的承認待機
+- **Task Breakdown**: Subdivision into implementable units
+- **Progress Tracking**: State management with TodoWrite
+- **Quality Assurance**: Test strategy and verification methods
+- **Approval Process**: Plan presentation with exit_plan_mode and explicit approval waiting
 
-### 注意事項
+### Notes
 
-**適用範囲**
+**Scope of Application**
 
-- Plan Mode は複雑な実装タスクに最適
-- 単純な修正や小規模な変更の場合は、通常の実装形式を使用
-- 3 ステップ以上の作業や新規機能開発に推奨
+- Plan Mode is optimal for complex implementation tasks
+- Use normal implementation format for simple fixes or small-scale changes
+- Recommended for work with 3+ steps or new feature development
 
-**技術的制約**
+**Technical Constraints**
 
-- `exit_plan_mode` ツールの戻り値は信頼しない
-- 承認プロセスはユーザーの明示的な意思表示で判断
-- CLI の plan mode とは異なる機能
+- Do not trust return values from `exit_plan_mode` tool
+- Judge approval process by user's explicit intent
+- Different functionality from CLI plan mode
 
-**実行上の注意**
+**Execution Notes**
 
-- 承認前の実装開始は厳禁
-- 計画提示後は必ずユーザー応答を待機
-- エラー時は代替手段を提示
+- Starting implementation before approval strictly prohibited
+- Always wait for user response after plan presentation
+- Provide alternatives in case of errors
 
-### 実行例
+### Execution Example
 
 ```bash
-# 使用例
-「ユーザー管理システムの実装計画を立てて」
+# Usage example
+"Create implementation plan for user management system"
 
-# 期待される動作
-# 1. Plan Mode が自動起動
-# 2. 要件分析と技術選定
-# 3. 実装ステップの構造化
-# 4. exit_plan_mode で計画提示
-# 5. 承認後に実装開始
+# Expected behavior
+# 1. Plan Mode auto-activates
+# 2. Requirements analysis and technology selection
+# 3. Structured implementation steps
+# 4. Present plan with exit_plan_mode
+# 5. Start implementation after approval
 ```

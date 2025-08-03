@@ -1,63 +1,63 @@
 ## Tech Debt
 
-プロジェクトの技術的負債を分析し、優先順位付けされた改善計画を作成します。
+Analyze project technical debt and create prioritized improvement plans.
 
-### 使い方
+### Usage
 
 ```bash
-# プロジェクトの構成を確認して技術的負債を分析
+# Check project structure and analyze technical debt
 ls -la
-「このプロジェクトの技術的負債を分析して改善計画を作成して」
+"Please analyze the technical debt of this project and create an improvement plan"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# TODO/FIXME コメントの分析
+# Analyze TODO/FIXME comments
 grep -r "TODO\|FIXME\|HACK\|XXX\|WORKAROUND" . --exclude-dir=node_modules --exclude-dir=.git
-「これらの TODO コメントを優先度順に整理して改善計画を立てて」
+"Please organize these TODO comments by priority and create an improvement plan"
 
-# プロジェクトの依存関係確認
+# Check project dependencies
 ls -la | grep -E "package.json|Cargo.toml|pubspec.yaml|go.mod|requirements.txt"
-「プロジェクトの依存関係を分析して古くなっているものとリスクを特定して」
+"Please analyze project dependencies and identify outdated ones and risks"
 
-# 大きなファイルや複雑な関数の検出
+# Detect large files or complex functions
 find . -type f -not -path "*/\.*" -not -path "*/node_modules/*" -exec wc -l {} + | sort -rn | head -10
-「大きすぎるファイルや複雑な構造を特定して改善案を提示して」
+"Please identify oversized files or complex structures and provide improvement suggestions"
 ```
 
-### Claude との連携
+### Claude Integration
 
 ```bash
-# 包括的な技術的負債分析
+# Comprehensive technical debt analysis
 ls -la && find . -name "*.md" -maxdepth 2 -exec head -20 {} \;
-「このプロジェクトの技術的負債を以下の観点で分析して：
-1. コード品質（複雑度、重複、保守性）
-2. 依存関係の健全性
-3. セキュリティリスク
-4. パフォーマンス問題
-5. テストカバレッジ不足」
+"Please analyze the technical debt of this project from the following perspectives:
+1. Code quality (complexity, duplication, maintainability)
+2. Dependency health
+3. Security risks
+4. Performance issues
+5. Insufficient test coverage"
 
-# アーキテクチャの負債分析
+# Architecture debt analysis
 find . -type d -name "src" -o -name "lib" -o -name "app" | head -10 | xargs ls -la
-「アーキテクチャレベルの技術的負債を特定し、リファクタリング計画を提案して」
+"Please identify architecture-level technical debt and propose refactoring plans"
 
-# 優先順位付けされた改善計画
-「技術的負債を以下の基準で評価して表形式で提示：
-- 影響度（高/中/低）
-- 修正コスト（時間）
-- ビジネスリスク
-- 改善による効果
-- 推奨実施時期」
+# Prioritized improvement plan
+"Please evaluate technical debt based on the following criteria and present in table format:
+- Impact level (High/Medium/Low)
+- Fix cost (time)
+- Business risk
+- Improvement effects
+- Recommended implementation timeline"
 ```
 
-### 詳細例
+### Detailed Examples
 
 ```bash
-# プロジェクトタイプの自動検出と分析
+# Automatic project type detection and analysis
 find . -maxdepth 2 -type f \( -name "package.json" -o -name "Cargo.toml" -o -name "pubspec.yaml" -o -name "go.mod" -o -name "pom.xml" \)
-「検出されたプロジェクトタイプに基づいて、以下を分析：
-1. 言語・フレームワーク固有の技術的負債
+"Based on detected project type, analyze the following:
+1. Language and framework-specific technical debt
 2. ベストプラクティスからの逸脱
 3. モダナイゼーションの機会
 4. 段階的な改善戦略」

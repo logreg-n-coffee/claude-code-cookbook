@@ -1,63 +1,63 @@
 ## Code Explain
 
-コードの動作を詳しく解説します。
+Provide detailed explanations of code behavior.
 
-### 使い方
+### Usage
 
 ```bash
-# ファイル内容を表示して Claude に依頼
+# Display file content and request from Claude
 cat <file>
-「このコードの動作を解説して」
+"Please explain how this code works"
 ```
 
-### 基本例
+### Basic Examples
 
 ```bash
-# Rust の所有権を理解
+# Understanding Rust ownership
 cat main.rs
-「Rust の所有権とライフタイムの観点から解説して」
+"Please explain from the perspective of Rust ownership and lifetimes"
 
-# アルゴリズムの解説
+# Algorithm explanation
 grep -A 50 "quicksort" sort.rs
-「このソートアルゴリズムの仕組みと計算量を解説して」
+"Please explain the mechanism and computational complexity of this sorting algorithm"
 
-# デザインパターンの説明
+# Design pattern explanation
 cat factory.rs
-「使用されているデザインパターンとその利点を説明して」
+"Please explain the design patterns used and their advantages"
 ```
 
-### Claude との連携
+### Claude Integration
 
 ```bash
-# 初心者向け解説
+# Beginner-friendly explanation
 cat complex_function.py
-「このコードを初心者にもわかりやすく 1 行ずつ解説して」
+"Please explain this code line by line in a way that beginners can understand"
 
-# パフォーマンス分析
+# Performance analysis
 cat algorithm.rs
-「このコードのパフォーマンス上の問題点と改善案を提示して」
+"Please identify performance issues in this code and provide improvement suggestions"
 
-# 図解付き説明
+# Explanation with diagrams
 cat state_machine.js
-「このコードの処理の流れを ASCII アートの図解付きで説明して」
+"Please explain the processing flow of this code with ASCII art diagrams"
 
-# セキュリティレビュー
+# Security review
 cat auth_handler.go
-「このコードのセキュリティ上の懸念点を指摘して」
+"Please point out security concerns in this code"
 ```
 
-### 詳細例
+### Detailed Examples
 
 ```bash
-# 複雑なロジックの解説
+# Complex logic explanation
 cat recursive_parser.rs
-「この再帰パーサーの動作を以下の観点で解説して：
-1. 全体的な処理フロー
-2. 各関数の役割と責任
-3. エッジケースの処理
-4. 改善可能な点」
+"Please explain this recursive parser from the following perspectives:
+1. Overall processing flow
+2. Role and responsibility of each function
+3. Edge case handling
+4. Areas for improvement"
 
-# 非同期処理の解説
+# Asynchronous processing explanation
 cat async_handler.ts
 「この非同期処理について以下を解説して：
 1. Promise チェーンの流れ

@@ -1,83 +1,83 @@
 ## Semantic Commit
 
-大きな変更を意味のある最小単位に分割して、セマンティックなコミットメッセージと共に順次コミットします。外部ツールに依存せず、git 標準コマンドのみを使用します。
+Divide large changes into meaningful minimal units and commit sequentially with semantic commit messages. Uses only standard git commands without external tool dependencies.
 
-### 使い方
+### Usage
 
 ```bash
-/semantic-commit [オプション]
+/semantic-commit [options]
 ```
 
-### オプション
+### Options
 
-- `--dry-run` : 実際のコミットは行わず、提案されるコミット分割のみを表示
-- `--lang <言語>` : コミットメッセージの言語を強制指定（en, ja）
-- `--max-commits <数>` : 最大コミット数を指定（デフォルト: 10）
+- `--dry-run` : Display only proposed commit divisions without actual commits
+- `--lang <language>` : Force specify commit message language (en, ja)
+- `--max-commits <number>` : Specify maximum number of commits (default: 10)
 
-### 基本例
+### Basic Examples
 
 ```bash
-# 現在の変更を分析して、論理的な単位でコミット
+# Analyze current changes and commit in logical units
 /semantic-commit
 
-# 分割案のみを確認（実際のコミットなし）
+# Check division proposal only (no actual commits)
 /semantic-commit --dry-run
 
-# 英語でコミットメッセージを生成
+# Generate commit messages in English
 /semantic-commit --lang en
 
-# 最大 5 個のコミットに分割
+# Divide into maximum 5 commits
 /semantic-commit --max-commits 5
 ```
 
-### 動作フロー
+### Operation Flow
 
-1. **変更分析**: `git diff HEAD` で全変更を取得
-2. **ファイル分類**: 変更されたファイルを論理的にグループ化
-3. **コミット提案**: 各グループに対してセマンティックなコミットメッセージを生成
-4. **順次実行**: ユーザー確認後、各グループを順次コミット
+1. **Change Analysis**: Get all changes with `git diff HEAD`
+2. **File Classification**: Logically group changed files
+3. **Commit Proposal**: Generate semantic commit messages for each group
+4. **Sequential Execution**: After user confirmation, commit each group sequentially
 
-### 変更分割の核心機能
+### Core Change Division Functionality
 
-#### 「大きな変更」の検出
+#### Detection of "Large Changes"
 
-以下の条件で大きな変更として検出：
+Detected as large changes under the following conditions:
 
-1. **変更ファイル数**: 5 ファイル以上の変更
-2. **変更行数**: 100 行以上の変更
-3. **複数機能**: 2 つ以上の機能領域にまたがる変更
-4. **混在パターン**: feat + fix + docs が混在
+1. **Number of changed files**: 5 or more files changed
+2. **Number of changed lines**: 100 or more lines changed
+3. **Multiple features**: Changes spanning 2 or more functional areas
+4. **Mixed patterns**: feat + fix + docs mixed together
 
 ```bash
-# 変更規模の分析
+# Change scale analysis
 CHANGED_FILES=$(git diff HEAD --name-only | wc -l)
 CHANGED_LINES=$(git diff HEAD --stat | tail -1 | grep -o '[0-9]\+ insertions\|[0-9]\+ deletions' | awk '{sum+=$1} END {print sum}')
 
 if [ $CHANGED_FILES -ge 5 ] || [ $CHANGED_LINES -ge 100 ]; then
-  echo "大きな変更を検出: 分割を推奨"
+  echo "Large change detected: Division recommended"
 fi
 ```
 
-#### 「意味のある最小単位」への分割戦略
+#### Division Strategy into "Meaningful Minimal Units"
 
-##### 1. 機能境界による分割
+##### 1. Division by Functional Boundaries
 
 ```bash
-# ディレクトリ構造から機能単位を特定
+# Identify functional units from directory structure
 git diff HEAD --name-only | cut -d'/' -f1-2 | sort | uniq
-# → src/auth, src/api, components/ui など
+# → src/auth, src/api, components/ui, etc.
 ```
 
-##### 2. 変更種別による分離
+##### 2. Separation by Change Type
 
 ```bash
-# 新規ファイル vs 既存ファイル修正
-git diff HEAD --name-status | grep '^A' # 新規ファイル
-git diff HEAD --name-status | grep '^M' # 修正ファイル
-git diff HEAD --name-status | grep '^D' # 削除ファイル
+# New files vs existing file modifications
+git diff HEAD --name-status | grep '^A' # New files
+git diff HEAD --name-status | grep '^M' # Modified files
+git diff HEAD --name-status | grep '^D' # Deleted files
 ```
 
-##### 3. 依存関係の分析
+##### 3. Dependency Analysis
 
 ```bash
 # インポート関係の変更を検出

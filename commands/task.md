@@ -1,61 +1,61 @@
 ## Task
 
-専用エージェントを起動して、複雑な検索・調査・分析タスクを自律的に実行します。複数のツールを組み合わせた大規模な情報処理で、コンテキスト効率性を重視します。
+Launch dedicated agents to autonomously execute complex search, investigation, and analysis tasks. Large-scale information processing combining multiple tools with emphasis on context efficiency.
 
-### 使い方
+### Usage
 
 ```bash
-# Claude に Task を依頼
-「[課題] を Task で調査して」
+# Request Task from Claude
+"Please investigate [issue] with Task"
 ```
 
-### Task の特徴
+### Task Features
 
-**自律的実行**
+**Autonomous Execution**
 
-- 複数のツールを組み合わせて自動実行
-- 段階的な情報収集と分析
-- 結果の統合と構造化された報告
+- Automatic execution combining multiple tools
+- Gradual information collection and analysis
+- Result integration and structured reporting
 
-**効率的な情報処理**
+**Efficient Information Processing**
 
-- コンテキスト消費の最適化
-- 大規模なファイル検索・解析
-- 外部情報源からのデータ収集
+- Context consumption optimization
+- Large-scale file search and analysis
+- Data collection from external information sources
 
-**品質保証**
+**Quality Assurance**
 
-- 情報源の信頼性チェック
-- 複数視点からの検証
-- 欠落情報の自動補完
+- Information source reliability checking
+- Verification from multiple perspectives
+- Automatic completion of missing information
 
-### 基本例
+### Basic Examples
 
 ```bash
-# 複雑なコードベース調査
-「この機能がどのファイルに実装されているか Task で調査して」
+# Complex codebase investigation
+"Please investigate which files implement this feature using Task"
 
-# 大規模なファイル検索
-「設定ファイルの不整合を Task で特定して」
+# Large-scale file search
+"Please identify configuration file inconsistencies using Task"
 
-# 外部情報の収集
-「最新の AI 技術トレンドを Task で調査して」
+# External information collection
+"Please investigate latest AI technology trends using Task"
 ```
 
-### Claude との連携
+### Claude Integration
 
 ```bash
-# 複雑な問題分析
-「メモリリークの原因を Task で分析して。プロファイリング結果とログを含めて」
+# Complex problem analysis
+"Please analyze the cause of memory leaks using Task. Include profiling results and logs"
 
-# 依存関係調査
-「この npm パッケージの脆弱性を Task で調査して」
+# Dependency investigation
+"Please investigate vulnerabilities in this npm package using Task"
 
-# 競合分析
-「競合サービスの API 仕様を Task で調査して」
+# Competitive analysis
+"Please investigate competitor service API specifications using Task"
 
-# アーキテクチャ分析
-「このマイクロサービスの依存関係を Task で分析して」
+# Architecture analysis
+"Please analyze the dependencies of this microservice using Task"
 ```
 
 ### 他のコマンドとの使い分け
