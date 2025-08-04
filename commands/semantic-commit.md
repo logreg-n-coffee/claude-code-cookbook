@@ -309,88 +309,88 @@ commit_with_retry() {
   return 1
 }
 
-# 中断からの復旧
+# Recovery from interruption
 resume_from_failure() {
-  echo "中断されたコミット処理を検出しました"
-  echo "現在のステージング状態:"
+  echo "Interrupted commit process detected"
+  echo "Current staging status:"
   git status --porcelain
   
-  read -p "処理を続行しますか? (y/n): " resume
+  read -p "Continue processing? (y/n): " resume
   if [ "$resume" = "y" ]; then
-    # 最後のコミット位置から再開
+    # Resume from last commit position
     last_commit=$(git log --oneline -1 --pretty=format:"%s")
-    echo "最後のコミット: $last_commit"
+    echo "Last commit: $last_commit"
   else
-    # 完全リセット
+    # Complete reset
     git reset HEAD
-    echo "処理をリセットしました"
+    echo "Process has been reset"
   fi
 }
 ```
 
-##### 4. 完了後の検証
+##### 4. Post-completion Verification
 
 ```bash
-# 全変更がコミットされたかの確認
+# Check if all changes have been committed
 remaining_changes=$(git status --porcelain | wc -l)
 if [ $remaining_changes -eq 0 ]; then
-  echo "✅ すべての変更がコミットされました"
+  echo "✅ All changes have been committed"
 else
-  echo "⚠️  未コミットの変更が残っています:"
+  echo "⚠️  Uncommitted changes remain:"
   git status --short
 fi
 
-# コミット履歴の表示
-echo "作成されたコミット:"
+# Display commit history
+echo "Created commits:"
 git log --oneline -n 10 --graph
 ```
 
-##### 5. 自動プッシュの抑制
+##### 5. Suppress Automatic Push
 
 ```bash
-# 注意: 自動プッシュは行わない
-echo "📝 注意: 自動プッシュは実行されません"
-echo "必要に応じて以下のコマンドでプッシュしてください:"
+# Note: Do not perform automatic push
+echo "📝 Note: Automatic push is not executed"
+echo "Push with the following command if needed:"
 echo "  git push origin $CURRENT_BRANCH"
 ```
 
-#### 分割アルゴリズムの詳細
+#### Detailed Division Algorithm
 
-##### ステップ 1: 初期分析
+##### Step 1: Initial Analysis
 
 ```bash
-# 全変更ファイルの取得と分類
+# Get and classify all changed files
 git diff HEAD --name-status | while read status file; do
   echo "$status:$file"
 done > /tmp/changes.txt
 
-# 機能ディレクトリ別の変更統計
+# Change statistics by functional directory
 git diff HEAD --name-only | cut -d'/' -f1-2 | sort | uniq -c
 ```
 
-##### ステップ 2: 機能境界による初期グループ化
+##### Step 2: Initial Grouping by Functional Boundaries
 
 ```bash
-# ディレクトリベースのグループ化
+# Directory-based grouping
 GROUPS=$(git diff HEAD --name-only | cut -d'/' -f1-2 | sort | uniq)
 for group in $GROUPS; do
-  echo "=== グループ: $group ==="
+  echo "=== Group: $group ==="
   git diff HEAD --name-only | grep "^$group" | head -10
 done
 ```
 
-##### ステップ 3: 変更内容の類似性分析
+##### Step 3: Change Content Similarity Analysis
 
 ```bash
-# 各ファイルの変更タイプを分析
+# Analyze change type for each file
 git diff HEAD --name-only | while read file; do
-  # 新規関数/クラス追加の検出
+  # Detect addition of new functions/classes
   NEW_FUNCTIONS=$(git diff HEAD -- "$file" | grep -c '^+.*function\|^+.*class\|^+.*def ')
   
-  # バグ修正パターンの検出
+  # Detect bug fix patterns
   BUG_FIXES=$(git diff HEAD -- "$file" | grep -c '^+.*fix\|^+.*bug\|^-.*error')
   
-  # テストファイルかの判定
+  # Determine if it's a test file
   if [[ "$file" =~ test|spec ]]; then
     echo "$file: TEST"
   elif [ $NEW_FUNCTIONS -gt 0 ]; then
@@ -403,10 +403,10 @@ git diff HEAD --name-only | while read file; do
 done
 ```
 
-##### ステップ 4: 依存関係による調整
+##### Step 4: Adjustment by Dependencies
 
 ```bash
-# インポート関係の分析
+# Import relationship analysis
 git diff HEAD | grep -E '^[+-].*import|^[+-].*from.*import' | \
 while read line; do
   echo "$line" | sed 's/^[+-]//' | awk '{print $2}'

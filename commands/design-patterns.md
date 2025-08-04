@@ -1,83 +1,83 @@
 ## Design Patterns
 
-コードベースに適用可能なデザインパターンを提案し、SOLID 原則の遵守状況を評価します。
+Propose applicable design patterns for the codebase and evaluate SOLID principle compliance.
 
-### 使い方
+### Usage
 
 ```bash
-/design-patterns [分析対象] [オプション]
+/design-patterns [analysis_target] [options]
 ```
 
-### オプション
+### Options
 
-- `--suggest` : 適用可能なパターンを提案（デフォルト）
-- `--analyze` : 既存パターンの使用状況を分析
-- `--refactor` : リファクタリング案を生成
-- `--solid` : SOLID 原則の遵守状況をチェック
-- `--anti-patterns` : アンチパターンを検出
+- `--suggest` : Propose applicable patterns (default)
+- `--analyze` : Analyze usage of existing patterns
+- `--refactor` : Generate refactoring proposals
+- `--solid` : Check SOLID principle compliance
+- `--anti-patterns` : Detect anti-patterns
 
-### 基本例
+### Basic Examples
 
 ```bash
-# プロジェクト全体のパターン分析
+# Project-wide pattern analysis
 /design-patterns
 
-# 特定ファイルへのパターン提案
+# Pattern suggestions for specific file
 /design-patterns src/services/user.js --suggest
 
-# SOLID 原則チェック
+# SOLID principle check
 /design-patterns --solid
 
-# アンチパターン検出
+# Anti-pattern detection
 /design-patterns --anti-patterns
 ```
 
-### 分析カテゴリ
+### Analysis Categories
 
-#### 1. 生成に関するパターン
+#### 1. Creational Patterns
 
-- **Factory Pattern**: オブジェクト生成の抽象化
-- **Builder Pattern**: 複雑なオブジェクトの段階的構築
-- **Singleton Pattern**: インスタンスの一意性保証
-- **Prototype Pattern**: オブジェクトのクローン生成
+- **Factory Pattern**: Object creation abstraction
+- **Builder Pattern**: Staged construction of complex objects
+- **Singleton Pattern**: Instance uniqueness guarantee
+- **Prototype Pattern**: Object clone creation
 
-#### 2. 構造に関するパターン
+#### 2. Structural Patterns
 
-- **Adapter Pattern**: インターフェースの変換
-- **Decorator Pattern**: 機能の動的追加
-- **Facade Pattern**: 複雑なサブシステムの簡略化
-- **Proxy Pattern**: オブジェクトへのアクセス制御
+- **Adapter Pattern**: Interface conversion
+- **Decorator Pattern**: Dynamic feature addition
+- **Facade Pattern**: Simplification of complex subsystems
+- **Proxy Pattern**: Object access control
 
-#### 3. 振る舞いに関するパターン
+#### 3. Behavioral Patterns
 
-- **Observer Pattern**: イベント通知の実装
-- **Strategy Pattern**: アルゴリズムの切り替え
-- **Command Pattern**: 操作のカプセル化
-- **Iterator Pattern**: コレクションの走査
+- **Observer Pattern**: Event notification implementation
+- **Strategy Pattern**: Algorithm switching
+- **Command Pattern**: Operation encapsulation
+- **Iterator Pattern**: Collection traversal
 
-### SOLID 原則チェック項目
-
-```
-S - Single Responsibility Principle (単一責任の原則)
-O - Open/Closed Principle (開放閉鎖の原則)
-L - Liskov Substitution Principle (リスコフの置換原則)
-I - Interface Segregation Principle (インターフェース分離の原則)
-D - Dependency Inversion Principle (依存性逆転の原則)
-```
-
-### 出力例
+### SOLID Principle Check Items
 
 ```
-デザインパターン分析レポート
+S - Single Responsibility Principle
+O - Open/Closed Principle
+L - Liskov Substitution Principle
+I - Interface Segregation Principle
+D - Dependency Inversion Principle
+```
+
+### Output Example
+
+```
+Design Pattern Analysis Report
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-現在使用中のパターン
-├─ Observer Pattern: EventEmitter (12 箇所)
-├─ Factory Pattern: UserFactory (3 箇所)
-├─ Singleton Pattern: DatabaseConnection (1 箇所)
-└─ Strategy Pattern: PaymentProcessor (5 箇所)
+Currently Used Patterns
+├─ Observer Pattern: EventEmitter (12 locations)
+├─ Factory Pattern: UserFactory (3 locations)
+├─ Singleton Pattern: DatabaseConnection (1 location)
+└─ Strategy Pattern: PaymentProcessor (5 locations)
 
-推奨パターン
+Recommended Patterns
 ├─ [HIGH] Repository Pattern
 │  └─ 対象: src/models/*.js
 │  └─ 理由: データアクセスロジックの分離

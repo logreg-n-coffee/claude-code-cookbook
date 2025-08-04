@@ -59,17 +59,17 @@ cat recursive_parser.rs
 
 # Asynchronous processing explanation
 cat async_handler.ts
-「この非同期処理について以下を解説して：
-1. Promise チェーンの流れ
-2. エラーハンドリングの仕組み
-3. 並行処理の有無
-4. デッドロックの可能性」
+"Explain this asynchronous processing from the following perspectives:
+1. Promise chain flow
+2. Error handling mechanism
+3. Presence of concurrent processing
+4. Possibility of deadlocks"
 
-# アーキテクチャの説明
+# Architecture explanation
 ls -la src/ && cat src/main.rs src/lib.rs
-「このプロジェクトのアーキテクチャとモジュール構成を解説して」
+"Explain the architecture and module structure of this project"
 ```
 
-### 注意事項
+### Notes
 
-コード解説では、単に動作を説明するだけでなく、なぜそのような実装になっているか、どのような利点があるか、潜在的な問題点は何かといった深い洞察も提供します。
+Code explanations provide not only behavioral descriptions but also deep insights into why implementations are done in certain ways, what advantages they have, and what potential issues exist.

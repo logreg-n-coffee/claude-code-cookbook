@@ -58,166 +58,166 @@ Launch dedicated agents to autonomously execute complex search, investigation, a
 "Please analyze the dependencies of this microservice using Task"
 ```
 
-### 他のコマンドとの使い分け
+### Distinguishing from Other Commands
 
-#### Task vs 他のコマンド
+#### Task vs Other Commands
 
-| コマンド | 主な用途 | 実行方式 | 情報収集 |
-|---------|---------|----------|----------|
-| **Task** | 調査・分析・検索 | 自律的実行 | 複数ソース |
-| ultrathink | 深い思考・判断 | 構造化思考 | 既存知識中心 |
-| sequential-thinking | 問題解決・設計 | 段階的思考 | 必要に応じて |
-| plan | 実装計画立案 | 承認プロセス | 要件分析 |
+| Command | Main Use | Execution Method | Information Collection |
+|---------|----------|------------------|----------------------|
+| **Task** | Investigation, analysis, search | Autonomous execution | Multiple sources |
+| ultrathink | Deep thinking, judgment | Structured thinking | Existing knowledge focused |
+| sequential-thinking | Problem solving, design | Staged thinking | As needed |
+| plan | Implementation planning | Approval process | Requirements analysis |
 
-#### 判断フローチャート
+#### Decision Flowchart
 
 ```
-情報収集が必要？
-├─ Yes → 複数ソース・大規模？
+Information collection needed?
+├─ Yes → Multiple sources, large scale?
 │          ├─ Yes → **Task**
-│          └─ No → 通常の質問
-└─ No → 深い思考が必要？
+│          └─ No → Regular question
+└─ No → Deep thinking needed?
           ├─ Yes → ultrathink/sequential-thinking
-          └─ No → 通常の質問
+          └─ No → Regular question
 ```
 
-### 有効なケース・不要なケース
+### Effective Cases / Unnecessary Cases
 
-**有効なケース**
+#### Effective Cases
 
-- 複雑なコードベース調査（依存関係、アーキテクチャ分析）
-- 大規模なファイル検索（特定の実装パターン、設定ファイル）
-- 外部情報の収集と整理（技術トレンド、ライブラリ調査）
-- 複数のソースからの情報統合（ログ解析、メトリクス分析）
-- 反復的な調査作業（セキュリティ監査、技術負債調査）
-- コンテキスト消費を避けたい大規模分析
+- Complex codebase investigation (dependencies, architecture analysis)
+- Large-scale file search (specific implementation patterns, configuration files)
+- External information collection and organization (technology trends, library research)
+- Information integration from multiple sources (log analysis, metrics analysis)
+- Repetitive investigation tasks (security audits, technical debt research)
+- Large-scale analysis where context consumption should be avoided
 
-**不要なケース**
+#### Unnecessary Cases
 
-- 単純な質問や既存知識で回答可能な内容
-- 短時間で完了する単発の作業
-- 対話的な確認・相談が必要な作業
-- 実装や設計の判断（plan や思考系コマンドが適切）
+- Simple questions or content answerable with existing knowledge
+- One-time tasks that complete quickly
+- Tasks requiring interactive confirmation or consultation
+- Implementation or design decisions (plan or thinking commands are appropriate)
 
-### カテゴリ別詳細例
+### Detailed Examples by Category
 
-#### システム分析・調査
+#### System Analysis & Investigation
 
 ```bash
-# 複雑なシステム分析
-「EC サイトのボトルネックを Task で特定して。データベース、API、フロントエンドの全体を調査」
+# Complex system analysis
+"Identify e-commerce site bottlenecks using Task. Investigate database, API, and frontend comprehensively"
 
-# アーキテクチャ分析
-「このマイクロサービスの依存関係を Task で分析して。API 通信とデータフローを含めて」
+# Architecture analysis
+"Analyze microservice dependencies using Task. Include API communication and data flow"
 
-# 技術負債調査
-「レガシーコードの技術負債を Task で分析して。リファクタリング優先度を含めて」
+# Technical debt research
+"Analyze legacy code technical debt using Task. Include refactoring priorities"
 ```
 
-#### セキュリティ・コンプライアンス
+#### Security & Compliance
 
 ```bash
-# セキュリティ監査
-「このアプリケーションの脆弱性を Task で調査して。OWASP Top 10 に基づいて」
+# Security audit
+"Investigate application vulnerabilities using Task. Based on OWASP Top 10"
 
-# ライセンス調査
-「プロジェクトの依存関係のライセンス問題を Task で調査して」
+# License investigation
+"Investigate license issues in project dependencies using Task"
 
-# 設定ファイル監査
-「セキュリティ設定の不整合を Task で特定して。環境ごとの差分を含めて」
+# Configuration file audit
+"Identify security configuration inconsistencies using Task. Include differences between environments"
 ```
 
-#### パフォーマンス・最適化
+#### Performance & Optimization
 
 ```bash
-# パフォーマンス分析
-「アプリケーションの重いクエリを Task で特定して。実行計画と最適化案を含めて」
+# Performance analysis
+"Identify heavy queries in the application using Task. Include execution plans and optimization suggestions"
 
-# リソース使用量調査
-「メモリリークの原因を Task で調査して。プロファイリング結果とコード解析を含めて」
+# Resource usage investigation
+"Investigate causes of memory leaks using Task. Include profiling results and code analysis"
 
-# バンドルサイズ分析
-「フロントエンドのバンドルサイズ問題を Task で調査して。最適化提案を含めて」
+# Bundle size analysis
+"Investigate frontend bundle size issues using Task. Include optimization suggestions"
 ```
 
-#### 外部情報収集
+#### External Information Collection
 
 ```bash
-# 技術トレンド調査
-「2024 年の JavaScript フレームワーク動向を Task で調査して」
+# Technology trend research
+"Research JavaScript framework trends in 2024 using Task"
 
-# 競合分析
-「競合サービスの API 仕様を Task で調査して。機能比較表を含めて」
+# Competitive analysis
+"Research competitor service API specifications using Task. Include feature comparison table"
 
-# ライブラリ評価
-「State 管理ライブラリの比較を Task で調査して。パフォーマンスと学習コストを含めて」
+# Library evaluation
+"Research state management library comparisons using Task. Include performance and learning costs"
 ```
 
-### 実行フローと品質保証
+### Execution Flow and Quality Assurance
 
-#### Task の実行フロー
+#### Task Execution Flow
 
 ```
-1. 初期分析
-   ├─ 課題の分解と調査範囲の特定
-   ├─ 必要なツールと情報源の選定
-   └─ 実行計画の立案
+1. Initial Analysis
+   ├─ Problem decomposition and investigation scope identification
+   ├─ Selection of necessary tools and information sources
+   └─ Execution plan formulation
 
-2. 情報収集
-   ├─ ファイル検索・コード解析
-   ├─ 外部情報の収集
-   └─ データの構造化
+2. Information Collection
+   ├─ File search and code analysis
+   ├─ External information collection
+   └─ Data structuring
 
-3. 分析・統合
-   ├─ 収集した情報の関連性分析
-   ├─ パターンや問題点の特定
-   └─ 仮説の検証
+3. Analysis & Integration
+   ├─ Relationship analysis of collected information
+   ├─ Pattern and issue identification
+   └─ Hypothesis verification
 
-4. 報告・提案
-   ├─ 結果の構造化
-   ├─ 改善提案の作成
-   └─ 次のアクションの提示
+4. Reporting & Proposals
+   ├─ Result structuring
+   ├─ Improvement proposal creation
+   └─ Next action presentation
 ```
 
-#### 品質保証
+#### Quality Assurance
 
-- **情報源の信頼性チェック**: 複数ソースでの事実確認
-- **網羅性の確認**: 調査対象の漏れがないかチェック
-- **一貫性の検証**: 矛盾する情報の整合性確認
-- **実用性の評価**: 提案の実現可能性と効果の評価
+- **Information Source Reliability Check**: Fact verification with multiple sources
+- **Completeness Verification**: Check for gaps in investigation targets
+- **Consistency Verification**: Confirm consistency of contradictory information
+- **Practicality Assessment**: Evaluate feasibility and effectiveness of proposals
 
-### エラーハンドリングと制約事項
+### Error Handling and Constraints
 
-#### よくある制約
+#### Common Constraints
 
-- **外部 API の利用制限**: レート制限や認証エラー
-- **大容量ファイルの処理制限**: メモリやタイムアウトの制約
-- **アクセス権限の問題**: ファイルやディレクトリへのアクセス制限
+- **External API Usage Limits**: Rate limits or authentication errors
+- **Large File Processing Limits**: Memory or timeout constraints
+- **Access Permission Issues**: File or directory access restrictions
 
-#### エラー時の対処
+#### Error Response
 
-- **部分的な結果報告**: 取得できた情報のみでの分析
-- **代替手段の提案**: 制約下での代替調査方法
-- **段階的実行**: 大規模タスクの分割実行
+- **Partial Result Reporting**: Analysis with only available information
+- **Alternative Method Suggestions**: Alternative investigation methods under constraints
+- **Staged Execution**: Divided execution of large-scale tasks
 
-### 注意事項
+### Notes
 
-- Task は複雑で自律的な調査・分析タスクに最適です
-- 単純な質問や即座の回答が必要な場合は、通常の質問形式を使用してください
-- 調査結果は参考情報として扱い、重要な判断は必ず検証してください
-- 外部情報の収集時は、情報の新しさと正確性に注意してください
+- Task is optimal for complex and autonomous investigation/analysis tasks
+- For simple questions or cases requiring immediate answers, use regular question format
+- Treat investigation results as reference information and always verify important decisions
+- When collecting external information, pay attention to information freshness and accuracy
 
-### 実行例
+### Execution Example
 
 ```bash
-# 使用例
-「GraphQL スキーマの問題点を Task で調査して」
+# Usage example
+"Investigate GraphQL schema issues using Task"
 
-# 期待される動作
-# 1. 専用エージェントが起動
-# 2. GraphQL 関連ファイルの検索
-# 3. スキーマ定義の解析
-# 4. ベストプラクティスとの比較
-# 5. 問題点の特定と改善提案
-# 6. 構造化された報告書の作成
+# Expected behavior
+# 1. Dedicated agent launches
+# 2. Search for GraphQL-related files
+# 3. Schema definition analysis
+# 4. Comparison with best practices
+# 5. Issue identification and improvement suggestions
+# 6. Structured report creation
 ```

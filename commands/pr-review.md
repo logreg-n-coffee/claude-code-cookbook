@@ -58,85 +58,85 @@ grep -r "import.*from.*\.\./\.\." . --include="*.js"
 └─ Comment additions
 
 🔵 info.q: Questions and information
-├─ 実装意図の確認
-├─ 設計判断の背景
-└─ ベストプラクティスの共有
+├─ Implementation intent confirmation
+├─ Design decision background
+└─ Best practice sharing
 ```
 
-### レビュー観点
+### Review Perspectives
 
-#### 1. コード正確性
+#### 1. Code Accuracy
 
-- **ロジックエラー**: 境界値、Null チェック、例外処理
-- **データ整合性**: 型安全性、バリデーション
-- **エラーハンドリング**: 網羅性、適切な処理
+- **Logic Errors**: Boundary values, null checks, exception handling
+- **Data Integrity**: Type safety, validation
+- **Error Handling**: Comprehensiveness, appropriate processing
 
-#### 2. セキュリティ
+#### 2. Security
 
-- **認証・認可**: 適切なチェック、権限管理
-- **入力検証**: SQL インジェクション、XSS 対策
-- **機密情報**: ログ出力禁止、暗号化
+- **Authentication & Authorization**: Proper checks, permission management
+- **Input Validation**: SQL injection, XSS prevention
+- **Sensitive Information**: Log output prohibition, encryption
 
-#### 3. パフォーマンス
+#### 3. Performance
 
-- **アルゴリズム**: 時間計算量、メモリ効率
-- **データベース**: N+1 クエリ、インデックス最適化
-- **リソース**: メモリリーク、キャッシュ活用
+- **Algorithms**: Time complexity, memory efficiency
+- **Database**: N+1 queries, index optimization
+- **Resources**: Memory leaks, cache utilization
 
-#### 4. アーキテクチャ
+#### 4. Architecture
 
-- **レイヤー分離**: 依存方向、適切な分離
-- **結合度**: 疑結合、インターフェース活用
-- **SOLID 原則**: 単一責任、開放閉鎖、依存性逆転
+- **Layer Separation**: Dependency direction, proper separation
+- **Coupling**: Loose coupling, interface utilization
+- **SOLID Principles**: Single responsibility, open-closed, dependency inversion
 
-### レビューフロー
+### Review Flow
 
-1. **事前確認**: PR 情報、変更差分、関連 Issue
-2. **体系的チェック**: セキュリティ → 正確性 → パフォーマンス → アーキテクチャ
-3. **建設的フィードバック**: 具体的な改善案とコード例
-4. **フォローアップ**: 修正確認、CI 状態、最終承認
+1. **Pre-check**: PR information, change diff, related issues
+2. **Systematic Check**: Security → Accuracy → Performance → Architecture
+3. **Constructive Feedback**: Specific improvement suggestions and code examples
+4. **Follow-up**: Fix verification, CI status, final approval
 
-### 効果的なコメント例
+### Effective Comment Examples
 
-**セキュリティ問題**
+#### Security Issues
 
 ```markdown
-**critical.must.** パスワードが平文で保存されています
+**critical.must.** Password is stored in plain text
 
 ```javascript
-// 修正案
+// Suggested fix
 const bcrypt = require('bcrypt');
 const hashedPassword = await bcrypt.hash(password, 12);
 ```
 
-セキュリティリスクを防ぐためハッシュ化が必須です。
+Hashing is required to prevent security risks.
 
 ```
 
-**パフォーマンス改善**
+#### Performance Improvement
 ```markdown
-**high.imo.** N+1 クエリ問題が発生します
+**high.imo.** N+1 query problem will occur
 
 ```javascript
-// 改善案: Eager Loading
+// Improvement suggestion: Eager Loading
 const users = await User.findAll({ include: [Post] });
 ```
 
-クエリ数を大幅に削減できます。
+Query count can be significantly reduced.
 
 ```
 
-**アーキテクチャ違反**
+#### Architecture Violation
 ```markdown
-**high.must.** レイヤー違反が発生しています
+**high.must.** Layer violation is occurring
 
-ドメイン層がインフラ層に直接依存しています。
-依存性逆転の原則でインターフェースを導入してください。
+Domain layer directly depends on infrastructure layer.
+Please introduce interfaces using dependency inversion principle.
 ```
 
-### 注意事項
+### Notes
 
-- **建設的トーン**: 攻撃的ではなく協調的なコミュニケーション
-- **具体的提案**: 問題の指摘だけでなく解決案を提示
-- **優先度付け**: Critical → High → Medium → Low の順で対応
-- **継続改善**: レビュー結果をナレッジベース化
+- **Constructive Tone**: Collaborative rather than aggressive communication
+- **Specific Suggestions**: Provide solutions, not just problem identification
+- **Prioritization**: Respond in order of Critical → High → Medium → Low
+- **Continuous Improvement**: Turn review results into knowledge base
