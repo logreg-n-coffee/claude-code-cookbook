@@ -158,92 +158,92 @@ mcp_github_create_pull_request({
 
 - **Up to 3 maximum**: Upper limit for automatic selection
 - **Existing labels only**: No new label creation
-- **部分マッチ**: キーワード含有による判定
+- **Partial matching**: Determination by keyword inclusion
 
-### プロジェクトガイドライン
+### Project Guidelines
 
-#### 基本姿勢
+#### Basic Approach
 
-1. **必ず Draft で開始**: すべての PR は Draft 状態で作成
-2. **段階的品質向上**: Phase 1（基本実装）→ Phase 2（テスト追加）→ Phase 3（ドキュメント更新）
-3. **適切なラベル**: 最大 3 種類のラベルを必ず付与
-4. **テンプレート使用**: `.github/PULL_REQUEST_TEMPLATE.md` を必ず使用
-5. **日本語スペース**: 日本語と半角英数字間に必ず半角スペース
+1. **Always start with Draft**: All PRs are created in Draft state
+2. **Gradual quality improvement**: Phase 1 (basic implementation) → Phase 2 (add tests) → Phase 3 (update documentation)
+3. **Appropriate labels**: Always assign up to 3 types of labels
+4. **Use templates**: Always use `.github/PULL_REQUEST_TEMPLATE.md`
+5. **Japanese spacing**: Always include half-width space between Japanese and half-width alphanumeric characters
 
-#### ブランチ命名規則
+#### Branch Naming Convention
 
 ```text
 {type}-{subject}
 
-例:
+Examples:
 - feat-user-profile
 - fix-login-error
 - refactor-api-client
 ```
 
-#### コミットメッセージ
+#### Commit Messages
 
 ```text
 {type}: {description}
 
-例:
-- feat: ユーザー認証 API の実装
-- fix: ログイン エラーの修正
-- docs: README の更新
+Examples:
+- feat: implement user authentication API
+- fix: fix login error
+- docs: update README
 ```
 
-### テンプレート処理システム
+### Template Processing System
 
-#### 処理優先順位
+#### Processing Priority
 
-1. **既存 PR 説明**: 既に記述されている内容を**完全に踏襲**
-2. **プロジェクトテンプレート**: `.github/PULL_REQUEST_TEMPLATE.md` 構造を維持
-3. **デフォルトテンプレート**: 上記が存在しない場合
+1. **Existing PR description**: **Completely follow** already written content
+2. **Project template**: Maintain `.github/PULL_REQUEST_TEMPLATE.md` structure
+3. **Default template**: When the above doesn't exist
 
-#### 既存内容保持ルール
+#### Existing Content Preservation Rules
 
-- **一文字も変更しない**: 既に記述されている内容
-- **空セクションのみ補完**: プレースホルダー部分を変更内容で埋める
-- **機能的コメント保持**: `<!-- Copilot review rule -->` などを維持
-- **HTML コメント保持**: `<!-- ... -->` を完全に保持
-- **区切り線保持**: `---` などの構造を維持
+- **Don't change a single character**: Already written content
+- **Supplement empty sections only**: Fill placeholder parts with change content
+- **Preserve functional comments**: Maintain `<!-- Copilot review rule -->` etc.
+- **Preserve HTML comments**: Completely preserve `<!-- ... -->`
+- **Preserve dividers**: Maintain structure like `---`
 
-#### HTML コメント保持の対処法
+#### HTML Comment Preservation Solutions
 
-**重要**: GitHub CLI (`gh pr edit`) は HTML コメントを自動エスケープし、シェル処理で `EOF < /dev/null` などの不正な文字列が混入する場合があります。
+**Important**: GitHub CLI (`gh pr edit`) automatically escapes HTML comments, and invalid strings like `EOF < /dev/null` may be mixed in through shell processing.
 
-**根本的解決策**:
+**Fundamental Solutions**:
 
-1. **GitHub API の --field オプション使用**: 適切なエスケープ処理で HTML コメント保持
-2. **テンプレート処理の簡素化**: 複雑なパイプ処理やリダイレクトを避ける
-3. **完全保持アプローチ**: HTML コメント削除処理を廃止し、テンプレートを完全保持
+1. **Use GitHub API --field option**: Preserve HTML comments with proper escape processing
+2. **Simplify template processing**: Avoid complex pipe processing and redirects
+3. **Complete preservation approach**: Abolish HTML comment removal processing and completely preserve templates
 
-### レビューコメント対応
+### Review Comment Response
 
 ```bash
-# 変更後の再コミット
+# Re-commit after changes
 git add .
-git commit -m "fix: レビュー フィードバックに基づく修正"
+git commit -m "fix: corrections based on review feedback"
 git push
 ```
 
-### 注意事項
+### Important Notes
 
-#### HTML コメント保持の重要性
+#### Importance of HTML Comment Preservation
 
-- **GitHub CLI 制限**: `gh pr edit` は HTML コメントをエスケープ、不正文字列混入
-- **根本的回避策**: GitHub API の `--field` オプションで適切なエスケープ処理
-- **テンプレート完全保持**: HTML コメント削除処理を廃止し、構造を完全維持
+- **GitHub CLI limitations**: `gh pr edit` escapes HTML comments, invalid string contamination
+- **Fundamental workaround**: Proper escape processing with GitHub API `--field` option
+- **Complete template preservation**: Abolish HTML comment removal processing and completely maintain structure
 
-#### 自動化の制約
+#### Automation Constraints
 
-- **新規ラベル禁止**: `.github/labels.yml` 定義外のラベル作成不可
-- **最大 3 ラベル**: 自動選択の上限
-- **既存内容優先**: 手動で記述された内容は一切変更しない
+- **New label prohibition**: Cannot create labels not defined in `.github/labels.yml`
+- **Maximum 3 labels**: Upper limit for automatic selection
+- **Existing content priority**: Never change manually written content
 
-#### 段階的品質向上
+#### Gradual Quality Improvement
 
-- **Draft 必須**: すべての PR は Draft で開始
-- **CI 確認**: `gh pr checks` で状態確認
-- **Ready 移行**: 品質確認完了後に `gh pr ready`
-- **テンプレート完全遵守**: プロジェクト固有の構造を維持
+- **Draft required**: All PRs start with Draft
+- **CI confirmation**: Check status with `gh pr checks`
+- **Ready transition**: `gh pr ready` after quality confirmation completed
+- **Complete template compliance**: Maintain project-specific structure

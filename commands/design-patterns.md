@@ -79,86 +79,86 @@ Currently Used Patterns
 
 Recommended Patterns
 ├─ [HIGH] Repository Pattern
-│  └─ 対象: src/models/*.js
-│  └─ 理由: データアクセスロジックの分離
-│  └─ 例:
+│  └─ Target: src/models/*.js
+│  └─ Reason: Separation of data access logic
+│  └─ Example:
 │      class UserRepository {
 │        async findById(id) { ... }
 │        async save(user) { ... }
 │      }
 │
 ├─ [MED] Command Pattern
-│  └─ 対象: src/api/handlers/*.js
-│  └─ 理由: リクエスト処理の統一化
+│  └─ Target: src/api/handlers/*.js
+│  └─ Reason: Unified request processing
 │
 └─ [LOW] Decorator Pattern
-   └─ 対象: src/middleware/*.js
-   └─ 理由: 機能の組み合わせ改善
+   └─ Target: src/middleware/*.js
+   └─ Reason: Improve feature combination
 
-SOLID 原則違反
-├─ [S] UserService: 認証と権限管理の両方を担当
-├─ [O] PaymentGateway: 新決済手段追加時に修正必要
-├─ [D] EmailService: 具象クラスに直接依存
-└─ [I] IDataStore: 使用されないメソッドを含む
+SOLID Principle Violations
+├─ [S] UserService: Responsible for both authentication and authorization
+├─ [O] PaymentGateway: Requires modification when adding new payment methods
+├─ [D] EmailService: Directly depends on concrete classes
+└─ [I] IDataStore: Contains unused methods
 
-リファクタリング提案
-1. UserService を認証と権限管理に分割
-2. PaymentStrategy インターフェースの導入
-3. EmailService インターフェースの定義
-4. IDataStore を用途別に分離
+Refactoring Suggestions
+1. Split UserService into authentication and authorization
+2. Introduce PaymentStrategy interface
+3. Define EmailService interface
+4. Separate IDataStore by use case
 ```
 
-### 高度な使用例
+### Advanced Usage Examples
 
 ```bash
-# パターン適用の影響分析
+# Impact analysis of pattern application
 /design-patterns --impact-analysis Repository
 
-# 特定パターンの実装例生成
+# Generate implementation examples for specific patterns
 /design-patterns --generate Factory --for src/models/Product.js
 
-# パターンの組み合わせ提案
+# Suggest pattern combinations
 /design-patterns --combine --context "API with caching"
 
-# アーキテクチャパターンの評価
+# Evaluate architectural patterns
 /design-patterns --architecture MVC
 ```
 
-### パターン適用例
+### Pattern Application Examples
 
-#### Before (問題のあるコード)
+#### Before (Problematic Code)
 
 ```javascript
 class OrderService {
   processOrder(order, paymentType) {
     if (paymentType === "credit") {
-      // クレジットカード処理
+      // Credit card processing
     } else if (paymentType === "paypal") {
-      // PayPal 処理
+      // PayPal processing
     }
-    // 他の決済方法...
+    // Other payment methods...
   }
 }
 ```
 
-#### After (Strategy Pattern 適用)
+#### After (Strategy Pattern Applied)
 
 ```javascript
-// 戦略インターフェース
+// Strategy interface
 class PaymentStrategy {
   process(amount) {
     throw new Error("Must implement process method");
   }
 }
 
-// 具象戦略
+// Concrete strategy
 class CreditCardPayment extends PaymentStrategy {
   process(amount) {
-    /* 実装 */
+    /* implementation */
   }
 }
 
-// コンテキスト
+// Context
 class OrderService {
   constructor(paymentStrategy) {
     this.paymentStrategy = paymentStrategy;
@@ -170,17 +170,17 @@ class OrderService {
 }
 ```
 
-### アンチパターン検出
+### Anti-Pattern Detection
 
-- **God Object**: 過度に多くの責務を持つクラス
-- **Spaghetti Code**: 制御フローが複雑に絡み合ったコード
-- **Copy-Paste Programming**: 重複コードの過度な使用
-- **Magic Numbers**: ハードコードされた定数
-- **Callback Hell**: 深くネストしたコールバック
+- **God Object**: Classes with excessive responsibilities
+- **Spaghetti Code**: Code with complex intertwined control flow
+- **Copy-Paste Programming**: Excessive use of duplicate code
+- **Magic Numbers**: Hard-coded constants
+- **Callback Hell**: Deeply nested callbacks
 
-### ベストプラクティス
+### Best Practices
 
-1. **段階的適用**: 一度に多くのパターンを適用しない
-2. **必要性の検証**: パターンは問題解決の手段であり目的ではない
-3. **チーム合意**: パターン適用前にチームで議論
-4. **ドキュメント化**: 適用したパターンの意図を記録
+1. **Gradual Application**: Don't apply many patterns at once
+2. **Verify Necessity**: Patterns are means to solve problems, not goals
+3. **Team Consensus**: Discuss with team before applying patterns
+4. **Documentation**: Record the intent of applied patterns
