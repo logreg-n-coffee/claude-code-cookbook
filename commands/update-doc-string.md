@@ -1,53 +1,53 @@
 ## Update Doc String
 
-多言語対応の docstring/コメントを体系的に管理し、高品質なドキュメントを維持します。
+Systematically manage multilingual docstrings/comments and maintain high-quality documentation.
 
-### 使い方
+### Usage
 
 ```bash
-# 言語を自動検出して実行
-「docstring がないクラス・関数に追加し、基準を満たさないコメントを更新してください」
+# Execute with automatic language detection
+"Add docstrings to classes/functions without them and update comments that don't meet standards"
 
-# 言語を指定して実行
+# Execute with specified language
 /update-doc-string --lang python
-「Python ファイルの docstring を PEP 257 準拠で更新してください」
+"Update Python file docstrings in PEP 257 compliance"
 
-# 特定ディレクトリのドキュメント整備
-「src/components/ 配下の関数に JSDoc を追加してください」
+# Document organization for specific directory
+"Add JSDoc to functions under src/components/"
 ```
 
-### オプション
+### Options
 
-- `--lang <en|ja>` : ドキュメントの記述言語（デフォルト: 既存コメントから自動判定、なければ en）
-- `--style <スタイル>` : ドキュメントスタイルを指定（言語固有のデフォルトあり）
-- `--marker <true|false>` : Claude マーカーを付与するか（デフォルト: true）
+- `--lang <en|ja>` : Documentation language (default: auto-detect from existing comments, en if none)
+- `--style <style>` : Specify documentation style (language-specific defaults available)
+- `--marker <true|false>` : Whether to add Claude markers (default: true)
 
-### 基本例
+### Basic Examples
 
 ```bash
-# 1. 対象ファイルの分析（プログラミング言語は自動検出）
+# 1. Analyze target files (programming language auto-detected)
 find . -type f \( -name "*.py" -o -name "*.js" -o -name "*.ts" -o -name "*.dart" -o -name "*.go" -o -name "*.rs" \) | grep -v test
-「docstring が不足している要素（コメント行数 0 または 30 文字未満）を特定してください」
+"Identify elements lacking docstrings (0 comment lines or less than 30 characters)"
 
-# 2. ドキュメント追加（言語自動判定）
-「特定された要素に言語固有の必須要素を含む docstring を追加してください」
-# → 既存コメントに日本語があれば日本語で、なければ英語で記述
+# 2. Add documentation (automatic language detection)
+"Add docstrings containing language-specific required elements to identified elements"
+# → Write in Japanese if existing comments contain Japanese, otherwise in English
 
-# 3. ドキュメント追加（明示的に英語指定）
+# 3. Add documentation (explicitly specify English)
 /update-doc-string --lang en
-「Add docstrings with required elements to the identified elements」
+"Add docstrings with required elements to the identified elements"
 
-# 4. マーカー確認
-「追加・更新したすべての docstring に Claude マーカーがあることを確認してください」
+# 4. Verify markers
+"Confirm that all added/updated docstrings have Claude markers"
 ```
 
-### 実行手順
+### Execution Procedure
 
-#### 1. 対象要素の優先順位
+#### Target Element Priority
 
-1. 🔴 **最優先**: docstring/コメントがない要素（コメント行数 0）
-2. 🟡 **次優先**: 基準を満たさない要素（30 文字未満または必須要素欠如）
-3. 🟢 **確認対象**: Claude マーカーがない既存コメント
+1. 🔴 **Highest Priority**: Elements without docstrings/comments (0 comment lines)
+2. 🟡 **Next Priority**: Elements not meeting standards (less than 30 characters or missing required elements)
+3. 🟢 **Verification Target**: Existing comments without Claude markers
 
 **対象要素（言語共通）**:
 

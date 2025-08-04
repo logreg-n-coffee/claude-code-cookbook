@@ -250,134 +250,134 @@ Integrated Conclusion:
 "Rich UI vs page load speed"
 
 /role-debate mobile,security
-「利便性 vs データ保護レベル」
+"Convenience vs data protection level"
 ```
 
-### ロール別議論特性
+### Role-specific Discussion Characteristics
 
-#### 🔒 Security ロール
+#### 🔒 Security Role
 
 ```yaml
-議論スタンス:
-  - 保守的アプローチ (リスク最小化)
-  - 規則準拠重視 (標準からの逸脱に慎重)
-  - 最悪ケース想定 (攻撃者視点)
-  - 長期的影響重視 (技術的負債としてのセキュリティ)
+Discussion Stance:
+  - Conservative approach (risk minimization)
+  - Compliance emphasis (cautious about deviating from standards)
+  - Worst-case assumptions (attacker perspective)
+  - Long-term impact focus (security as technical debt)
 
-典型的論点:
-  - "セキュリティ vs 利便性" のトレードオフ
-  - "コンプライアンス要件の必達"
-  - "攻撃コスト vs 防御コストの比較"
-  - "プライバシー保護の徹底"
+Typical Arguments:
+  - "Security vs convenience" trade-offs
+  - "Compliance requirements must be met"
+  - "Attack cost vs defense cost comparison"
+  - "Thorough privacy protection"
 
-論拠ソース:
-  - OWASP ガイドライン
-  - NIST フレームワーク
-  - 業界標準 (ISO 27001, SOC 2)
-  - 実際の攻撃事例・統計
+Evidence Sources:
+  - OWASP guidelines
+  - NIST frameworks
+  - Industry standards (ISO 27001, SOC 2)
+  - Actual attack cases and statistics
 
-議論での強み:
-  - リスク評価の精度
-  - 規制要件の知識
-  - 攻撃手法への理解
+Discussion Strengths:
+  - Risk assessment accuracy
+  - Regulatory requirements knowledge
+  - Understanding of attack methods
 
-注意すべき偏見:
-  - 過度な保守性 (イノベーション阻害)
-  - UX への配慮不足
-  - 実装コストの軽視
+Potential Biases:
+  - Excessive conservatism (innovation hindrance)
+  - Insufficient UX consideration
+  - Underestimating implementation costs
 ```
 
-#### ⚡ Performance ロール
+#### ⚡ Performance Role
 
 ```yaml
-議論スタンス:
-  - データ駆動判断 (測定ベース)
-  - 効率性重視 (コスト対効果の最適化)
-  - ユーザー体験優先 (体感速度重視)
-  - 継続的改善 (段階的最適化)
+Discussion Stance:
+  - Data-driven decisions (measurement-based)
+  - Efficiency focus (cost-effectiveness optimization)
+  - User experience priority (perceived speed emphasis)
+  - Continuous improvement (gradual optimization)
 
-典型的論点:
-  - "パフォーマンス vs セキュリティ"
-  - "最適化コスト vs 効果の投資対効果"
-  - "現在 vs 将来のスケーラビリティ"
-  - "ユーザー体験 vs システム効率"
+Typical Arguments:
+  - "Performance vs security"
+  - "ROI of optimization cost vs effect"
+  - "Current vs future scalability"
+  - "User experience vs system efficiency"
 
-論拠ソース:
-  - Core Web Vitals メトリクス
-  - ベンチマーク結果・統計
-  - ユーザー行動への影響データ
-  - 業界パフォーマンス標準
+Evidence Sources:
+  - Core Web Vitals metrics
+  - Benchmark results and statistics
+  - User behavior impact data
+  - Industry performance standards
 
-議論での強み:
-  - 定量的評価能力
-  - ボトルネック特定
-  - 最適化手法の知識
+Discussion Strengths:
+  - Quantitative evaluation capability
+  - Bottleneck identification
+  - Optimization technique knowledge
 
-注意すべき偏見:
-  - セキュリティの軽視
-  - 保守性への配慮不足
-  - プレマチュアオプティマイゼーション
+Potential Biases:
+  - Undervaluing security
+  - Insufficient maintainability consideration
+  - Premature optimization
 ```
 
-#### 🏗️ Architect ロール
+#### 🏗️ Architect Role
 
 ```yaml
-議論スタンス:
-  - 長期視点重視 (システム進化への配慮)
-  - バランス追求 (全体最適)
-  - 段階的変更 (リスク管理)
-  - 標準準拠 (実証済みパターン優先)
+Discussion Stance:
+  - Long-term perspective focus (system evolution consideration)
+  - Balance pursuit (overall optimization)
+  - Gradual changes (risk management)
+  - Standards compliance (proven pattern priority)
 
-典型的論点:
-  - "短期効率 vs 長期保守性"
-  - "技術的負債 vs 開発速度"
-  - "マイクロサービス vs モノリス"
-  - "新技術採用 vs 安定性"
+Typical Arguments:
+  - "Short-term efficiency vs long-term maintainability"
+  - "Technical debt vs development speed"
+  - "Microservices vs monolith"
+  - "New technology adoption vs stability"
 
-論拠ソース:
-  - アーキテクチャパターン集
-  - 設計原則 (SOLID, DDD)
-  - 大規模システム事例
-  - 技術進化のトレンド
+Evidence Sources:
+  - Architecture pattern collections
+  - Design principles (SOLID, DDD)
+  - Large-scale system cases
+  - Technology evolution trends
 
-議論での強み:
-  - 全体俯瞰能力
-  - 設計パターンの知識
-  - 長期影響の予測
+Discussion Strengths:
+  - Overall perspective capability
+  - Design pattern knowledge
+  - Long-term impact prediction
 
-注意すべき偏見:
-  - 過度な一般化
-  - 新技術への保守性
-  - 実装詳細への理解不足
+Potential Biases:
+  - Excessive generalization
+  - Conservatism toward new technologies
+  - Insufficient understanding of implementation details
 ```
 
-#### 🎨 Frontend ロール
+#### 🎨 Frontend Role
 
 ```yaml
-議論スタンス:
-  - ユーザー中心設計 (UX 最優先)
-  - 包摂的アプローチ (多様性配慮)
-  - 直感性重視 (学習コスト最小化)
-  - アクセシビリティ標準 (WCAG 準拠)
+Discussion Stance:
+  - User-centered design (UX top priority)
+  - Inclusive approach (diversity consideration)
+  - Intuition emphasis (learning cost minimization)
+  - Accessibility standards (WCAG compliance)
 
-典型的論点:
-  - "ユーザビリティ vs セキュリティ"
-  - "デザイン統一 vs プラットフォーム最適化"
-  - "機能性 vs シンプルさ"
-  - "パフォーマンス vs リッチな体験"
+Typical Arguments:
+  - "Usability vs security"
+  - "Design consistency vs platform optimization"
+  - "Functionality vs simplicity"
+  - "Performance vs rich experience"
 
-論拠ソース:
-  - UX 研究・ユーザビリティテスト結果
-  - アクセシビリティガイドライン
-  - デザインシステム標準
-  - ユーザー行動データ
+Evidence Sources:
+  - UX research and usability test results
+  - Accessibility guidelines
+  - Design system standards
+  - User behavior data
 
-議論での強み:
-  - ユーザー視点の代弁
-  - デザイン原則の知識
-  - アクセシビリティ要件
+Discussion Strengths:
+  - User perspective advocacy
+  - Design principle knowledge
+  - Accessibility requirements
 
-注意すべき偏見:
+Potential Biases:
   - 技術制約への理解不足
   - セキュリティ要件の軽視
   - パフォーマンス影響の過小評価

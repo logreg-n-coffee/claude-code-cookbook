@@ -463,27 +463,27 @@ done
 [optional footer(s)]
 ```
 
-#### 標準タイプ
+#### Standard Types
 
-**必須タイプ**:
+**Required Types**:
 
-- `feat`: 新機能（ユーザーに見える機能追加）
-- `fix`: バグ修正
+- `feat`: New features (user-visible feature additions)
+- `fix`: Bug fixes
 
-**任意タイプ**:
+**Optional Types**:
 
-- `build`: ビルドシステムや外部依存関係の変更
-- `chore`: その他の変更（リリースに影響しない）
-- `ci`: CI 設定ファイルやスクリプトの変更
-- `docs`: ドキュメントのみの変更
-- `style`: コードの意味に影響しない変更（空白、フォーマット、セミコロンなど）
-- `refactor`: バグ修正や機能追加を伴わないコード変更
-- `perf`: パフォーマンス改善
-- `test`: テストの追加や修正
+- `build`: Changes to build system or external dependencies
+- `chore`: Other changes (not affecting releases)
+- `ci`: Changes to CI configuration files or scripts
+- `docs`: Documentation-only changes
+- `style`: Changes that don't affect code meaning (whitespace, formatting, semicolons, etc.)
+- `refactor`: Code changes that neither fix bugs nor add features
+- `perf`: Performance improvements
+- `test`: Adding or correcting tests
 
-#### スコープ（任意）
+#### Scope (Optional)
 
-変更の影響範囲を示す：
+Indicates the scope of impact of changes:
 
 ```
 feat(api): add user authentication endpoint
@@ -493,7 +493,7 @@ docs(readme): update installation instructions
 
 #### Breaking Change
 
-API の破壊的変更がある場合：
+When there are API breaking changes:
 
 ```
 feat!: change user API response format
@@ -501,19 +501,19 @@ feat!: change user API response format
 BREAKING CHANGE: user response now includes additional metadata
 ```
 
-または
+Or
 
 ```
 feat(api)!: change authentication flow
 ```
 
-#### プロジェクト規約の自動検出
+#### Automatic Project Convention Detection
 
-**重要**: プロジェクト独自の規約が存在する場合は、それを優先します。
+**Important**: When project-specific conventions exist, they take priority.
 
-##### 1. CommitLint 設定の確認
+##### CommitLint Configuration Detection
 
-以下のファイルから設定を自動検出：
+Auto-detect settings from the following files:
 
 - `commitlint.config.js`
 - `commitlint.config.mjs`
@@ -532,9 +532,9 @@ cat .commitlintrc.json
 grep -A 10 '"commitlint"' package.json
 ```
 
-##### 2. カスタムタイプの検出
+##### Custom Type Detection
 
-プロジェクト独自のタイプ例：
+Project-specific type examples:
 
 ```javascript
 // commitlint.config.mjs
@@ -546,44 +546,44 @@ export default {
       'always',
       [
         'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore',
-        'wip',      // 作業中
-        'hotfix',   // 緊急修正
-        'release',  // リリース
-        'deps',     // 依存関係更新
-        'config'    // 設定変更
+        'wip',      // Work in progress
+        'hotfix',   // Emergency fix
+        'release',  // Release
+        'deps',     // Dependency updates
+        'config'    // Configuration changes
       ]
     ]
   }
 }
 ```
 
-##### 3. 言語設定の検出
+##### Language Setting Detection
 
 ```javascript
-// プロジェクトが日本語メッセージを使用する場合
+// When project uses Japanese messages
 export default {
   rules: {
-    'subject-case': [0],  // 日本語対応のため無効化
-    'subject-max-length': [2, 'always', 72]  // 日本語は文字数制限を調整
+    'subject-case': [0],  // Disabled for Japanese support
+    'subject-max-length': [2, 'always', 72]  // Adjusted character limit for Japanese
   }
 }
 ```
 
-#### 自動分析の流れ
+#### Automatic Analysis Flow
 
-1. **設定ファイル検索**
+1. **Configuration File Search**
 
    ```bash
    find . -name "commitlint.config.*" -o -name ".commitlintrc.*" | head -1
    ```
 
-2. **既存コミット分析**
+2. **Existing Commit Analysis**
 
    ```bash
    git log --oneline -50 --pretty=format:"%s"
    ```
 
-3. **使用タイプ統計**
+3. **Type Usage Statistics**
 
    ```bash
    git log --oneline -100 --pretty=format:"%s" | \
@@ -591,9 +591,9 @@ export default {
    sort | uniq -c | sort -nr
    ```
 
-#### プロジェクト規約の例
+#### Project Convention Examples
 
-##### Angular スタイル
+##### Angular Style
 
 ```
 feat(scope): add new feature
@@ -601,7 +601,7 @@ fix(scope): fix bug
 docs(scope): update documentation
 ```
 
-##### Gitmoji 併用スタイル
+##### Gitmoji Combined Style
 
 ```
 ✨ feat: add user registration
@@ -609,7 +609,7 @@ docs(scope): update documentation
 📚 docs: update API docs
 ```
 
-##### 日本語プロジェクト
+##### Japanese Projects
 
 ```
 feat: ユーザー登録機能を追加
@@ -617,27 +617,27 @@ fix: ログイン処理のバグを修正
 docs: API ドキュメントを更新
 ```
 
-### 言語判定
+### Language Detection
 
-このコマンドで完結する言語判定ロジック：
+Language detection logic completed within this command:
 
-1. **CommitLint 設定**から言語設定を確認
+1. **CommitLint Configuration** language setting verification
 
    ```bash
-   # subject-case ルールが無効化されている場合は日本語と判定
+   # Detect Japanese if subject-case rule is disabled
    grep -E '"subject-case".*\[0\]|subject-case.*0' commitlint.config.*
    ```
 
-2. **git log 分析**による自動判定
+2. **git log analysis** automatic detection
 
    ```bash
-   # 最近 20 コミットの言語を分析
+   # Analyze language of recent 20 commits
    git log --oneline -20 --pretty=format:"%s" | \
    grep -E '^[あ-ん]|[ア-ン]|[一-龯]' | wc -l
-   # 50% 以上が日本語なら日本語モード
+   # Japanese mode if 50% or more are Japanese
    ```
 
-3. **プロジェクトファイル**の言語設定
+3. **Project file** language settings
 
    ```bash
    # README.md の言語確認

@@ -1,153 +1,153 @@
 ## Check Prompt
 
-AI Agent 向けプロンプトの品質を評価・改善するための包括的ベストプラクティス集です。実際のプロンプト改善プロセスで培った知見を体系化し、曖昧性の排除・情報統合・強制力強化・追跡システム・継続改善など、すべての重要観点を網羅しています。
+A comprehensive best practices collection for evaluating and improving prompt quality for AI agents. Systematizes insights gained from actual prompt improvement processes, covering all critical aspects including ambiguity elimination, information integration, enforcement strengthening, tracking systems, and continuous improvement.
 
-### 使い方
+### Usage
 
 ```bash
-# プロンプトファイルの品質をチェック
+# Check prompt file quality
 cat your-prompt.md
 /check-prompt
-「このプロンプトの品質をチェックして改善案を提示して」
+"Check the quality of this prompt and provide improvement suggestions"
 ```
 
-### オプション
+### Options
 
-- なし : 現在のファイルまたは選択したテキストを分析
-- `--category <name>` : 特定カテゴリのみをチェック (structure/execution/restrictions/quality/roles/improvement)
-- `--score` : 品質スコアのみを算出
-- `--fix` : 検出された問題を自動修正提案
-- `--deep` : 深層分析モード（曖昧性・情報分散・強制力を重点チェック）
+- None : Analyze current file or selected text
+- `--category <name>` : Check only specific category (structure/execution/restrictions/quality/roles/improvement)
+- `--score` : Calculate quality score only
+- `--fix` : Auto-suggest fixes for detected issues
+- `--deep` : Deep analysis mode (focus on ambiguity, information scatter, enforcement)
 
-### 基本例
+### Basic Examples
 
 ```bash
-# プロンプト全体の品質評価
+# Quality evaluation of entire prompt
 cat devin/playbooks/code-review.md
 /check-prompt
-「このプロンプトの品質を 6 つのカテゴリで評価して、問題点と改善案を提示して」
+"Evaluate this prompt quality across 6 categories and provide issues and improvement suggestions"
 
-# 深層分析モード
+# Deep analysis mode
 /check-prompt --deep
-「曖昧性・情報分散・強制力不足を重点的にチェックして根本的な改善案を提示して」
+"Focus on ambiguity, information scatter, and insufficient enforcement to provide fundamental improvement suggestions"
 
-# 特定カテゴリのチェック
+# Check specific category
 /check-prompt --category structure
-「構造と明確性の観点でこのプロンプトをチェックして」
+"Check this prompt from structure and clarity perspective"
 
-# 曖昧表現の検出と修正
+# Detect and fix ambiguous expressions
 /check-prompt --fix
-「曖昧表現を検出して明確な表現に修正提案して」
+"Detect ambiguous expressions and suggest clear expression fixes"
 ```
 
 ---
 
-## 核心的な設計原則
+## Core Design Principles
 
-### 原則 1: 解釈の余地を完全に排除
+### Principle 1: Completely Eliminate Room for Interpretation
 
-- **絶対禁止**: 「原則として」「推奨」「可能であれば」「状況に応じて」「適宜判断」
-- **必須使用**: 「必ず」「絶対に」「厳守」「例外なく」「強制」
-- **例外条件**: 数値で厳格に限定（「以下の 3 つの条件のみ」「この 2 つの場合を除いて」）
+- **Absolutely Prohibited**: "As a rule", "recommended", "if possible", "depending on situation", "judge appropriately"
+- **Must Use**: "Must", "absolutely", "strictly adhere", "without exception", "mandatory"
+- **Exception Conditions**: Strictly limited by numbers ("only the following 3 conditions", "except for these 2 cases")
 
-### 原則 2: 情報の戦略的統合
+### Principle 2: Strategic Information Integration
 
-- 関連する重要情報は 1 つのセクションに完全統合
-- 実行チェックリストに全体像を要約
-- 参照の循環や分散を徹底排除
+- Completely integrate related important information into one section
+- Summarize the overall picture in execution checklists
+- Thoroughly eliminate circular references and scatter
 
-### 原則 3: 段階的強制力の構築
+### Principle 3: Build Hierarchical Enforcement
 
-- 🔴 (実行停止レベル) → 🟡 (品質重要) → 🟢 (推奨事項) の明確な階層
-- 推奨レベルから必須レベルへの段階的格上げ
-- 違反時の影響度と対処法の明示
+- Clear hierarchy of 🔴 (execution halt level) → 🟡 (quality important) → 🟢 (recommended)
+- Gradual promotion from recommended to mandatory level
+- Clear indication of impact and countermeasures when violated
 
-### 原則 4: 追跡可能性の確保
+### Principle 4: Ensure Traceability
 
-- すべての実行結果を記録・検証可能
-- 虚偽報告を技術的に防止
-- 成功/失敗の客観的判断基準
+- Record and verify all execution results
+- Technically prevent false reporting
+- Objective success/failure judgment criteria
 
-### 原則 5: フィードバック駆動改善
+### Principle 5: Feedback-Driven Improvement
 
-- 実際の失敗事例から学習
-- 継続的な有効性検証
-- 新パターンの自動検出
+- Learn from actual failure cases
+- Continuous effectiveness verification
+- Automatic detection of new patterns
 
 ---
 
-## 📋 包括的チェック項目
+## 📋 Comprehensive Checklist
 
-### 1. 📐 構造と明確性（配点: 25 点）
+### 📐 Structure and Clarity (25 points)
 
-#### 1.1 指示の優先度表示（8 点）
+#### Priority Display of Instructions (8 points)
 
-- [ ] 🔴🟡🟢 の優先度が全ての重要指示に明示されている
-- [ ] 実行停止レベルの条件が具体的かつ明確に定義されている
-- [ ] 各優先度の判断基準が客観的かつ検証可能
-- [ ] 優先度の階層が一貫して適用されている
+- [ ] 🔴🟡🟢 priorities are clearly indicated for all important instructions
+- [ ] Execution halt level conditions are specifically and clearly defined
+- [ ] Judgment criteria for each priority are objective and verifiable
+- [ ] Priority hierarchy is consistently applied
 
-#### 1.2 曖昧表現の完全排除（9 点）
+#### Complete Elimination of Ambiguous Expressions (9 points)
 
-- [ ] **致命的曖昧表現**: 「原則として」「推奨」「可能であれば」が 0 個
-- [ ] **強制表現の使用**: 「必ず」「絶対に」「厳守」「例外なく」を適切に使用
-- [ ] **例外条件の数値限定**: 「3 つの条件のみ」など明確な境界線
-- [ ] **判断余地の排除**: 複数解釈が不可能な表現のみ使用
-- [ ] **グレーゾーンの撲滅**: すべての状況で明確な判断基準
+- [ ] **Fatal ambiguous expressions**: "As a rule", "recommended", "if possible" = 0 instances
+- [ ] **Use of mandatory expressions**: Proper use of "must", "absolutely", "strictly adhere", "without exception"
+- [ ] **Numerical limitation of exception conditions**: Clear boundaries like "only 3 conditions"
+- [ ] **Elimination of judgment room**: Use only expressions that allow no multiple interpretations
+- [ ] **Eradication of gray zones**: Clear judgment criteria for all situations
 
-#### 1.3 情報の戦略的統合（8 点）
+#### Strategic Information Integration (8 points)
 
-- [ ] 重要情報の複数箇所分散が完全に解消されている
-- [ ] 関連指示が論理的に 1 つのセクションに統合されている
-- [ ] 実行チェックリストに全体像が漏れなく要約されている
-- [ ] 参照の循環や無限ループが存在しない
+- [ ] Multiple location scatter of important information is completely resolved
+- [ ] Related instructions are logically integrated into one section
+- [ ] Overall picture is comprehensively summarized in execution checklists
+- [ ] No circular references or infinite loops exist
 
-### 2. 🎯 実行可能性（配点: 20 点）
+### 🎯 Executability (20 points)
 
-#### 2.1 具体的な手順の完全性（7 点）
+#### Completeness of Specific Procedures (7 points)
 
-- [ ] すべてのコマンド例が実際に実行可能で検証済み
-- [ ] 環境変数・前提条件・依存関係が漏れなく明記
-- [ ] エラー時の対処法が具体的かつ実行可能
-- [ ] 手順の順序が論理的で必然性がある
+- [ ] All command examples are actually executable and verified
+- [ ] Environment variables, prerequisites, dependencies are completely specified
+- [ ] Error handling methods are specific and executable
+- [ ] Procedure order is logical and necessary
 
-#### 2.2 検証可能性の確保（7 点）
+#### Ensuring Verifiability (7 points)
 
-- [ ] 実行結果の成功/失敗が客観的に判断可能
-- [ ] 出力例・ログ形式・期待値が具体的に示されている
-- [ ] テスト方法・検証手順が実装可能
-- [ ] 中間結果の確認ポイントが適切に配置
+- [ ] Success/failure of execution results can be objectively determined
+- [ ] Output examples, log formats, expected values are specifically shown
+- [ ] Test methods and verification procedures are implementable
+- [ ] Intermediate result check points are appropriately placed
 
-#### 2.3 自動化適応性（6 点）
+#### Automation Adaptability (6 points)
 
-- [ ] スクリプト化・ CI/CD 統合が容易な形式
-- [ ] 人間判断箇所と AI 実行箇所の明確な分離
-- [ ] バッチ処理・並列実行への対応
+- [ ] Format easy for scripting and CI/CD integration
+- [ ] Clear separation between human judgment and AI execution areas
+- [ ] Support for batch processing and parallel execution
 
-### 3. 🚫 禁止事項の明確化（配点: 15 点）
+### 🚫 Clarification of Prohibitions (15 points)
 
-#### 3.1 絶対禁止事項の体系化（8 点）
+#### Systematization of Absolute Prohibitions (8 points)
 
-- [ ] 実行してはならない操作の完全なリストアップ
-- [ ] 各禁止事項の違反時影響度（軽微/重大/致命的）の明示
-- [ ] 代替手段・回避方法の具体的提示
-- [ ] 禁止事項の技術的根拠の説明
+- [ ] Complete listing of operations that must not be executed
+- [ ] Clear indication of violation impact level (minor/major/fatal) for each prohibition
+- [ ] Specific presentation of alternative methods and workarounds
+- [ ] Technical rationale explanation for prohibitions
 
-#### 3.2 例外条件の厳格限定（7 点）
+#### Strict Limitation of Exception Conditions (7 points)
 
-- [ ] 例外を認める条件が具体的かつ限定的（数値指定）
-- [ ] 「完全に重複」「明示的に記載」など客観的判断基準
-- [ ] グレーゾーンを残さない明確な境界線
-- [ ] 例外適用時の追加条件・制約の明示
+- [ ] Conditions for allowing exceptions are specific and limited (numerical specification)
+- [ ] Objective judgment criteria like "completely duplicate", "explicitly stated"
+- [ ] Clear boundaries leaving no gray zones
+- [ ] Clear additional conditions and constraints when applying exceptions
 
-### 4. 📊 品質保証メカニズム（配点: 20 点）
+### 📊 Quality Assurance Mechanisms (20 points)
 
-#### 4.1 追跡システムの完全性（8 点）
+#### Completeness of Tracking System (8 points)
 
-- [ ] 全実行結果の自動記録・統計取得機能
-- [ ] 虚偽報告を技術的に防ぐ検証機能
-- [ ] リアルタイム監視・アラート機能
-- [ ] 監査ログの改ざん防止機能
+- [ ] Automatic recording and statistics acquisition for all execution results
+- [ ] Verification function to technically prevent false reporting
+- [ ] Real-time monitoring and alert functions
+- [ ] Audit log tamper prevention function
 
 #### 4.2 テンプレート遵守の強制（7 点）
 
@@ -197,56 +197,56 @@ cat devin/playbooks/code-review.md
 ### ❌ レベル 1: 致命的曖昧性（実行停止レベル）
 
 - **複数解釈可能な指示**: 「適宜判断して」「状況に応じて」「原則として」
-- **曖昧な例外条件**: 「特別な場合は」「必要に応じて」
-- **主観的判断基準**: 「適切に」「十分に」「可能な限り」
-- **未定義の重要概念**: 「標準的な」「一般的な」「基本的な」
+- **Ambiguous exception conditions**: "In special cases", "as needed"
+- **Subjective judgment criteria**: "Appropriately", "sufficiently", "as much as possible"
+- **Undefined important concepts**: "Standard", "general", "basic"
 
-### ❌ レベル 2: 構造的欠陥（品質重要レベル）
+### ❌ Level 2: Structural Defects (Quality Important Level)
 
-- **情報の分散**: 関連重要情報が 3 箇所以上に散在
-- **循環参照**: セクション A→B→C→A の無限ループ
-- **矛盾する指示**: 異なるセクションで相反する指示
-- **実行順序の不明確**: 依存関係が不明瞭な手順
+- **Information scatter**: Related important information scattered in 3+ locations
+- **Circular references**: Infinite loops like Section A→B→C→A
+- **Contradictory instructions**: Conflicting instructions in different sections
+- **Unclear execution order**: Procedures with unclear dependencies
 
-### ❌ レベル 3: 品質劣化（推奨改善レベル）
+### ❌ Level 3: Quality Degradation (Recommended Improvement Level)
 
-- **検証不可能性**: 成功/失敗の判断基準が不明
-- **自動化困難**: 人間の主観判断に依存する設計
-- **保守困難**: 更新時の影響範囲が予測できない構造
-- **学習困難**: 新人が理解するのに時間がかかる複雑さ
+- **Unverifiability**: Unclear success/failure judgment criteria
+- **Automation difficulty**: Design dependent on human subjective judgment
+- **Maintenance difficulty**: Structure where update impact scope is unpredictable
+- **Learning difficulty**: Complexity that takes time for newcomers to understand
 
 ---
 
-## 🎯 実証された改善手法
+## 🎯 Proven Improvement Methods
 
-### ✅ 段階的強化アプローチ
+### ✅ Gradual Strengthening Approach
 
-1. **現状分析**: 問題の分類・優先度付け・影響度評価
-2. **致命的問題優先**: レベル 1 問題の完全解決を最優先
-3. **段階的実装**: 一度に全変更せず、検証可能な単位で実施
-4. **効果測定**: 改善前後の定量的比較
-5. **継続監視**: 改善効果の持続性確認
+1. **Current state analysis**: Problem classification, prioritization, impact assessment
+2. **Critical problem priority**: Complete resolution of Level 1 problems as top priority
+3. **Gradual implementation**: Execute in verifiable units rather than all changes at once
+4. **Effect measurement**: Quantitative comparison before and after improvement
+5. **Continuous monitoring**: Confirm sustainability of improvement effects
 
-### ✅ 曖昧性排除の実践手法
+### ✅ Practical Methods for Ambiguity Elimination
 
 ```markdown
-# ❌ 改善前（曖昧）
+# ❌ Before improvement (ambiguous)
 
-「指摘事項は、原則として GitHub 上の該当する変更箇所にインラインコメントとして記述してください」
+"Issues should, as a rule, be described as inline comments on the relevant changed locations on GitHub"
 
-# ✅ 改善後（明確）
+# ✅ After improvement (clear)
 
-「指摘事項は GitHub 上の該当する変更箇所にインラインコメントとして必ず記述してください。例外はセクション 3.3 で定義された 3 つの条件のみです」
+"Issues must be described as inline comments on the relevant changed locations on GitHub. Exceptions are only the 3 conditions defined in Section 3.3"
 ```
 
-### ✅ 情報統合の実践手法
+### ✅ Practical Methods for Information Integration
 
 ```markdown
-# ❌ 改善前（分散）
+# ❌ Before improvement (scattered)
 
-セクション 2.1: 「必須 6 セクション使用」
-セクション 3.5: 「📊 総合評価、📋 指摘事項...」
-セクション 4.2: 「セクション削除禁止」
+Section 2.1: "Use mandatory 6 sections"
+Section 3.5: "📊 Overall evaluation, 📋 Issues..."
+Section 4.2: "Section deletion prohibited"
 
 # ✅ 改善後（統合）
 

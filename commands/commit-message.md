@@ -48,9 +48,9 @@ The generated main candidate is automatically copied to the clipboard in the com
 - When passing commit command to `pbcopy`, execute in a separate process from message output
 - Use `printf` instead of `echo` to avoid trailing newlines
 
-### プロジェクト規約の自動検出
+### Automatic Project Convention Detection
 
-**重要**: プロジェクト独自の規約が存在する場合は、それを優先します。
+**Important**: When project-specific conventions exist, they take priority.
 
 #### CommitLint Configuration Detection
 
