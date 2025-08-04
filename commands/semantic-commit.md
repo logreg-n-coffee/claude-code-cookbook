@@ -305,7 +305,7 @@ commit_with_retry() {
     fi
   done
   
-  echo "❌ コミットに失敗しました。手動で確認してください。"
+  echo "❌ Commit failed. Please check manually."
   return 1
 }
 

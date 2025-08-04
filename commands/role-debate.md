@@ -378,194 +378,194 @@ Discussion Strengths:
   - Accessibility requirements
 
 Potential Biases:
-  - 技術制約への理解不足
-  - セキュリティ要件の軽視
-  - パフォーマンス影響の過小評価
+  - Insufficient understanding of technical constraints
+  - Underestimation of security requirements
+  - Underestimation of performance impact
 ```
 
-#### 📱 Mobile ロール
+#### 📱 Mobile Role
 
 ```yaml
-議論スタンス:
-  - プラットフォーム特化 (iOS/Android 差異考慮)
-  - コンテキスト適応 (移動中・片手操作)
-  - リソース制約 (バッテリー・メモリ・通信)
-  - ストア準拠 (審査ガイドライン)
+Discussion Stance:
+  - Platform specialization (considering iOS/Android differences)
+  - Context adaptation (mobile usage, one-handed operation)
+  - Resource constraints (battery, memory, communication)
+  - Store compliance (review guidelines)
 
-典型的論点:
-  - "ネイティブ vs クロスプラットフォーム"
-  - "オフライン対応 vs リアルタイム同期"
-  - "バッテリー効率 vs 機能性"
-  - "プラットフォーム統一 vs 最適化"
+Typical Discussion Points:
+  - "Native vs Cross-platform"
+  - "Offline support vs Real-time sync"
+  - "Battery efficiency vs Functionality"
+  - "Platform unification vs Optimization"
 
-論拠ソース:
+Evidence Sources:
   - iOS HIG / Android Material Design
-  - App Store / Google Play ガイドライン
-  - モバイル UX 研究
-  - デバイス性能統計
+  - App Store / Google Play guidelines
+  - Mobile UX research
+  - Device performance statistics
 
-議論での強み:
-  - モバイル特有制約の理解
-  - プラットフォーム差異の知識
-  - タッチインターフェース設計
+Discussion Strengths:
+  - Understanding of mobile-specific constraints
+  - Knowledge of platform differences
+  - Touch interface design
 
-注意すべき偏見:
-  - Web プラットフォームへの理解不足
-  - サーバーサイド制約の軽視
-  - デスクトップ環境への配慮不足
+Potential Biases:
+  - Insufficient understanding of web platforms
+  - Underestimation of server-side constraints
+  - Lack of consideration for desktop environments
 ```
 
-#### 🔍 Analyzer ロール
+#### 🔍 Analyzer Role
 
 ```yaml
-議論スタンス:
-  - 証拠重視 (データファースト)
-  - 仮説検証 (科学的アプローチ)
-  - 構造的思考 (システム思考)
-  - バイアス除去 (客観性追求)
+Discussion Stance:
+  - Evidence-focused (data-first)
+  - Hypothesis verification (scientific approach)
+  - Structural thinking (systems thinking)
+  - Bias elimination (objectivity pursuit)
 
-典型的論点:
-  - "相関関係 vs 因果関係"
-  - "症状対症療法 vs 根本解決"
-  - "仮説 vs 事実の区別"
-  - "短期症状 vs 構造的問題"
+Typical Discussion Points:
+  - "Correlation vs Causation"
+  - "Symptom treatment vs Root cause resolution"
+  - "Hypothesis vs Fact distinction"
+  - "Short-term symptoms vs Structural problems"
 
-論拠ソース:
-  - 実測データ・ログ分析
-  - 統計的手法・分析結果
-  - システム思考理論
-  - 認知バイアス研究
+Evidence Sources:
+  - Measurement data and log analysis
+  - Statistical methods and analysis results
+  - Systems thinking theory
+  - Cognitive bias research
 
-議論での強み:
-  - 論理的分析能力
-  - 証拠評価の客観性
-  - 構造的問題の発見
+Discussion Strengths:
+  - Logical analysis capability
+  - Objectivity in evidence evaluation
+  - Structural problem discovery
 
-注意すべき偏見:
-  - 分析麻痺 (行動力不足)
-  - 完璧主義 (実用性軽視)
-  - データ万能主義
+Potential Biases:
+  - Analysis paralysis (lack of action)
+  - Perfectionism (undervaluing practicality)
+  - Data supremacism
 ```
 
-### 議論進行テンプレート
+### Discussion Flow Template
 
-#### Phase 1: 立場表明テンプレート
-
-```
-【ロール名】の推奨案:
-「[具体的な提案]」
-
-根拠:
-- [公式文書・標準への言及]
-- [実証事例・データ]
-- [専門分野の原則]
-
-想定効果:
-- [短期的効果]
-- [中長期的効果]
-
-懸念・リスク:
-- [実装リスク]
-- [運用リスク]
-- [他分野への影響]
-
-成功指標:
-- [測定可能な指標 1]
-- [測定可能な指標 2]
-```
-
-#### Phase 2: 反駁テンプレート
+#### Phase 1: Position Statement Template
 
 ```
-[対象ロール] への反論:
-「[対象提案への具体的反論]」
+【Role Name】Recommendation:
+"[Specific proposal]"
 
-反論根拠:
-- [見落とされた視点]
-- [対立する証拠・事例]
-- [専門分野からの懸念]
+Evidence:
+- [Reference to official documents/standards]
+- [Empirical cases/data]
+- [Professional domain principles]
 
-代替案:
-「[改良された提案]」
+Expected Effects:
+- [Short-term effects]
+- [Medium to long-term effects]
 
-妥協可能ポイント:
-- [受け入れ可能な条件]
-- [段階的実装の可能性]
+Concerns/Risks:
+- [Implementation risks]
+- [Operational risks]
+- [Impact on other domains]
+
+Success Metrics:
+- [Measurable indicator 1]
+- [Measurable indicator 2]
 ```
 
-#### Phase 3: 統合解決テンプレート
+#### Phase 2: Rebuttal Template
 
 ```
-統合解決案:
-「[各ロールの懸念を考慮した最終提案]」
+Counter-argument to [Target Role]:
+"[Specific counter-argument to target proposal]"
 
-各ロールへの配慮:
-- [Security]: [セキュリティ要件の満足方法]
-- [Performance]: [パフォーマンス要件の満足方法]
-- [その他]: [その他要件の満足方法]
+Counter-evidence:
+- [Overlooked perspectives]
+- [Conflicting evidence/cases]
+- [Concerns from professional domain]
 
-実装ロードマップ:
-- フェーズ 1 (即座): [緊急対応事項]
-- フェーズ 2 (短期): [基本実装]
-- フェーズ 3 (中期): [完全実装]
+Alternative Proposal:
+"[Improved proposal]"
 
-成功指標・測定方法:
-- [統合的な成功指標]
-- [測定方法・頻度]
-- [見直しタイミング]
+Compromise Points:
+- [Acceptable conditions]
+- [Possibilities for phased implementation]
 ```
 
-### 議論品質チェックリスト
+#### Phase 3: Integrated Solution Template
 
-#### 論拠の質
+```
+Integrated Solution:
+"[Final proposal considering concerns from all roles]"
 
-- [ ] 公式文書・標準への言及がある
-- [ ] 具体的な事例・データが提示されている
-- [ ] 推測と事実が明確に区別されている
-- [ ] 情報源が明示されている
+Consideration for Each Role:
+- [Security]: [How to satisfy security requirements]
+- [Performance]: [How to satisfy performance requirements]
+- [Others]: [How to satisfy other requirements]
 
-#### 議論の建設性
+Implementation Roadmap:
+- Phase 1 (Immediate): [Emergency response items]
+- Phase 2 (Short-term): [Basic implementation]
+- Phase 3 (Medium-term): [Full implementation]
 
-- [ ] 相手の提案を正確に理解している
-- [ ] 感情的でなく論理的な反論
-- [ ] 代替案も提示している
-- [ ] Win-Win の可能性を探っている
+Success Metrics and Measurement Methods:
+- [Integrated success indicators]
+- [Measurement methods and frequency]
+- [Review timing]
+```
 
-#### 実装可能性
+### Discussion Quality Checklist
 
-- [ ] 技術的実現可能性を考慮
-- [ ] 実装コスト・期間を見積もり
-- [ ] 段階的実装の可能性を検討
-- [ ] リスク軽減策を提示
+#### Quality of Evidence
 
-#### 統合性
+- [ ] References to official documents and standards
+- [ ] Specific cases and data are presented
+- [ ] Speculation and facts are clearly distinguished
+- [ ] Information sources are clearly indicated
 
-- [ ] 他分野への影響を考慮
-- [ ] 全体最適を追求
-- [ ] 長期的視点を含む
-- [ ] 測定可能な成功指標を設定
+#### Discussion Constructiveness
 
-### Claude との連携
+- [ ] Accurately understands opponent's proposals
+- [ ] Logical rather than emotional rebuttals
+- [ ] Alternative proposals are also presented
+- [ ] Explores Win-Win possibilities
+
+#### Implementation Feasibility
+
+- [ ] Considers technical feasibility
+- [ ] Estimates implementation cost and duration
+- [ ] Examines possibilities for phased implementation
+- [ ] Presents risk mitigation measures
+
+#### Integration
+
+- [ ] Considers impact on other domains
+- [ ] Pursues overall optimization
+- [ ] Includes long-term perspective
+- [ ] Sets measurable success indicators
+
+### Integration with Claude
 
 ```bash
-# 設計文書を元にした議論
+# Discussion based on design documents
 cat system-design.md
 /role-debate architect,security
-「この設計のセキュリティ面での課題を議論して」
+"Discuss security challenges in this design"
 
-# 問題を元にした解決策議論
+# Solution discussion based on problems
 cat performance-issues.md
 /role-debate performance,architect
-「パフォーマンス問題の根本的解決策を議論して」
+"Discuss fundamental solutions to performance problems"
 
-# 要件を元にした技術選定議論
+# Technology selection discussion based on requirements
 /role-debate mobile,frontend
-「iOS ・ Android ・ Web の統一 UI 戦略について議論して」
+"Discuss unified UI strategy for iOS, Android, and Web"
 ```
 
-### 注意事項
+### Important Notes
 
-- 議論は時間がかかる場合があります（複雑なトピックほど長時間）
-- 3 つ以上のロールでは議論が発散する可能性があります
-- 最終判断は議論結果を参考にユーザーが行ってください
-- 緊急性の高い問題では single role や multi-role を先に検討してください
+- Discussions may take time (longer for complex topics)
+- With 3 or more roles, discussions may diverge
+- Final decisions should be made by the user with reference to discussion results
+- For urgent problems, consider single role or multi-role first
