@@ -208,18 +208,18 @@ EOF
 ```bash
 $ /commit-message
 
-📝 コミットメッセージ提案
+📝 Commit Message Suggestions
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✨ メイン候補:
-feat: JWT 認証システムを実装
+✨ Main Candidate:
+feat: implement JWT authentication system
 
-📋 代替案:
-1. feat: JWT トークンによるユーザー認証を追加
-2. fix: 認証ミドルウェアのトークン検証エラーを解決
-3. docs: 認証ロジックを別モジュールに分離
+📋 Alternatives:
+1. feat: add JWT token-based user authentication
+2. fix: resolve token validation errors in auth middleware
+3. docs: separate authentication logic into separate module
 
-✅ `git commit -m "feat: JWT 認証システムを実装"` をクリップボードにコピーしました
+✅ Copied `git commit -m "feat: implement JWT authentication system"` to clipboard
 ```
 
 ### Operation Overview
@@ -285,15 +285,15 @@ feat(api)!: change authentication flow
 **Japanese**:
 
 ```bash
-feat!: ユーザー API レスポンス形式を変更
+feat!: change user API response format
 
-BREAKING CHANGE: レスポンスに追加のメタデータが含まれるようになりました
+BREAKING CHANGE: user response now includes additional metadata
 ```
 
 Or
 
 ```bash
-feat(api)!: 認証フローを変更
+feat(api)!: change authentication flow
 ```
 
 ### Best Practices
@@ -316,7 +316,15 @@ docs: update API documentation
 
 **Japanese**:
 
+```text
+feat: add user registration endpoint
+fix: resolve memory leak in cache manager
+docs: update API documentation
 ```
+
+**Japanese**:
+
+```text
 feat: ユーザー登録エンドポイントを追加
 fix: キャッシュマネージャーのメモリリークを解決
 docs: API ドキュメントを更新
