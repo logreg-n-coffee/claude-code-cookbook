@@ -1,103 +1,103 @@
 ## Role
 
-特定のロール（役割）に切り替えて、専門的な分析や作業を実行します。
+Switch to a specific role and execute specialized analysis or work.
 
-### 使い方
+### Usage
 
 ```bash
-/role <ロール名> [--agent|-a]
+/role <role name> [--agent|-a]
 ```
 
-### オプション
+### Options
 
-- `--agent` または `-a` : サブエージェントとして独立実行（大規模分析時推奨）
-  - このオプションを使用すると、ロールの description に自動委任促進フレーズ（"use PROACTIVELY" など）が含まれている場合、より積極的な自動委任が有効になります
+- `--agent` or `-a` : Execute independently as sub-agent (recommended for large-scale analysis)
+  - When this option is used, if role descriptions contain automatic delegation promotion phrases (like "use PROACTIVELY"), more aggressive automatic delegation becomes enabled
 
-### 利用可能なロール
+### Available Roles
 
-#### 専門分析ロール（Evidence-First 統合）
+#### Specialized Analysis Roles (Evidence-First Integration)
 
-- `security` : セキュリティ監査専門家（OWASP Top 10 ・脅威モデリング・ Zero Trust 原則・ CVE 照合）
-- `performance` : パフォーマンス最適化専門家（Core Web Vitals ・ RAIL モデル・段階的最適化・ ROI 分析）
-- `analyzer` : 根本原因分析専門家（5 Whys ・システム思考・仮説駆動・認知バイアス対策）
-- `frontend` : フロントエンド・ UI/UX 専門家（WCAG 2.1 ・デザインシステム・ユーザー中心設計）
+- `security` : Security audit specialist (OWASP Top 10 · threat modeling · Zero Trust principles · CVE matching)
+- `performance` : Performance optimization specialist (Core Web Vitals · RAIL model · progressive optimization · ROI analysis)
+- `analyzer` : Root cause analysis specialist (5 Whys · systems thinking · hypothesis-driven · cognitive bias countermeasures)
+- `frontend` : Frontend & UI/UX specialist (WCAG 2.1 · design systems · user-centered design)
 
-#### 開発支援ロール
+#### Development Support Roles
 
-- `reviewer` : コードレビュー専門家（可読性・保守性・パフォーマンス・リファクタリング提案）
-- `architect` : システムアーキテクト（Evidence-First 設計・ MECE 分析・進化的アーキテクチャ）
-- `qa` : テストエンジニア（テストカバレッジ・ E2E/統合/単体戦略・自動化提案）
-- `mobile` : モバイル開発専門家（iOS HIG ・ Android Material Design ・クロスプラットフォーム戦略）
+- `reviewer` : Code review specialist (readability · maintainability · performance · refactoring suggestions)
+- `architect` : System architect (Evidence-First design · MECE analysis · evolutionary architecture)
+- `qa` : Test engineer (test coverage · E2E/integration/unit strategies · automation proposals)
+- `mobile` : Mobile development specialist (iOS HIG · Android Material Design · cross-platform strategy)
 
-### 基本例
+### Basic Examples
 
 ```bash
-# セキュリティ監査モードに切り替え（通常）
+# Switch to security audit mode (normal)
 /role security
-「このプロジェクトのセキュリティ脆弱性をチェックして」
+"Check this project for security vulnerabilities"
 
-# セキュリティ監査をサブエージェントで実行（大規模分析）
+# Execute security audit with sub-agent (large-scale analysis)
 /role security --agent
-「プロジェクト全体のセキュリティ監査を実行して」
+"Execute security audit of entire project"
 
-# コードレビューモードに切り替え
+# Switch to code review mode
 /role reviewer
-「最近の変更をレビューして改善点を指摘して」
+"Review recent changes and point out improvements"
 
-# パフォーマンス最適化モードに切り替え
+# Switch to performance optimization mode
 /role performance
-「アプリケーションのボトルネックを分析して」
+"Analyze application bottlenecks"
 
-# 根本原因分析モードに切り替え
+# Switch to root cause analysis mode
 /role analyzer
-「この障害の根本原因を調査して」
+"Investigate the root cause of this failure"
 
-# フロントエンド専門モードに切り替え
+# Switch to frontend specialist mode
 /role frontend
-「UI/UX の改善点を評価して」
+"Evaluate UI/UX improvements"
 
-# モバイル開発専門モードに切り替え
+# Switch to mobile development specialist mode
 /role mobile
-「このアプリのモバイル最適化を評価して」
+"Evaluate mobile optimization for this app"
 
-# 通常モードに戻る
+# Return to normal mode
 /role default
-「通常の Claude に戻ります」
+"Return to normal Claude"
 ```
 
-### Claude との連携
+### Integration with Claude
 
 ```bash
-# セキュリティ特化の分析
+# Security-focused analysis
 /role security
 cat app.js
-「このコードの潜在的なセキュリティリスクを詳細に分析して」
+"Analyze potential security risks in this code in detail"
 
-# アーキテクチャ観点での評価
+# Architecture perspective evaluation
 /role architect
 ls -la src/
-「現在の構造の問題点と改善案を提示して」
+"Present problems and improvement suggestions for current structure"
 
-# テスト戦略の立案
+# Test strategy planning
 /role qa
-「このプロジェクトに最適なテスト戦略を提案して」
+"Suggest optimal test strategy for this project"
 ```
 
-### 詳細例
+### Detailed Examples
 
 ```bash
-# 複数ロールでの分析
+# Multi-role analysis
 /role security
-「まずセキュリティ観点でチェック」
+"First check from security perspective"
 git diff HEAD~1
 
 /role reviewer
-「次に一般的なコード品質をレビュー」
+"Next review general code quality"
 
 /role architect
-「最後にアーキテクチャの観点から評価」
+"Finally evaluate from architecture perspective"
 
-# ロール固有の出力形式
+# Role-specific output format
 /role security
 セキュリティ分析結果
 ━━━━━━━━━━━━━━━━━━━━━

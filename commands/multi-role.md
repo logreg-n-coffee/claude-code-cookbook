@@ -159,133 +159,133 @@ Implementation Period: 3-4 weeks
 "Login screen security"
 
 /multi-role security,mobile
-「モバイルアプリのデータ保護」
+"Mobile app data protection"
 ```
 
-### パフォーマンス重視
+### Performance-Focused
 
 ```bash
 /multi-role performance,architect
-「スケーラビリティ設計」
+"Scalability design"
 
 /multi-role performance,frontend
-「Web ページの高速化」
+"Web page acceleration"
 
 /multi-role performance,mobile
-「アプリの動作最適化」
+"App performance optimization"
 ```
 
-### ユーザー体験重視
+### User Experience-Focused
 
 ```bash
 /multi-role frontend,mobile
-「クロスプラットフォーム UI」
+"Cross-platform UI"
 
 /multi-role frontend,performance
-「UX とパフォーマンスのバランス」
+"Balance between UX and performance"
 
 /multi-role mobile,performance
-「モバイル UX の最適化」
+"Mobile UX optimization"
 ```
 
-### 包括的分析
+### Comprehensive Analysis
 
 ```bash
 /multi-role architect,security,performance
-「システム全体の評価」
+"System-wide evaluation"
 
 /multi-role frontend,mobile,performance
-「ユーザー体験の総合評価」
+"Comprehensive user experience evaluation"
 
 /multi-role security,performance,mobile
-「モバイルアプリの総合診断」
+"Comprehensive mobile app diagnosis"
 ```
 
-### Claude との連携
+### Integration with Claude
 
 ```bash
-# ファイル分析と組み合わせ
+# Combine with file analysis
 cat src/components/UserProfile.tsx
 /multi-role frontend,mobile
-「このコンポーネントを複数の視点で評価して」
+"Evaluate this component from multiple perspectives"
 
-# 設計ドキュメントの評価
+# Evaluate design documents
 cat architecture-design.md
 /multi-role architect,security,performance
-「この設計を複数の専門分野で評価して」
+"Evaluate this design from multiple specialized fields"
 
-# エラー分析
+# Error analysis
 cat performance-issues.log
 /multi-role performance,analyzer
-「パフォーマンス問題を多角的に分析して」
+"Analyze performance issues from multiple angles"
 ```
 
-### multi-role vs role-debate の使い分け
+### Choosing between multi-role vs role-debate
 
-### multi-role を使う場面
+#### Use multi-role when
 
-- 各専門分野の独立した評価が欲しい
-- 統合的な改善計画を立てたい
-- 矛盾や重複を整理したい
-- 実装優先度を決めたい
+- Want independent evaluation from each specialized field
+- Want to create integrated improvement plans
+- Want to organize contradictions and duplications
+- Want to determine implementation priorities
 
-### role-debate を使う場面
+#### Use role-debate when
 
-- 専門分野間でトレードオフがある
-- 技術選定で意見が分かれそう
-- 設計方針を議論で決めたい
-- 異なる視点での議論を聞きたい
+- There are trade-offs between specialized fields
+- Technology selection opinions might be divided
+- Want to decide design policies through discussion
+- Want to hear discussions from different perspectives
 
-### サブエージェント並列実行（--agent）
+### Sub-agent Parallel Execution (--agent)
 
-`--agent` オプションを使用すると、各ロールが独立したサブエージェントとして並列実行されます。
+When using the `--agent` option, each role is executed in parallel as independent sub-agents.
 
-#### 自動委任の促進
+#### Promoting Automatic Delegation
 
-ロールファイルの description フィールドに以下のようなフレーズが含まれている場合、`--agent` 使用時により積極的な自動委任が有効化されます：
+When role file description fields contain phrases like the following, using `--agent` enables more aggressive automatic delegation:
 
 - "use PROACTIVELY"
 - "MUST BE USED"
-- その他の強調表現
+- Other emphasis expressions
 
-#### 実行フロー
+#### Execution Flow
 
 ```
-通常実行:
-ロール 1 → ロール 2 → ロール 3 → 統合
-（順次実行、約 3-5 分）
+Normal execution:
+Role 1 → Role 2 → Role 3 → Integration
+(Sequential execution, approximately 3-5 minutes)
 
---agent 実行:
-ロール 1 ─┐
-ロール 2 ─┼→ 統合
-ロール 3 ─┘
-（並列実行、約 1-2 分）
+--agent execution:
+Role 1 ─┐
+Role 2 ─┼→ Integration
+Role 3 ─┘
+(Parallel execution, approximately 1-2 minutes)
 ```
 
-#### 効果的な使用例
+#### Effective Usage Examples
 
 ```bash
-# 大規模システムの総合評価
+# Comprehensive evaluation of large-scale system
 /multi-role architect,security,performance,qa --agent
-「新システムの包括的評価」
+"Comprehensive evaluation of new system"
 
-# 複数観点での詳細分析
+# Detailed analysis from multiple perspectives
 /multi-role frontend,mobile,performance --agent
-「全画面の UX 最適化分析」
+"UX optimization analysis for all screens"
 ```
 
-#### パフォーマンス比較
+#### Performance Comparison
 
-| ロール数 | 通常実行 | --agent 実行 | 短縮率 |
+| Role Count | Normal Execution | --agent Execution | Reduction Rate |
 |---------|----------|-------------|-------|
-| 2 ロール | 2-3 分 | 1 分 | 50% |
-| 3 ロール | 3-5 分 | 1-2 分 | 60% |
-| 4 ロール | 5-8 分 | 2-3 分 | 65% |
+| 2 roles | 2-3 minutes | 1 minute | 50% |
+| 3 roles | 3-5 minutes | 1-2 minutes | 60% |
+| 4 roles | 5-8 minutes | 2-3 minutes | 65% |
 
-### 注意事項
+### Important Notes
 
-- 3 つ以上のロールを同時実行すると出力が長くなります
-- 複雑な分析ほど実行時間が長くなる可能性があります
-- 相互矛盾する推奨事項が出た場合は、role-debate も検討してください
-- 最終的な判断は統合結果を参考にユーザーが行ってください
-- **--agent 使用時**: より多くのリソースを使用しますが、大規模分析では効率的です
+- Running 3 or more roles simultaneously results in longer output
+- Complex analysis may take longer execution time
+- If mutually contradictory recommendations appear, consider role-debate as well
+- Final decisions should be made by users based on integrated results
+- **When using --agent**: Uses more resources but is efficient for large-scale analysis
