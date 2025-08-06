@@ -412,20 +412,20 @@ while read line; do
   echo "$line" | sed 's/^[+-]//' | awk '{print $2}'
 done | sort | uniq > /tmp/imports.txt
 
-# 関連ファイルのグループ化
+# Related file grouping
 git diff HEAD --name-only | while read file; do
   basename=$(basename "$file" .js .ts .py)
   related=$(git diff HEAD --name-only | grep "$basename" | grep -v "^$file$")
   if [ -n "$related" ]; then
-    echo "関連ファイル群: $file <-> $related"
+    echo "Related file group: $file <-> $related"
   fi
 done
 ```
 
-##### ステップ 5: コミットサイズの最適化
+##### Step 5: Commit Size Optimization
 
 ```bash
-# グループサイズの調整
+# Group size adjustment
 MAX_FILES_PER_COMMIT=8
 current_group=1
 file_count=0
@@ -435,25 +435,25 @@ git diff HEAD --name-only | while read file; do
     current_group=$((current_group + 1))
     file_count=0
   fi
-  echo "コミット $current_group: $file"
+  echo "Commit $current_group: $file"
   file_count=$((file_count + 1))
 done
 ```
 
-##### ステップ 6: 最終グループ決定
+##### Step 6: Final Group Decision
 
 ```bash
-# 分割結果の検証
+# Split result verification
 for group in $(seq 1 $current_group); do
-  files=$(grep "コミット $group:" /tmp/commit_plan.txt | cut -d':' -f2-)
+  files=$(grep "Commit $group:" /tmp/commit_plan.txt | cut -d':' -f2-)
   lines=$(echo "$files" | xargs git diff HEAD -- | wc -l)
-  echo "コミット $group: $(echo "$files" | wc -w) ファイル, $lines 行変更"
+  echo "Commit $group: $(echo "$files" | wc -w) files, $lines line changes"
 done
 ```
 
-### Conventional Commits 準拠
+### Conventional Commits Compliance
 
-#### 基本形式
+#### Basic Format
 
 ```
 <type>[optional scope]: <description>
@@ -523,10 +523,10 @@ Auto-detect settings from the following files:
 - `.commitlintrc.json`
 - `.commitlintrc.yml`
 - `.commitlintrc.yaml`
-- `package.json` の `commitlint` セクション
+- `package.json` `commitlint` section
 
 ```bash
-# 設定ファイル例の確認
+# Configuration file example verification
 cat commitlint.config.mjs
 cat .commitlintrc.json
 grep -A 10 '"commitlint"' package.json
@@ -612,9 +612,9 @@ docs(scope): update documentation
 ##### Japanese Projects
 
 ```
-feat: ユーザー登録機能を追加
-fix: ログイン処理のバグを修正
-docs: API ドキュメントを更新
+feat: Add user registration functionality
+fix: Fix login process bug
+docs: Update API documentation
 ```
 
 ### Language Detection
@@ -640,32 +640,32 @@ Language detection logic completed within this command:
 3. **Project file** language settings
 
    ```bash
-   # README.md の言語確認
+   # README.md language verification
    head -10 README.md | grep -E '^[あ-ん]|[ア-ン]|[一-龯]' | wc -l
    
-   # package.json の description 確認
+   # package.json description verification
    grep -E '"description".*[あ-ん]|[ア-ン]|[一-龯]' package.json
    ```
 
-4. **変更ファイル内**のコメント・文字列分析
+4. **Comment and string analysis in changed files**
 
    ```bash
-   # 変更されたファイルのコメント言語を確認
+   # Verify comment language in changed files
    git diff HEAD | grep -E '^[+-].*//.*[あ-ん]|[ア-ン]|[一-龯]' | wc -l
    ```
 
-#### 判定アルゴリズム
+#### Decision Algorithm
 
 ```bash
-# 言語判定スコア計算
+# Language detection score calculation
 JAPANESE_SCORE=0
 
-# 1. CommitLint 設定 (+3 点)
+# 1. CommitLint configuration (+3 points)
 if grep -q '"subject-case".*\[0\]' commitlint.config.* 2>/dev/null; then
   JAPANESE_SCORE=$((JAPANESE_SCORE + 3))
 fi
 
-# 2. git log 分析 (最大+2 点)
+# 2. git log analysis (max +2 points)
 JAPANESE_COMMITS=$(git log --oneline -20 --pretty=format:"%s" | \
   grep -cE '[あ-ん]|[ア-ン]|[一-龯]' 2>/dev/null || echo 0)
 if [ $JAPANESE_COMMITS -gt 10 ]; then
@@ -674,17 +674,17 @@ elif [ $JAPANESE_COMMITS -gt 5 ]; then
   JAPANESE_SCORE=$((JAPANESE_SCORE + 1))
 fi
 
-# 3. README.md 確認 (+1 点)
+# 3. README.md verification (+1 point)
 if head -5 README.md 2>/dev/null | grep -qE '[あ-ん]|[ア-ン]|[一-龯]'; then
   JAPANESE_SCORE=$((JAPANESE_SCORE + 1))
 fi
 
-# 4. 変更ファイル内容確認 (+1 点)
+# 4. Changed file content verification (+1 point)
 if git diff HEAD 2>/dev/null | grep -qE '^[+-].*[あ-ん]|[ア-ン]|[一-龯]'; then
   JAPANESE_SCORE=$((JAPANESE_SCORE + 1))
 fi
 
-# 判定: 3 点以上で日本語モード
+# Decision: Japanese mode if 3 or more points
 if [ $JAPANESE_SCORE -ge 3 ]; then
   LANGUAGE="ja"
 else
@@ -692,16 +692,16 @@ else
 fi
 ```
 
-### 設定ファイル自動読み込み
+### Automatic Configuration File Loading
 
-#### 実行時の動作
+#### Runtime Behavior
 
-コマンド実行時に以下の順序で設定を確認：
+Configuration verification follows this order during command execution:
 
-1. **CommitLint 設定ファイルの検索**
+1. **CommitLint configuration file search**
 
    ```bash
-   # 以下の順序で検索し、最初に見つかったファイルを使用
+   # Search in the following order and use the first found file
    commitlint.config.mjs
    commitlint.config.js  
    commitlint.config.cjs
@@ -710,24 +710,24 @@ fi
    .commitlintrc.json
    .commitlintrc.yml
    .commitlintrc.yaml
-   package.json (commitlint セクション)
+   package.json (commitlint section)
    ```
 
-2. **設定内容の解析**
-   - 使用可能なタイプの一覧を抽出
-   - スコープの制限があるかを確認
-   - メッセージ長制限の取得
-   - 言語設定の確認
+2. **Configuration content analysis**
+   - Extract list of available types
+   - Check for scope restrictions
+   - Get message length limits
+   - Verify language settings
 
-3. **既存コミット履歴の分析**
+3. **Existing commit history analysis**
 
    ```bash
-   # 最近のコミットから使用パターンを学習
+   # Learn usage patterns from recent commits
    git log --oneline -100 --pretty=format:"%s" | \
    head -20
    ```
 
-#### 設定例の分析
+#### Configuration Example Analysis
 
 **標準的な commitlint.config.mjs**:
 

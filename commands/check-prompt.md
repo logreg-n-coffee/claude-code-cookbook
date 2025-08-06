@@ -149,54 +149,54 @@ cat devin/playbooks/code-review.md
 - [ ] Real-time monitoring and alert functions
 - [ ] Audit log tamper prevention function
 
-#### 4.2 テンプレート遵守の強制（7 点）
+#### 4.2 Template Compliance Enforcement (7 points)
 
-- [ ] 必須要素の明確な定義とチェック機能
-- [ ] カスタマイズ禁止箇所の技術的制限
-- [ ] 遵守確認の自動化されたチェックポイント
-- [ ] 違反時の自動修正・警告機能
+- [ ] Clear definition and checking function for mandatory elements
+- [ ] Technical restrictions on non-customizable sections
+- [ ] Automated checkpoints for compliance verification
+- [ ] Automatic correction and warning functions for violations
 
-#### 4.3 エラーハンドリングの網羅性（5 点）
+#### 4.3 Comprehensiveness of Error Handling (5 points)
 
-- [ ] 想定エラーパターンの完全なカタログ化
-- [ ] エラー時の段階的対処プロセス
-- [ ] 失敗を成功として報告することの技術的防止
+- [ ] Complete cataloging of anticipated error patterns
+- [ ] Stepped response processes for errors
+- [ ] Technical prevention of reporting failures as successes
 
-### 5. 🎭 役割と責任の明確化（配点: 10 点）
+### 5. 🎭 Role and Responsibility Clarification (Score: 10 points)
 
-#### 5.1 AI Agent の権限範囲（5 点）
+#### 5.1 AI Agent Authority Scope (5 points)
 
-- [ ] 実行可能操作と禁止操作の明確な境界線
-- [ ] 判断権限の具体的な範囲と制約
-- [ ] 人間確認が必要な操作の明確な分離
+- [ ] Clear boundary lines between executable and prohibited operations
+- [ ] Specific scope and constraints of decision-making authority
+- [ ] Clear separation of operations requiring human confirmation
 
-#### 5.2 分類システムの統一（5 点）
+#### 5.2 Classification System Unification (5 points)
 
-- [ ] 分類定義の明確性・一意性・排他性
-- [ ] 分類間の重要度誤解を防ぐ明示的説明
-- [ ] 各分類の具体的使用例と判断フローチャート
+- [ ] Clarity, uniqueness, and exclusivity of classification definitions
+- [ ] Explicit explanations to prevent misunderstanding of importance between classifications
+- [ ] Specific usage examples and decision flowcharts for each classification
 
-### 6. 🔄 継続改善（配点: 10 点）
+### 6. 🔄 Continuous Improvement (Score: 10 points)
 
-#### 6.1 フィードバック収集の自動化（5 点）
+#### 6.1 Automation of Feedback Collection (5 points)
 
-- [ ] 実行ログからの自動改善点抽出
-- [ ] 失敗パターンの機械学習ベース分析
-- [ ] ベストプラクティスの自動更新メカニズム
+- [ ] Automatic extraction of improvement points from execution logs
+- [ ] Machine learning-based analysis of failure patterns
+- [ ] Automatic update mechanism for best practices
 
-#### 6.2 学習機能の実装（5 点）
+#### 6.2 Implementation of Learning Functions (5 points)
 
-- [ ] 新パターンの自動検出・分類
-- [ ] 既存ルールの有効性継続監視
-- [ ] 段階的改善の自動提案
+- [ ] Automatic detection and classification of new patterns
+- [ ] Continuous monitoring of existing rule effectiveness
+- [ ] Automatic suggestions for gradual improvements
 
 ---
 
-## 🚨 致命的な問題パターン（即修正要）
+## 🚨 Critical Problem Patterns (Requires Immediate Fix)
 
-### ❌ レベル 1: 致命的曖昧性（実行停止レベル）
+### ❌ Level 1: Critical Ambiguity (Execution Stop Level)
 
-- **複数解釈可能な指示**: 「適宜判断して」「状況に応じて」「原則として」
+- **Multiple interpretable instructions**: "Judge appropriately", "according to situation", "as a rule"
 - **Ambiguous exception conditions**: "In special cases", "as needed"
 - **Subjective judgment criteria**: "Appropriately", "sufficiently", "as much as possible"
 - **Undefined important concepts**: "Standard", "general", "basic"
@@ -248,12 +248,12 @@ Section 2.1: "Use mandatory 6 sections"
 Section 3.5: "📊 Overall evaluation, 📋 Issues..."
 Section 4.2: "Section deletion prohibited"
 
-# ✅ 改善後（統合）
+# ✅ After improvement (integrated)
 
-実行チェックリスト:
-□ 10. サマリーコメントを投稿（必須 6 セクション使用）
-🔴 必須 6 セクション： 1) 📊 総合評価 2) 📋 指摘事項の分類別集計 3) ⚠️ 主要な懸念事項 4) ✅ 評価できる点 5) 🎯 結論 6) 🤖 AI レビュー品質の自己評価
-❌ 絶対禁止：セクション削除・追加・名前変更
+Execution Checklist:
+□ 10. Post summary comment (use mandatory 6 sections)
+🔴 Mandatory 6 sections: 1) 📊 Overall evaluation 2) 📋 Issue classification summary 3) ⚠️ Major concerns 4) ✅ Commendable points 5) 🎯 Conclusion 6) 🤖 AI review quality self-assessment
+❌ Absolutely prohibited: Section deletion, addition, or renaming
 ```
 
 ### ✅ 追跡システムの実装パターン
@@ -269,193 +269,193 @@ if [ $? -eq 0 ]; then
     echo "✅ 成功: $OPERATION" >> /tmp/execution_log.txt
     POSTED_COMMENTS=$((POSTED_COMMENTS + 1))
 else
-    echo "❌ 失敗: $OPERATION" >> /tmp/execution_log.txt
+    echo "❌ Failed: $OPERATION" >> /tmp/execution_log.txt
     FAILED_COMMENTS=$((FAILED_COMMENTS + 1))
 fi
 
-# 虚偽報告の防止
+# Prevention of false reporting
 if [ $POSTED_COMMENTS -ne $REPORTED_COMMENTS ]; then
-    echo "🚨 警告: 報告数と実際の投稿数が不一致"
+    echo "🚨 Warning: Reported count and actual posted count mismatch"
     exit 1
 fi
 ```
 
 ---
 
-## 📈 品質スコア計算（改良版）
+## 📈 Quality Score Calculation (Improved Version)
 
-### 総合スコア算出
-
-```
-基本スコア = Σ(各カテゴリスコア × 配点) / 100
-
-致命的問題ペナルティ:
-- レベル 1 問題: -20 点/件
-- レベル 2 問題: -10 点/件
-- レベル 3 問題: -5 点/件
-
-ボーナス要素:
-- 自動化対応: +5 点
-- 学習機能実装: +5 点
-- 実証済み改善事例: +5 点
-
-最終スコア = 基本スコア + ボーナス - ペナルティ
-```
-
-### 品質レベル判定
+### Overall Score Calculation
 
 ```
-95-100 点: 世界最高水準 (業界標準として推奨可能)
-90-94 点:  優秀 (本番運用可能)
-80-89 点:  良好 (軽微な改善で運用可能)
-70-79 点:  普通 (改善必要)
-60-69 点:  要改善 (大幅な修正必要)
-50-59 点:  要大幅修正 (根本的な見直し必要)
-49 点以下: 使用禁止 (完全な再設計必要)
+Base Score = Σ(Each Category Score × Points) / 100
+
+Critical Problem Penalties:
+- Level 1 problems: -20 points/case
+- Level 2 problems: -10 points/case
+- Level 3 problems: -5 points/case
+
+Bonus Elements:
+- Automation support: +5 points
+- Learning function implementation: +5 points
+- Proven improvement cases: +5 points
+
+Final Score = Base Score + Bonus - Penalty
+```
+
+### Quality Level Assessment
+
+```
+95-100 points: World-class standard (Recommendable as industry standard)
+90-94 points:  Excellent (Ready for production use)
+80-89 points:  Good (Production ready with minor improvements)
+70-79 points:  Average (Improvements needed)
+60-69 points:  Needs improvement (Major modifications required)
+50-59 points:  Major revision needed (Fundamental review required)
+49 points or below: Prohibited for use (Complete redesign required)
 ```
 
 ---
 
-## 🔧 実践的な改善プロセス
+## 🔧 Practical Improvement Process
 
-### フェーズ 1: 診断・分析（1-2 日）
+### Phase 1: Diagnosis and Analysis (1-2 days)
 
-1. **全体構造の把握**: セクション構成・情報フロー・依存関係の可視化
-2. **曖昧性検出**: 解釈余地のある表現の全件抽出
-3. **情報分散分析**: 関連情報の散在パターンのマッピング
-4. **強制力評価**: 推奨/必須の分類と実効性の評価
-5. **追跡可能性確認**: 実行結果の記録・検証機能の評価
+1. **Overall structure understanding**: Visualization of section composition, information flow, and dependencies
+2. **Ambiguity detection**: Complete extraction of expressions with room for interpretation
+3. **Information scatter analysis**: Mapping patterns of related information dispersion
+4. **Enforcement evaluation**: Classification and effectiveness assessment of recommendations/requirements
+5. **Traceability confirmation**: Evaluation of execution result recording and verification functions
 
-### フェーズ 2: 優先度付け・計画（半日）
+### Phase 2: Prioritization and Planning (Half day)
 
-1. **致命度分類**: レベル 1-3 の問題分類と影響度評価
-2. **改善順序決定**: 相互依存関係を考慮した最適順序
-3. **リソース配分**: 改善効果とコストのバランス最適化
-4. **リスク評価**: 改善時の副作用・互換性問題の予測
+1. **Criticality classification**: Problem classification levels 1-3 and impact assessment
+2. **Improvement order determination**: Optimal sequence considering interdependencies
+3. **Resource allocation**: Optimization of balance between improvement effects and costs
+4. **Risk assessment**: Prediction of side effects and compatibility issues during improvement
 
-### フェーズ 3: 段階的実装（2-5 日）
+### Phase 3: Phased Implementation (2-5 days)
 
-1. **レベル 1 問題解決**: 致命的曖昧性の完全排除
-2. **情報統合実施**: 分散情報の戦略的集約
-3. **強制力強化**: 推奨 → 必須への段階的格上げ
-4. **追跡システム実装**: 実行結果の自動記録・検証機能
-5. **テンプレート強化**: 必須要素の明確化と遵守強制
+1. **Level 1 problem resolution**: Complete elimination of critical ambiguity
+2. **Information integration execution**: Strategic consolidation of scattered information
+3. **Enforcement strengthening**: Gradual upgrade from recommendations to requirements
+4. **Tracking system implementation**: Automatic recording and verification functions for execution results
+5. **Template strengthening**: Clarification of mandatory elements and enforcement of compliance
 
-### フェーズ 4: 検証・調整（1-2 日）
+### Phase 4: Verification and Adjustment (1-2 days)
 
-1. **機能テスト**: 全ての変更点の動作確認
-2. **統合テスト**: システム全体の整合性確認
-3. **パフォーマンステスト**: 実行効率・レスポンス確認
-4. **ユーザビリティテスト**: 実際の使用シナリオでの検証
+1. **Functional testing**: Operation confirmation of all changes
+2. **Integration testing**: System-wide consistency confirmation
+3. **Performance testing**: Execution efficiency and response confirmation
+4. **Usability testing**: Verification with actual usage scenarios
 
-### フェーズ 5: 運用・監視（継続）
+### Phase 5: Operations and Monitoring (Ongoing)
 
-1. **効果測定**: 改善前後の定量的比較
-2. **継続監視**: 品質劣化の早期検出
-3. **フィードバック収集**: 実運用での問題点抽出
-4. **最適化継続**: 継続的な改善サイクル
-
----
-
-## 📊 実際の改善事例（詳細版）
-
-### ケーススタディ: 大規模プロンプトの品質改善
-
-#### 改善前の状況
-
-```bash
-品質スコア: 70 点/100 点
-- 曖昧表現: 15 箇所発見
-- 情報分散: 6 箇所に重要情報が散在
-- 強制力不足: 推奨レベル表現が 80%
-- 追跡機能: 実行結果の記録なし
-- エラー処理: 失敗時の対処法不明確
-```
-
-#### 実施した改善内容
-
-```bash
-# 1. 曖昧性排除（2 日間）
-- 「原則として」→「例外はセクション 3.3 の 3 つの条件のみ」
-- 「推奨」→「必須」（重要度レベル 2 以上）
-- 「適宜」→具体的な判断基準の明示
-
-# 2. 情報統合（1 日間）
-- 分散していた必須 6 セクション情報→実行チェックリストに統合
-- 関連する禁止事項→1 つのセクションに集約
-- 参照の循環を解消→線形の情報フロー
-
-# 3. 追跡システム実装（1 日間）
-- 実行結果の自動ログ記録
-- 虚偽報告防止の検証機能
-- リアルタイム統計表示
-
-# 4. エラー処理強化（半日）
-- 想定エラーパターンの完全カタログ化
-- 段階的対処プロセスの明文化
-- 自動回復機能の実装
-```
-
-#### 改善後の結果
-
-```bash
-品質スコア: 90 点/100 点（+20 点向上）
-- 曖昧表現: 0 箇所（完全排除）
-- 情報統合: 重要情報を 3 箇所に集約
-- 強制力: 必須レベル表現 95%
-- 追跡機能: 完全自動化
-- エラー処理: 90% の問題を自動解決
-
-実際の改善効果:
-- 判断ミス: 85% 減少
-- 実行時間: 40% 短縮
-- エラー発生率: 70% 減少
-- ユーザー満足度: 95% 向上
-```
-
-### 教訓・ベストプラクティス
-
-#### 成功要因
-
-1. **段階的アプローチ**: 一度に全変更せず、検証可能な単位で実施
-2. **データ駆動**: 主観的判断ではなく、実測データに基づく改善
-3. **継続監視**: 改善効果の持続性を定期的に確認
-4. **フィードバック重視**: 実際の使用者からの意見を積極的に収集
-
-#### 失敗回避策
-
-1. **過度の完璧主義**: 90 点到達で一旦運用開始、継続改善で 100 点目指す
-2. **一括変更の危険性**: 大規模変更は必ず段階的に実施
-3. **後方互換性**: 既存ワークフローへの影響を最小限に抑制
-4. **ドキュメント不足**: すべての変更を詳細に記録・共有
+1. **Effect measurement**: Quantitative comparison before and after improvement
+2. **Continuous monitoring**: Early detection of quality degradation
+3. **Feedback collection**: Problem extraction from actual operations
+4. **Continuous optimization**: Ongoing improvement cycles
 
 ---
 
-### Claude との連携
+## 📊 Actual Improvement Cases (Detailed Version)
+
+### Case Study: Quality Improvement of Large-Scale Prompts
+
+#### Pre-improvement Situation
 
 ```bash
-# プロンプトファイルと組み合わせた品質チェック
+Quality Score: 70 points/100 points
+- Ambiguous expressions: 15 instances found
+- Information scatter: Important information scattered across 6 locations
+- Insufficient enforcement: 80% recommendation-level expressions
+- Tracking functionality: No execution result recording
+- Error handling: Unclear failure response methods
+```
+
+#### Implemented Improvements
+
+```bash
+# 1. Ambiguity elimination (2 days)
+- "In principle" → "Exceptions are only the 3 conditions in Section 3.3"
+- "Recommended" → "Required" (importance level 2 or higher)
+- "As appropriate" → Explicit judgment criteria specification
+
+# 2. Information integration (1 day)
+- Distributed essential 6 section information → Integrated into execution checklist
+- Related prohibitions → Consolidated into one section
+- Circular references resolved → Linear information flow
+
+# 3. Tracking system implementation (1 day)
+- Automatic execution result log recording
+- False reporting prevention verification function
+- Real-time statistics display
+
+# 4. Error handling enhancement (half day)
+- Complete cataloging of expected error patterns
+- Documentation of step-by-step response processes
+- Automatic recovery function implementation
+```
+
+#### Post-improvement Results
+
+```bash
+Quality Score: 90 points/100 points (+20 point improvement)
+- Ambiguous expressions: 0 instances (complete elimination)
+- Information integration: Essential information consolidated to 3 locations
+- Enforcement: 95% mandatory-level expressions
+- Tracking functionality: Fully automated
+- Error handling: 90% of problems resolved automatically
+
+Actual improvement effects:
+- Judgment errors: 85% reduction
+- Execution time: 40% reduction
+- Error occurrence rate: 70% reduction
+- User satisfaction: 95% improvement
+```
+
+### Lessons Learned and Best Practices
+
+#### Success Factors
+
+1. **Phased approach**: Implement in verifiable units rather than all changes at once
+2. **Data-driven**: Base improvements on actual measurement data, not subjective judgment
+3. **Continuous monitoring**: Regularly verify the sustainability of improvement effects
+4. **Feedback emphasis**: Actively collect opinions from actual users
+
+#### Failure Avoidance Strategies
+
+1. **Excessive perfectionism**: Start operations at 90 points, aim for 100 points through continuous improvement
+2. **Risks of bulk changes**: Always implement large-scale changes in phases
+3. **Backward compatibility**: Minimize impact on existing workflows
+4. **Documentation deficiency**: Record and share all changes in detail
+
+---
+
+### Integration with Claude
+
+```bash
+# Quality check combined with prompt files
 cat your-prompt.md
 /check-prompt
-「このプロンプトの品質を評価して、改善点を提案して」
+"Evaluate the quality of this prompt and propose improvements"
 
-# 複数のプロンプトファイルの比較
+# Comparison of multiple prompt files
 cat prompt-v1.md && echo "---" && cat prompt-v2.md
 /check-prompt
-「2 つのバージョンを比較して、改善された点と残る課題を分析して」
+"Compare the two versions and analyze improved points and remaining issues"
 
-# 実際のエラーログと組み合わせた分析
+# Analysis combined with actual error logs
 cat execution-errors.log
 /check-prompt --deep
-「このエラーを引き起こした可能性のあるプロンプトの問題点を特定して」
+"Identify prompt issues that may have caused these errors"
 ```
 
-### 注意事項
+### Important Notes
 
-- **前提条件**: プロンプトファイルは Markdown 形式で記述されていることを推奨
-- **制限事項**: 大規模なプロンプト（1 万行以上）の場合、分割して分析することを推奨
-- **推奨事項**: 定期的にプロンプトの品質チェックを実施し、継続的に改善してください
+- **Prerequisites**: Prompt files should preferably be written in Markdown format
+- **Limitations**: For large prompts (over 10,000 lines), it's recommended to divide and analyze them
+- **Recommendations**: Regularly conduct prompt quality checks and continuously improve
 
 ---
 
-_このチェックリストは実際のプロンプト改善プロジェクトで実証された知見の完全版であり、継続的に進化し続けます。_
+_This checklist is the complete version of knowledge verified through actual prompt improvement projects and continues to evolve._
