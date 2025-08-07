@@ -729,7 +729,7 @@ Configuration verification follows this order during command execution:
 
 #### Configuration Example Analysis
 
-**標準的な commitlint.config.mjs**:
+**Standard commitlint.config.mjs**:
 
 ```javascript
 export default {
@@ -749,13 +749,13 @@ export default {
 }
 ```
 
-**日本語対応の設定**:
+**Japanese language support configuration**:
 
 ```javascript
 export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
-    'subject-case': [0],  // 日本語のため無効化
+    'subject-case': [0],  // Disabled for Japanese language
     'subject-max-length': [2, 'always', 72],
     'type-enum': [
       2,
@@ -766,7 +766,7 @@ export default {
 }
 ```
 
-**カスタムタイプを含む設定**:
+**Configuration with custom types**:
 
 ```javascript
 export default {
@@ -778,87 +778,88 @@ export default {
       [
         'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore',
         'wip',      // Work in Progress
-        'hotfix',   // 緊急修正
-        'release',  // リリース準備
-        'deps',     // 依存関係更新
-        'config'    // 設定変更
+        'hotfix',   // Emergency fix
+        'release',  // Release preparation
+        'deps',     // Dependency updates
+        'config'    // Configuration changes
       ]
     ]
   }
 }
+}
 ```
 
-#### フォールバック動作
+#### Fallback Behavior
 
-設定ファイルが見つからない場合：
+When configuration file is not found:
 
-1. **git log 分析**による自動推測
+1. **Automatic inference through git log analysis**
 
    ```bash
-   # 最近 100 コミットからタイプを抽出
+   # Extract types from recent 100 commits
    git log --oneline -100 --pretty=format:"%s" | \
    grep -oE '^[a-z]+(\([^)]+\))?' | \
    sort | uniq -c | sort -nr
    ```
 
-2. **Conventional Commits 標準**をデフォルト使用
+2. **Use Conventional Commits standard as default**
 
    ```
    feat, fix, docs, style, refactor, perf, test, chore, build, ci
    ```
 
-3. **言語判定**
-   - 日本語コミットが 50% 以上 → 日本語モード
-   - その他 → 英語モード
+3. **Language detection**
+   - Japanese commits 50% or more → Japanese mode
+   - Otherwise → English mode
 
-### 前提条件
+### Prerequisites
 
-- Git リポジトリ内で実行
-- 未コミットの変更が存在すること
-- ステージングされた変更は一旦リセットされます
+- Execute within Git repository
+- Uncommitted changes must exist
+- Staged changes will be temporarily reset
 
-### 注意事項
+### Important Notes
 
-- **自動プッシュなし**: コミット後の `git push` は手動実行
-- **ブランチ作成なし**: 現在のブランチでコミット
-- **バックアップ推奨**: 重要な変更前には `git stash` でバックアップ
+- **No automatic push**: Manual execution of `git push` required after commit
+- **No branch creation**: Commits to current branch
+- **Backup recommended**: Use `git stash` for backup before important changes
 
-### プロジェクト規約の優先度
+### Project Convention Priority
 
-コミットメッセージ生成時の優先度：
+Priority during commit message generation:
 
-1. **CommitLint 設定** (最優先)
-   - `commitlint.config.*` ファイルの設定
-   - カスタムタイプやスコープの制限
-   - メッセージ長やケースの制限
+1. **CommitLint configuration** (highest priority)
+   - Configuration in `commitlint.config.*` files
+   - Custom type and scope restrictions
+   - Message length and case restrictions
 
-2. **既存コミット履歴** (第 2 優先)
-   - 実際に使用されているタイプの統計
-   - メッセージの言語（日本語/英語）
-   - スコープの使用パターン
+2. **Existing commit history** (2nd priority)
+   - Statistics of actually used types
+   - Message language (Japanese/English)
+   - Scope usage patterns
 
-3. **プロジェクト種別** (第 3 優先)
-   - `package.json` → Node.js プロジェクト
-   - `Cargo.toml` → Rust プロジェクト  
-   - `pom.xml` → Java プロジェクト
+3. **Project type** (3rd priority)
+   - `package.json` → Node.js project
+   - `Cargo.toml` → Rust project  
+   - `pom.xml` → Java project
 
-4. **Conventional Commits 標準** (フォールバック)
-   - 設定が見つからない場合の標準動作
+4. **Conventional Commits standard** (fallback)
+   - Standard behavior when configuration not found
 
-#### 規約検出の実例
+#### Convention Detection Examples
 
-**Monorepo での scope 自動検出**:
+**Automatic scope detection in Monorepo**:
 
 ```bash
-# packages/ フォルダから scope を推測
+# Infer scope from packages/ folder
 ls packages/ | head -10
-# → api, ui, core, auth などを scope として提案
+# → Propose api, ui, core, auth, etc. as scope
 ```
 
-**フレームワーク固有の規約**:
+**Framework-specific conventions**:
 
 ```javascript
-// Angular プロジェクトの場合
+// For Angular projects
 {
   'scope-enum': [2, 'always', [
     'animations', 'common', 'core', 'forms', 'http', 'platform-browser',
@@ -866,7 +867,7 @@ ls packages/ | head -10
   ]]
 }
 
-// React プロジェクトの場合  
+// For React projects  
 {
   'scope-enum': [2, 'always', [
     'components', 'hooks', 'utils', 'types', 'styles', 'api'
@@ -874,253 +875,253 @@ ls packages/ | head -10
 }
 ```
 
-**企業・チーム固有の規約**:
+**Company and team-specific conventions**:
 
 ```javascript
-// 日本の企業でよく見られるパターン
+// Common pattern seen in Japanese companies
 {
   'type-enum': [2, 'always', [
     'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore',
-    'wip',      // 作業中（プルリクエスト用）
-    'hotfix',   // 緊急修正
-    'release'   // リリース準備
+    'wip',      // Work in progress (for pull requests)
+    'hotfix',   // Emergency fix
+    'release'   // Release preparation
   ]],
-  'subject-case': [0],  // 日本語対応
-  'subject-max-length': [2, 'always', 72]  // 日本語は長めに設定
+  'subject-case': [0],  // Japanese language support
+  'subject-max-length': [2, 'always', 72]  // Set longer for Japanese
 }
 ```
 
-### ベストプラクティス
+### Best Practices
 
-1. **プロジェクト規約の尊重**: 既存の設定やパターンに従う
-2. **小さな変更単位**: 1 つのコミットは 1 つの論理的変更
-3. **明確なメッセージ**: 何を変更したかが明確
-4. **関連性の重視**: 機能的に関連するファイルをグループ化
-5. **テストの分離**: テストファイルは別コミットに
-6. **設定ファイルの活用**: CommitLint を導入してチーム全体で規約を統一
+1. **Respect project conventions**: Follow existing settings and patterns
+2. **Small change units**: One commit for one logical change
+3. **Clear messages**: Make it clear what was changed
+4. **Emphasize relevance**: Group functionally related files
+5. **Separate tests**: Test files in separate commits
+6. **Utilize configuration files**: Introduce CommitLint to unify conventions across the team
 
-### 実際の分割例（Before/After）
+### Actual Split Examples (Before/After)
 
-#### 例 1: 大規模な認証システム追加
+#### Example 1: Large-scale authentication system addition
 
-**Before（1 つの巨大なコミット）:**
+**Before (one massive commit):**
 
 ```bash
-# 変更されたファイル（15 ファイル、850 行変更）
-src/auth/login.js          # 新規作成
-src/auth/register.js       # 新規作成  
-src/auth/password.js       # 新規作成
-src/auth/types.js          # 新規作成
-src/api/auth-routes.js     # 新規作成
-src/middleware/auth.js     # 新規作成
-src/database/migrations/001_users.sql  # 新規作成
-src/database/models/user.js            # 新規作成
-tests/auth/login.test.js   # 新規作成
-tests/auth/register.test.js # 新規作成
-tests/api/auth-routes.test.js # 新規作成
-docs/authentication.md    # 新規作成
-package.json              # 依存関係追加
-README.md                 # 使用方法追加
-.env.example             # 環境変数例追加
+# Changed files (15 files, 850 line changes)
+src/auth/login.js          # New file
+src/auth/register.js       # New file  
+src/auth/password.js       # New file
+src/auth/types.js          # New file
+src/api/auth-routes.js     # New file
+src/middleware/auth.js     # New file
+src/database/migrations/001_users.sql  # New file
+src/database/models/user.js            # New file
+tests/auth/login.test.js   # New file
+tests/auth/register.test.js # New file
+tests/api/auth-routes.test.js # New file
+docs/authentication.md    # New file
+package.json              # Dependencies added
+README.md                 # Usage added
+.env.example             # Environment variable examples added
 
-# 従来の問題のあるコミット
+# Traditional problematic commit
 feat: implement complete user authentication system with login, registration, password reset, API routes, database models, tests and documentation
 ```
 
-**After（意味のある 5 つのコミットに分割）:**
+**After (split into 5 meaningful commits):**
 
 ```bash
-# コミット 1: データベース基盤
+# Commit 1: Database foundation
 feat(db): add user model and authentication schema
 
-含まれるファイル:
+Included files:
 - src/database/migrations/001_users.sql
 - src/database/models/user.js
 - src/auth/types.js
 
-理由: データベース構造は他の機能の基盤となるため最初にコミット
+Reason: Database structure is the foundation for other features, so commit first
 
-# コミット 2: 認証ロジック
+# Commit 2: Authentication logic
 feat(auth): implement core authentication functionality  
 
-含まれるファイル:
+Included files:
 - src/auth/login.js
 - src/auth/register.js
 - src/auth/password.js
 - src/middleware/auth.js
 
-理由: 認証の核となるビジネスロジックを一括でコミット
+Reason: Batch commit of core business logic for authentication
 
-# コミット 3: API エンドポイント
+# Commit 3: API endpoints
 feat(api): add authentication API routes
 
-含まれるファイル:
+Included files:
 - src/api/auth-routes.js
 
-理由: API レイヤーは認証ロジックに依存するため後でコミット
+Reason: API layer depends on authentication logic, so commit later
 
-# コミット 4: 包括的なテスト
+# Commit 4: Comprehensive tests
 test(auth): add comprehensive authentication tests
 
-含まれるファイル:
+Included files:
 - tests/auth/login.test.js
 - tests/auth/register.test.js  
 - tests/api/auth-routes.test.js
 
-理由: 実装完了後にテストを一括追加
+Reason: Add tests in batch after implementation completion
 
-# コミット 5: 設定とドキュメント
+# Commit 5: Configuration and documentation
 docs(auth): add authentication documentation and configuration
 
-含まれるファイル:
+Included files:
 - docs/authentication.md
 - package.json
 - README.md
 - .env.example
 
-理由: ドキュメントと設定は最後にまとめてコミット
+Reason: Batch commit documentation and configuration at the end
 ```
 
-#### 例 2: バグ修正とリファクタリングの混在
+#### Example 2: Mixed bug fixes and refactoring
 
-**Before（混在した問題のあるコミット）:**
+**Before (mixed problematic commit):**
 
 ```bash
-# 変更されたファイル（8 ファイル、320 行変更）
-src/user/service.js       # バグ修正 + リファクタリング
-src/user/validator.js     # 新規作成（リファクタリング）
-src/auth/middleware.js    # バグ修正
-src/api/user-routes.js    # バグ修正 + エラーハンドリング改善
-tests/user.test.js        # テスト追加
-tests/auth.test.js        # バグ修正テスト追加
-docs/user-api.md          # ドキュメント更新
-package.json              # 依存関係更新
+# Changed files (8 files, 320 line changes)
+src/user/service.js       # Bug fix + refactoring
+src/user/validator.js     # New file (refactoring)
+src/auth/middleware.js    # Bug fix
+src/api/user-routes.js    # Bug fix + error handling improvement
+tests/user.test.js        # Test addition
+tests/auth.test.js        # Bug fix test addition
+docs/user-api.md          # Documentation update
+package.json              # Dependency update
 
-# 問題のあるコミット
+# Problematic commit
 fix: resolve user validation bugs and refactor validation logic with improved error handling
 ```
 
-**After（種別別に 3 つのコミットに分割）:**
+**After (split into 3 commits by type):**
 
 ```bash
-# コミット 1: 緊急バグ修正
+# Commit 1: Emergency bug fixes
 fix: resolve user validation and authentication bugs
 
-含まれるファイル:
-- src/user/service.js（バグ修正部分のみ）
+Included files:
+- src/user/service.js (bug fix parts only)
 - src/auth/middleware.js
-- tests/auth.test.js（バグ修正テストのみ）
+- tests/auth.test.js (bug fix tests only)
 
-理由: 本番環境に影響するバグは最優先で修正
+Reason: Bugs affecting production environment have top priority
 
-# コミット 2: バリデーションロジックのリファクタリング  
+# Commit 2: Validation logic refactoring  
 refactor: extract and improve user validation logic
 
-含まれるファイル:
-- src/user/service.js（リファクタリング部分）
+Included files:
+- src/user/service.js (refactoring parts)
 - src/user/validator.js
 - src/api/user-routes.js
 - tests/user.test.js
 
-理由: 構造改善は機能単位でまとめてコミット
+Reason: Structural improvements batched by functional unit
 
-# コミット 3: ドキュメントと依存関係更新
+# Commit 3: Documentation and dependency updates
 chore: update documentation and dependencies
 
-含まれるファイル:
+Included files:
 - docs/user-api.md
 - package.json
 
-理由: 開発環境の整備は最後にまとめてコミット
+Reason: Development environment maintenance batched at the end
 ```
 
-#### 例 3: 複数機能の同時開発
+#### Example 3: Simultaneous multi-feature development
 
-**Before（機能横断の巨大コミット）:**
+**Before (massive cross-functional commit):**
 
 ```bash
-# 変更されたファイル（12 ファイル、600 行変更）
-src/user/profile.js       # 新機能 A
-src/user/avatar.js        # 新機能 A  
-src/notification/email.js # 新機能 B
-src/notification/sms.js   # 新機能 B
-src/api/profile-routes.js # 新機能 A 用 API
-src/api/notification-routes.js # 新機能 B 用 API
-src/dashboard/widgets.js  # 新機能 C
-src/dashboard/charts.js   # 新機能 C
-tests/profile.test.js     # 新機能 A 用テスト
-tests/notification.test.js # 新機能 B 用テスト  
-tests/dashboard.test.js   # 新機能 C 用テスト
-package.json              # 全機能の依存関係
+# Changed files (12 files, 600 line changes)
+src/user/profile.js       # New feature A
+src/user/avatar.js        # New feature A  
+src/notification/email.js # New feature B
+src/notification/sms.js   # New feature B
+src/api/profile-routes.js # API for new feature A
+src/api/notification-routes.js # API for new feature B
+src/dashboard/widgets.js  # New feature C
+src/dashboard/charts.js   # New feature C
+tests/profile.test.js     # Tests for new feature A
+tests/notification.test.js # Tests for new feature B  
+tests/dashboard.test.js   # Tests for new feature C
+package.json              # Dependencies for all features
 
-# 問題のあるコミット  
+# Problematic commit  
 feat: add user profile management, notification system and dashboard widgets
 ```
 
-**After（機能別に 4 つのコミットに分割）:**
+**After (split into 4 commits by feature):**
 
 ```bash
-# コミット 1: ユーザープロフィール機能
+# Commit 1: User profile feature
 feat(profile): add user profile management
 
-含まれるファイル:
+Included files:
 - src/user/profile.js
 - src/user/avatar.js
 - src/api/profile-routes.js
 - tests/profile.test.js
 
-理由: プロフィール機能は独立した機能単位
+Reason: Profile feature is an independent functional unit
 
-# コミット 2: 通知システム
+# Commit 2: Notification system
 feat(notification): implement email and SMS notifications
 
-含まれるファイル:
+Included files:
 - src/notification/email.js
 - src/notification/sms.js  
 - src/api/notification-routes.js
 - tests/notification.test.js
 
-理由: 通知機能は独立した機能単位
+Reason: Notification feature is an independent functional unit
 
-# コミット 3: ダッシュボードウィジェット
+# Commit 3: Dashboard widgets
 feat(dashboard): add interactive widgets and charts
 
-含まれるファイル:
+Included files:
 - src/dashboard/widgets.js
 - src/dashboard/charts.js
 - tests/dashboard.test.js
 
-理由: ダッシュボード機能は独立した機能単位
+Reason: Dashboard feature is an independent functional unit
 
-# コミット 4: 依存関係とインフラ更新
+# Commit 4: Dependencies and infrastructure updates
 chore: update dependencies for new features
 
-含まれるファイル:
+Included files:
 - package.json
 
-理由: 共通の依存関係更新は最後にまとめて
+Reason: Common dependency updates batched at the end
 ```
 
-### 分割効果の比較
+### Split Effect Comparison
 
-| 項目 | Before（巨大コミット） | After（適切な分割） |
+| Item | Before (massive commit) | After (proper split) |
 |------|---------------------|-------------------|
-| **レビュー性** | ❌ 非常に困難 | ✅ 各コミットが小さくレビュー可能 |
-| **バグ追跡** | ❌ 問題箇所の特定が困難 | ✅ 問題のあるコミットを即座に特定 |
-| **リバート** | ❌ 全体をリバートする必要 | ✅ 問題部分のみをピンポイントでリバート |
-| **並行開発** | ❌ コンフリクトが発生しやすい | ✅ 機能別でマージが容易 |
-| **デプロイ** | ❌ 全機能を一括デプロイ | ✅ 段階的なデプロイが可能 |
+| **Reviewability** | ❌ Very difficult | ✅ Each commit is small and reviewable |
+| **Bug tracking** | ❌ Difficult to identify problem areas | ✅ Instantly identify problematic commits |
+| **Revert** | ❌ Need to revert everything | ✅ Pinpoint revert of only problem parts |
+| **Parallel development** | ❌ Prone to conflicts | ✅ Easy merging by feature |
+| **Deployment** | ❌ Batch deployment of all features | ✅ Gradual deployment possible |
 
-### トラブルシューティング
+### Troubleshooting
 
-#### コミット失敗時
+#### When commit fails
 
-- プリコミットフックの確認
-- 依存関係の解決
-- 個別ファイルでの再試行
+- Check pre-commit hooks
+- Resolve dependencies
+- Retry with individual files
 
-#### 分割が適切でない場合
+#### When split is inappropriate
 
-- `--max-commits` オプションで調整
-- 手動での `edit` モード使用
-- より細かい単位での再実行
+- Adjust with `--max-commits` option
+- Use manual `edit` mode
+- Re-run with finer granularity
