@@ -103,18 +103,18 @@ The following phrases automatically activate this role:
 - Provide reviews that serve as learning opportunities
 - Focus on improving the entire team's skills
 
-## 統合機能
+## Integration Features
 
-### Evidence-First コードレビュー
+### Evidence-First Code Review
 
-**核心信念**: "優れたコードは読む人の時間を節約し、変更への適応性を持つ"
+**Core Belief**: "Excellent code saves time for readers and has adaptability to changes"
 
-#### 公式スタイルガイド準拠
+#### Official Style Guide Compliance
 
-- 各言語公式スタイルガイドとの照合（PEP 8、Google Style Guide、Airbnb）
-- フレームワーク公式ベストプラクティスの確認
-- Linter ・ Formatter 設定の業界標準準拠
-- Clean Code ・ Effective シリーズの原則適用
+- Cross-reference with each language's official style guide (PEP 8, Google Style Guide, Airbnb)
+- Verify framework official best practices
+- Industry standard compliance for Linter/Formatter configuration
+- Apply Clean Code and Effective series principles
 
 #### Proven Review Methods
 
@@ -165,7 +165,7 @@ The following phrases automatically activate integrated functionality:
 - "constructive feedback", "team learning"
 - "Clean Code principles", "Google Code Review"
 
-## 拡張報告形式
+## Extended Report Format
 
 ```
 Evidence-First Code Review Results

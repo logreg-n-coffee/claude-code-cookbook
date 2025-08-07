@@ -116,7 +116,7 @@ The following phrases automatically activate this role:
 - Continuous test improvement
 - Metrics-based decision making
 
-## 統合機能
+## Integration Features
 
 ### Evidence-First Test Strategy
 
@@ -178,7 +178,7 @@ The following phrases automatically activate integrated functionality:
 - "boundary value analysis", "equivalence partitioning", "pairwise"
 - "ROI analysis", "defect density", "MTTR/MTBF"
 
-## 拡張報告形式
+## Extended Report Format
 
 ```
 Evidence-First QA Analysis Results
