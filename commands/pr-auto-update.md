@@ -112,11 +112,11 @@ parse_template_structure() {
 
 **Change Content Based**:
 
-- Bug fixes: `fix|bug|error|crash|修正` → Labels containing `bug|fix`
-- New features: `feat|feature|add|implement|新機能|実装` → Labels containing `feature|enhancement|feat`
-- Refactoring: `refactor|clean|リファクタ` → Labels containing `refactor|cleanup|clean`
-- Performance: `performance|perf|optimize|パフォーマンス` → Labels containing `performance|perf`
-- Security: `security|secure|セキュリティ` → Labels containing `security`
+- Bug fixes: `fix|bug|error|crash` → Labels containing `bug|fix`
+- New features: `feat|feature|add|implement` → Labels containing `feature|enhancement|feat`
+- Refactoring: `refactor|clean` → Labels containing `refactor|cleanup|clean`
+- Performance: `performance|perf|optimize` → Labels containing `performance|perf`
+- Security: `security|secure` → Labels containing `security`
 
 #### Constraints
 
@@ -252,11 +252,11 @@ analyze_change_patterns() {
   fi
   
   # Determination by change content
-  if echo "$changes" | grep -iq "fix\|bug\|error\|crash\|修正"; then
+  if echo "$changes" | grep -iq "fix\|bug\|error\|crash"; then
     add_matching_label "bug\|fix" available_ref suggested_ref
   fi
   
-  if echo "$changes" | grep -iq "feat\|feature\|add\|implement\|新機能\|実装"; then
+  if echo "$changes" | grep -iq "feat\|feature\|add\|implement"; then
     add_matching_label "feature\|enhancement\|feat" available_ref suggested_ref
   fi
 }

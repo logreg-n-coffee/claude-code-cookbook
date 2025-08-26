@@ -256,17 +256,17 @@ Execution Checklist:
 ❌ Absolutely prohibited: Section deletion, addition, or renaming
 ```
 
-### ✅ 追跡システムの実装パターン
+### ✅ Tracking System Implementation Patterns
 
 ```bash
-# 実行結果の厳格な追跡
+# Strict tracking of execution results
 POSTED_COMMENTS=0
 FAILED_COMMENTS=0
 TOTAL_COMMENTS=0
 
-# 各操作の結果記録
+# Record results of each operation
 if [ $? -eq 0 ]; then
-    echo "✅ 成功: $OPERATION" >> /tmp/execution_log.txt
+    echo "✅ Success: $OPERATION" >> /tmp/execution_log.txt
     POSTED_COMMENTS=$((POSTED_COMMENTS + 1))
 else
     echo "❌ Failed: $OPERATION" >> /tmp/execution_log.txt

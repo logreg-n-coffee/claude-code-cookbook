@@ -325,9 +325,9 @@ docs: update API documentation
 **Japanese**:
 
 ```text
-feat: ユーザー登録エンドポイントを追加
-fix: キャッシュマネージャーのメモリリークを解決
-docs: API ドキュメントを更新
+feat: add user registration endpoint
+fix: resolve memory leak in cache manager
+docs: update API documentation
 ```
 
 ### Integration with Claude

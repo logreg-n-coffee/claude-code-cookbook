@@ -1,97 +1,97 @@
 #!/bin/bash
 
-# シンプル継続チェック
-# 合い言葉がなければ「作業を再開してください」と伝える
+# Simple continuation check
+# If no magic phrase is found, tell to "resume work"
 #
-# 合い言葉は CLAUDE.md で定義されている完了時の決まり文句
-# 詳細: ~/.claude/CLAUDE.md の「作業完了報告のルール」を参照
+# The magic phrase is the completion phrase defined in CLAUDE.md
+# Details: See "Task Completion Report Rules" in ~/.claude/CLAUDE.md
 
 COMPLETION_PHRASE="May the Force be with you."
 
-# Stop hook から渡される JSON を読み取り
+# Read JSON passed from Stop hook
 input_json=$(cat)
 
-# transcript_path を抽出
+# Extract transcript_path
 transcript_path=$(echo "$input_json" | jq -r '.transcript_path // empty')
 
 if [ -n "$transcript_path" ] && [ -f "$transcript_path" ]; then
-  # 最後のメッセージ全体を取得（エラーメッセージも含む）
+  # Get entire last message (including error messages)
   last_entry=$(tail -n 1 "$transcript_path")
 
-  # デバッグ用（必要に応じて有効化）
+  # For debugging (enable as needed)
   # echo "Debug: last_entry=$last_entry" >&2
 
-  # アシスタントメッセージのテキストを取得
+  # Get assistant message text
   last_message=$(echo "$last_entry" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
 
-  # エラーフィールドの様々な可能性をチェック
+  # Check various possibilities for error fields
   error_message=$(echo "$last_entry" | jq -r '.message.error // .error // empty' 2>/dev/null || echo "")
 
-  # メッセージ全体を文字列化してチェック（JSON の構造に関わらず）
+  # Stringify entire message for checking (regardless of JSON structure)
   full_entry_text=$(echo "$last_entry" | jq -r '.' 2>/dev/null || echo "$last_entry")
 
-  # Claude usage limit reached のチェック（複数の方法で）
+  # Check for Claude usage limit reached (multiple methods)
   if echo "$error_message" | grep -qi "usage limit" ||
     echo "$last_message" | grep -qi "usage limit" ||
     echo "$full_entry_text" | grep -qi "usage limit"; then
-    # Usage limit エラーの場合は何もしない（正常終了）
+    # Do nothing for usage limit errors (normal exit)
     exit 0
   fi
 
-  # その他のエラーパターンの検出
+  # Detect other error patterns
   if echo "$error_message" | grep -qi "network error\|timeout\|connection refused" ||
     echo "$full_entry_text" | grep -qi "network error\|timeout\|connection refused"; then
-    # ネットワークエラーの場合は何もしない（正常終了）
+    # Do nothing for network errors (normal exit)
     exit 0
   fi
 
-  # /compact 関連のパターンの検出（エラーメッセージとして扱う）
+  # Detect /compact related patterns (treat as error messages)
   if echo "$error_message" | grep -qi "Context low.*Run /compact to compact" ||
     echo "$full_entry_text" | grep -qi "Context low.*Run /compact to compact"; then
-    # /compact 関連のメッセージの場合は何もしない（正常終了）
+    # Do nothing for /compact related messages (normal exit)
     exit 0
   fi
 
-  # Stop hook feedback の繰り返しパターンの検出
+  # Detect Stop hook feedback repetition patterns
   if echo "$last_message" | grep -qi "Stop hook feedback" &&
-    echo "$last_message" | grep -qi "作業を再開してください"; then
-    # Stop hook feedback の繰り返しパターンの場合は何もしない（正常終了）
+    echo "$last_message" | grep -qi "resume work"; then
+    # Do nothing for Stop hook feedback repetition patterns (normal exit)
     exit 0
   fi
 
-  # 計画提示関連のパターンチェック（修正：承認済みの場合は継続）
+  # Check plan presentation related patterns (fix: continue if approved)
   if echo "$last_message" | grep -qi "User approved Claude's plan" ||
     echo "$full_entry_text" | grep -qi "User approved Claude's plan"; then
-    # 計画承認済み → 作業継続（ブロックしない）
+    # Plan approved → continue work (don't block)
     exit 0
   fi
 
-  # y/n で確認を求められている場合
+  # When y/n confirmation is requested
   if echo "$last_message" | grep -qi "y/n" ||
     echo "$full_entry_text" | grep -qi "y/n"; then
-    # 計画承認済み → 作業継続（ブロックしない）
+    # Plan approved → continue work (don't block)
     exit 0
   fi
 
-  # /spec 関連の作業パターンチェック
+  # Check /spec related work patterns
   if echo "$last_message" | grep -qi "spec" ||
     echo "$last_message" | grep -qi "spec-driven" ||
     echo "$last_message" | grep -qi "requirements\.md\\|design\.md\\|tasks\.md"; then
-    # /spec 関連の作業中は継続を促さない（正常終了）
+    # Don't prompt continuation during /spec related work (normal exit)
     exit 0
   fi
 
-  # 合い言葉チェック
+  # Check magic phrase
   if echo "$last_message" | grep -q "$COMPLETION_PHRASE"; then
-    # 合い言葉があれば何もしない（正常終了）
+    # Do nothing if magic phrase exists (normal exit)
     exit 0
   fi
 fi
 
-# 合い言葉がなければ継続を促す
+# Prompt continuation if no magic phrase
 cat <<EOF
 {
   "decision": "block",
-  "reason": "作業を再開してください。\n  続ける作業がない場合は \`$COMPLETION_PHRASE\` を出力して終了してください。"
+  "reason": "Please resume work.\n  If there is no more work to continue, output \`$COMPLETION_PHRASE\` to finish."
 }
 EOF

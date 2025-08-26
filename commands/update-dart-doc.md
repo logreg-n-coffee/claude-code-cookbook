@@ -112,8 +112,8 @@ class UserProfileWidget extends HookConsumerWidget {
 
 - URLs and links: References starting with `See also:`
 - TODO comments: `TODO(user_name):` format
-- Notes: Warnings starting with `注意:` or `Warning:`
-- Usage examples: Code starting with `例:` or `Example:`
+- Notes: Warnings starting with `Note:` or `Warning:`
+- Usage examples: Code starting with `Example:`
 - Technical constraints: Performance and limitation descriptions
 
 ### Claude Marker Management
