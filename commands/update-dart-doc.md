@@ -1,8 +1,8 @@
-## Update Dart Doc
+# Update Dart Doc
 
 Systematically manage DartDoc comments in Dart files and maintain high-quality Japanese documentation.
 
-### Usage
+## Usage
 
 ```bash
 # Execute both new additions and updates simultaneously

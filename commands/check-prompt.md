@@ -1,8 +1,8 @@
-## Check Prompt
+# Check Prompt
 
 A comprehensive best practices collection for evaluating and improving prompt quality for AI agents. Systematizes insights gained from actual prompt improvement processes, covering all critical aspects including ambiguity elimination, information integration, enforcement strengthening, tracking systems, and continuous improvement.
 
-### Usage
+## Usage
 
 ```bash
 # Check prompt file quality
@@ -286,7 +286,7 @@ fi
 
 ### Overall Score Calculation
 
-```
+```text
 Base Score = Σ(Each Category Score × Points) / 100
 
 Critical Problem Penalties:
@@ -304,7 +304,7 @@ Final Score = Base Score + Bonus - Penalty
 
 ### Quality Level Assessment
 
-```
+```text
 95-100 points: World-class standard (Recommendable as industry standard)
 90-94 points:  Excellent (Ready for production use)
 80-89 points:  Good (Production ready with minor improvements)

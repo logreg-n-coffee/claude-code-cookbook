@@ -1,8 +1,8 @@
-## Commit Message
+# Commit Message
 
 Generate appropriate commit messages from staged changes (git diff --staged). Does not execute git commands, only generates messages and copies to clipboard.
 
-### Usage
+## Usage
 
 ```bash
 /commit-message [options]
@@ -135,7 +135,7 @@ Default is English. Generates in Japanese when detected as Japanese project.
 
 #### Conventional Commits (Default)
 
-```
+```text
 <type>: <description>
 ```
 
@@ -308,7 +308,7 @@ feat(api)!: change authentication flow
 
 **English**:
 
-```
+```text
 feat: add user registration endpoint
 fix: resolve memory leak in cache manager
 docs: update API documentation
