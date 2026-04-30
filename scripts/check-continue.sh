@@ -21,8 +21,8 @@ if [ -n "$transcript_path" ] && [ -f "$transcript_path" ]; then
   # For debugging (enable as needed)
   # echo "Debug: last_entry=$last_entry" >&2
 
-  # Get assistant message text
-  last_message=$(echo "$last_entry" | jq -r '.message.content[0].text // empty' 2>/dev/null || echo "")
+  # Get assistant message text (concatenate all text-type blocks; skip thinking/tool_use blocks)
+  last_message=$(echo "$last_entry" | jq -r '[.message.content[]? | select(.type=="text") | .text] | join("\n") // empty' 2>/dev/null || echo "")
 
   # Check various possibilities for error fields
   error_message=$(echo "$last_entry" | jq -r '.message.error // .error // empty' 2>/dev/null || echo "")
