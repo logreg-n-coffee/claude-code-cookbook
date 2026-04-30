@@ -14,13 +14,13 @@
     "command": "~/.claude/scripts/statusline.sh",
     "padding": 0
   },
-  "additionalDirectories": [
-    "~/Documents/GitHub"
-  ],
   "enableAllProjectMcpServers": false,
   "enabledMcpjsonServers": [],
   "disabledMcpjsonServers": [],
   "permissions": {
+    "additionalDirectories": [
+      "~/Documents/GitHub"
+    ],
     "allow": [
       "Bash(git status:*)",
       "Bash(git diff:*)",
